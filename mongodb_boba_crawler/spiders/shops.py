@@ -3,8 +3,8 @@ from ..items import MongodbBobaCrawlerItem
 
 class ShopsSpider(scrapy.Spider):
     name = "shops"
-    allowed_domains = ["quotes.toscrape.com"]
-    start_urls = ["https://quotes.toscrape.com/"]
+    allowed_domains = ["www.grubhub.com"]
+    start_urls = ["https://www.grubhub.com/search?orderMethod=delivery&locationMode=DELIVERY&facetSet=umamiV6&pageSize=36&hideHateos=true&searchMetrics=true&queryText=boba&latitude=37.33866119&longitude=-121.88510895&preciseLocation=true&geohash=9q9k6mmcrngt&includeOffers=true&sortSetId=umamiv3&sponsoredSize=3&countOmittingTimes=true&tab=all"]
 
     def parse(self, response):
         # Parse each quote div 
