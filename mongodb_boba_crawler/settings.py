@@ -12,6 +12,13 @@ BOT_NAME = "mongodb_boba_crawler"
 SPIDER_MODULES = ["mongodb_boba_crawler.spiders"]
 NEWSPIDER_MODULE = "mongodb_boba_crawler.spiders"
 
+# playwright
+DOWNLOAD_HANDLERS = {
+    "http": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
+    "https": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
+}
+
+TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = "mongodb_boba_crawler (+http://www.yourdomain.com)"
