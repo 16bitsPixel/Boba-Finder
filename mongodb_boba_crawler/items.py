@@ -7,6 +7,4 @@ import scrapy
 
 
 class MongodbBobaCrawlerItem(scrapy.Item):
-    author = scrapy.Field()
-    text = scrapy.Field()
-    tags = scrapy.Field()
+    drinkName = scrapy.Field()
