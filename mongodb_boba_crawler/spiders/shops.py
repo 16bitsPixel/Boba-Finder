@@ -10,7 +10,7 @@ class ShopsSpider(scrapy.Spider):
         # Parse each quote div 
         for menuItem in response.css('div.h6.item-main'):
             item = MongodbBobaCrawlerItem()
-            item['tea'] = menuItem.css('span.item-title').get()
+            item['tea'] = menuItem.css('span.item-title::text').get()
             
             #item['author'] = quote.css('small.author::text').get()
             #item['text'] = quote.css('span.text::text').re(r'“(.+)”')[0]
