@@ -14,12 +14,23 @@ class ShopsSpider(scrapy.Spider):
         item['address'] = response.css('div.right-content.pull-right ul.info-list li a::text').get()
         
         for menuItem in response.css('div.h6.item-main'):
-            item['tea'] = menuItem.css('span.item-title::text').get()
+            # capture menu item name
+            teaRaw = menuItem.css('span.item-title::text').get()
+
+            # clean input string (remove non-alpha characters)
+            teaClean = ''
+            for char in teaRaw:
+                if char.isalpha() or char == ' ':
+                    teaClean += char
+            # removing leading blank space
+            if teaClean[0] == ' ':
+                teaClean = teaClean[1:]
             
-            #item['author'] = quote.css('small.author::text').get()
-            #item['text'] = quote.css('span.text::text').re(r'“(.+)”')[0]
-            #item['tags'] = quote.css('div.tags a.tag::text').getall()
-            
+            # remove initial lone letter ex: "P <tea>" (residual from formatting)
+            if teaClean[1] == ' ':
+                teaClean = teaClean[2:]
+
+            item['tea'] = teaClean
             yield item
 
         # Follow each resaturant link on page to view
