@@ -9,9 +9,11 @@ class ShopsSpider(scrapy.Spider):
     def parse(self, response):
         # Parse each menu item div
         item = MongodbBobaCrawlerItem()
-        item['restaurant'] = response.css('div.menu-header span::text').get()
+        # Caputure Restaurant name and Address
+        item['name'] = response.css('div.menu-header span::text').get()
+        item['address'] = response.css('div.right-content.pull-right ul.info-list li a::text').get()
+        
         for menuItem in response.css('div.h6.item-main'):
-            #item = MongodbBobaCrawlerItem()
             item['tea'] = menuItem.css('span.item-title::text').get()
             
             #item['author'] = quote.css('small.author::text').get()
