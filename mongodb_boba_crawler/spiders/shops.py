@@ -7,9 +7,11 @@ class ShopsSpider(scrapy.Spider):
     start_urls = ["https://www.allmenus.com/ca/san-francisco/-/teahouses/"]
 
     def parse(self, response):
-        # Parse each quote div 
+        # Parse each menu item div
+        item = MongodbBobaCrawlerItem()
+        item['restaurant'] = response.css('div.menu-header span::text').get()
         for menuItem in response.css('div.h6.item-main'):
-            item = MongodbBobaCrawlerItem()
+            #item = MongodbBobaCrawlerItem()
             item['tea'] = menuItem.css('span.item-title::text').get()
             
             #item['author'] = quote.css('small.author::text').get()
