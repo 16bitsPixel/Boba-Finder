@@ -22,4 +22,4 @@ py .\menu-scraper\grubhub_scrape.py
 ```
 
 Enter a link to a grubhub store page when prompted  
-Ex: https://www.grubhub.com/restaurant/sharetea-2855-stevens-creek-blvd-santa-clara/547478
+Ex: https://www.grubhub.com/restaurant/ume-tea-milpitas-272-barber-ct-milpitas/2642037
