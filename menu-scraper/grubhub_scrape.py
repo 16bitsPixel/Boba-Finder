@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.options import Options
 import os
 import time
 import json
+import pymongo
 
 
 def get_item(browser, id):
@@ -46,16 +47,30 @@ def get_menu(url):
 
     innerHTML = browser.page_source
 
-    html = BeautifulSoup(innerHTML, 'html.parser')
+    soup = BeautifulSoup(innerHTML, 'html.parser')
 
-    menu = html.find("div", {"data-testid" : "menu-sections-container"})
+    menu = soup.find("div", {"data-testid" : "menu-sections-container"})
     if menu is None:
         print('menu fail')
         get_menu(url)
         return
     else:
         print('found menu')
-    # Categories
+
+    menuItems = []
+    for item in soup.select('div[data-testid="menu-item"]'):
+            boba = {}
+            boba['Drink Name'] = item.select_one('h6').get_text()
+            boba['Description'] = item.select_one('span[data-testid="menu-item-description"]').get_text()
+            boba['Price'] = item.select_one('span[data-testid="menu-item-price"]').get_text()
+            menuItems.append(boba)
+
+    return menuItems
+
+    for item in soup.select(".menuItem"):
+        print(item.select_one("h6").get_text())
+
+    """
     cats = menu.find_all('ghs-restaurant-menu-section')
     cats = cats[1:]
 
@@ -85,6 +100,17 @@ def get_menu(url):
     path = r"C:\\Users\\xbran\\repos\\Boba-Finder\\menu-scraper"
     with open(f'{path}/data.json', 'w') as f:
         json.dump(full_menu, f, indent=4)
+    """
+
     print('[Finished]')
-get_menu(input('Grubhub Link?  '))
-#example link: 'https://www.grubhub.com/restaurant/insomnia-cookies-76-pearl-st-new-york/295836'
+
+# insert data collected into MongoDB
+shopMenus = get_menu(input('Grubhub Link?  '))
+client = pymongo.MongoClient("mongodb+srv://brandonllanes16:XIPZsFqtcLYtkQ4l@bobacluster.atdxi6u.mongodb.net/?retryWrites=true&w=majority")
+db = client.db.bobaShops
+try:
+    db.insert_many(shopMenus)
+    print(f'inserted {len(shopMenus)} boba shop menus')
+except:
+    print('an error occurred quotes were not stored to db')
+#example link: 'https://www.grubhub.com/restaurant/ume-tea-milpitas-272-barber-ct-milpitas/2642037'
