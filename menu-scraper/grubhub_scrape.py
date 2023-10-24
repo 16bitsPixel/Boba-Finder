@@ -1,6 +1,8 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 import time
 import pymongo
 
@@ -19,7 +21,7 @@ def get_menu(url):
     browser = webdriver.Chrome(options=chrome_options)
     browser.get(url)
 
-    time.sleep(5)  
+    time.sleep(3)  
 
     innerHTML = browser.page_source
 
@@ -33,20 +35,35 @@ def get_menu(url):
     else:
         print('[FOUND MENU]')
 
-    menuItems = []
-    for item in soup.select('div[data-testid="menu-item"]'):
-            boba = {}
-            boba['Drink Name'] = item.select_one('h6').get_text()
-            desc = item.select_one('span[data-testid="menu-item-description"]')
-            if desc is None:
-                boba['Description'] = "Milk Tea"
-            else:
-                boba['Description'] = item.select_one('span[data-testid="menu-item-description"]').get_text()
-            boba['Price'] = item.select_one('span[data-testid="menu-item-price"]').get_text()
+    previous_height = browser.execute_script('return window.pageYOffset;')
+    body = browser.find_element(By.TAG_NAME, 'body')
+    body.click()
 
-            # check if newly created item is duplicate, if so don't append
-            if boba not in menuItems:
-                menuItems.append(boba)
+    menuItems = []
+
+    while True:    
+        for item in soup.select('.menuItem'):
+                boba = {}
+                boba['Drink Name'] = item.select_one('h6').get_text()
+                desc = item.select_one('span[data-testid="menu-item-description"]')
+                if desc is None:
+                    boba['Description'] = "Milk Tea"
+                else:
+                    boba['Description'] = item.select_one('span[data-testid="menu-item-description"]').get_text()
+                boba['Price'] = item.select_one('span[data-testid="menu-item-price"]').get_text()
+
+                # append boba drinks
+                if boba not in menuItems:
+                    menuItems.append(boba)
+
+        body.send_keys(Keys.PAGE_DOWN)
+        body.send_keys(Keys.PAGE_DOWN)
+        body.send_keys(Keys.PAGE_DOWN)
+        time.sleep(3)
+        new_height = browser.execute_script('return window.pageYOffset;')
+        if new_height == previous_height:
+            break
+        previous_height = new_height
     print("[FINISHED SCRAPING]")
 
     return menuItems
