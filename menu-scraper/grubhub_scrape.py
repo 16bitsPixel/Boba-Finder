@@ -51,11 +51,11 @@ def get_menu(url):
 
     menu = soup.find("div", {"data-testid" : "menu-sections-container"})
     if menu is None:
-        print('menu fail')
+        print('[MENU FAIL]')
         get_menu(url)
         return
     else:
-        print('found menu')
+        print('[FOUND MENU]')
 
     menuItems = []
     for item in soup.select('div[data-testid="menu-item"]'):
@@ -64,45 +64,9 @@ def get_menu(url):
             boba['Description'] = item.select_one('span[data-testid="menu-item-description"]').get_text()
             boba['Price'] = item.select_one('span[data-testid="menu-item-price"]').get_text()
             menuItems.append(boba)
+    print("[FINISHED SCRAPING]")
 
     return menuItems
-
-    for item in soup.select(".menuItem"):
-        print(item.select_one("h6").get_text())
-
-    """
-    cats = menu.find_all('ghs-restaurant-menu-section')
-    cats = cats[1:]
-
-    cat_titles = [cat.find('h3', class_='menuSection-title').text for cat in cats]
-    cat_items = [[itm.text for itm in cat.find_all('a', class_='menuItem-name')] for cat in cats]
-    prices = [[p.text for p in cat.find_all('span', class_='menuItem-displayPrice')] for cat in cats]
-
-    ids = []
-    for cat in cats:
-        cat_ids = []
-        items = cat.find_all('div', class_='menuItem-inner')
-        for item in items:
-            cat_ids.append(item.get('id'))
-        ids.append(cat_ids)
-
-    full_menu = {}
-    for ind, title in enumerate(cat_titles):
-        all_items = []
-        for ind2, itm_name in enumerate(cat_items[ind]):
-            item = {}
-            item['name'] = itm_name
-            item['price'] = prices[ind][ind2]
-            item['options'] = get_item(browser, ids[ind][ind2])
-            all_items.append(item)
-        full_menu[title] = all_items
-
-    path = r"C:\\Users\\xbran\\repos\\Boba-Finder\\menu-scraper"
-    with open(f'{path}/data.json', 'w') as f:
-        json.dump(full_menu, f, indent=4)
-    """
-
-    print('[Finished]')
 
 # insert data collected into MongoDB
 shopMenus = get_menu(input('Grubhub Link?  '))
