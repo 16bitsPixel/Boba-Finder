@@ -31,20 +31,30 @@ def get_menu(url):
     """ given a valid grubhub url, scrape the menu of a restaurant """
     print('Running...')
     chrome_options = Options()
+    chrome_options.add_argument("start-maximized")
+    chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+    chrome_options.add_experimental_option('useAutomationExtension', False)
+    chrome_options.add_argument('--disable-blink-features=AutomationControlled')
     # To disable headless mode (for debugging or troubleshooting), comment out the following line:
     #chrome_options.add_argument("--headless")
 
     browser = webdriver.Chrome(options=chrome_options)
     browser.get(url)
+
+    time.sleep(5)  
+
     innerHTML = browser.page_source
 
     html = BeautifulSoup(innerHTML, 'html.parser')
 
-    menu = html.find(class_="menuSectionsContainer");
+    menu = html.find("div", {"data-testid" : "menu-sections-container"})
     if menu is None:
         print('menu fail')
         get_menu(url)
         return
+    else:
+        print('found menu')
     # Categories
     cats = menu.find_all('ghs-restaurant-menu-section')
     cats = cats[1:]
@@ -71,7 +81,8 @@ def get_menu(url):
             item['options'] = get_item(browser, ids[ind][ind2])
             all_items.append(item)
         full_menu[title] = all_items
-    path = '/'.join(os.path.realpath(__file__).split('/')[:-1])
+
+    path = r"C:\\Users\\xbran\\repos\\Boba-Finder\\menu-scraper"
     with open(f'{path}/data.json', 'w') as f:
         json.dump(full_menu, f, indent=4)
     print('[Finished]')

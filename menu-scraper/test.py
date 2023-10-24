@@ -6,17 +6,25 @@ from bs4 import BeautifulSoup
 from selenium import webdriver 
 from selenium.webdriver.common.keys import Keys 
 from selenium.webdriver.edge.service import Service
+from selenium.webdriver.edge.options import Options
 import time 
   
 #url of the page we want to scrape 
-url = "https://www.grubhub.com/restaurant/la-victoria-taqueria-140-e-san-carlos-st-san-jose/2072725"
+url = "https://www.grubhub.com/restaurant/sharetea-2855-stevens-creek-blvd-santa-clara/547478"
 
 # create service object
 edgeService = Service(
     r"C:\\Users\\xbran\\repos\Boba-Finder\\res\\edgedriver_win64\\msedgedriver.exe")
-  
+
+options = Options()
+options.add_argument("start-maximized")
+options.add_experimental_option("excludeSwitches", ["enable-automation"])
+options.add_experimental_option('excludeSwitches', ['enable-logging'])
+options.add_experimental_option('useAutomationExtension', False)
+options.add_argument('--disable-blink-features=AutomationControlled')
+
 # initiating the webdriver. Parameter includes the path of the webdriver. 
-driver = webdriver.Edge(service=edgeService)  
+driver = webdriver.Edge(service=edgeService, options=options)  
 driver.get(url)  
   
 # this is just to ensure that the page is loaded 
