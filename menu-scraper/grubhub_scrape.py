@@ -47,7 +47,7 @@ def get_menu(url):
                 boba['Drink Name'] = item.select_one('h6').get_text()
                 desc = item.select_one('span[data-testid="menu-item-description"]')
                 if desc is None:
-                    boba['Description'] = "Milk Tea"
+                    boba['Description'] = boba['Drink Name']
                 else:
                     boba['Description'] = item.select_one('span[data-testid="menu-item-description"]').get_text()
                 boba['Price'] = item.select_one('span[data-testid="menu-item-price"]').get_text()
@@ -58,12 +58,15 @@ def get_menu(url):
 
         body.send_keys(Keys.PAGE_DOWN)
         body.send_keys(Keys.PAGE_DOWN)
-        body.send_keys(Keys.PAGE_DOWN)
         time.sleep(3)
         new_height = browser.execute_script('return window.pageYOffset;')
         if new_height == previous_height:
             break
         previous_height = new_height
+
+        # update html
+        innerHTML = browser.page_source
+        soup = BeautifulSoup(innerHTML, 'html.parser')
     print("[FINISHED SCRAPING]")
 
     return menuItems
