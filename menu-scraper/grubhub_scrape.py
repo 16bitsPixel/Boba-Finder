@@ -1,32 +1,8 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-import os
 import time
-import json
 import pymongo
-
-
-def get_item(browser, id):
-    """ given an id, scrape a menu item and all of its options """
-    button = browser.find_element_by_id(id)
-    browser.execute_script("arguments[0].click();", button)
-    time.sleep(1)
-
-    innerHTML = browser.page_source
-    html = BeautifulSoup(innerHTML, 'html.parser')
-
-    _options = {}
-    options = html.find_all('div', class_='menuItemModal-options') # menuItemModal-choice-option-description
-    for option in options:
-        name = option.find(class_='menuItemModal-choice-name').text
-        choices = option.find_all('span', class_='menuItemModal-choice-option-description')
-        if ' + ' in choices[0].text:
-            _choices = {choice.text.split(' + ')[0]:choice.text.split(' + ')[1] for choice in choices}
-        else:
-            _choices = [choice.text for choice in choices]
-        _options[name] = _choices
-    return _options
 
 def get_menu(url):
     """ given a valid grubhub url, scrape the menu of a restaurant """
@@ -61,20 +37,27 @@ def get_menu(url):
     for item in soup.select('div[data-testid="menu-item"]'):
             boba = {}
             boba['Drink Name'] = item.select_one('h6').get_text()
-            boba['Description'] = item.select_one('span[data-testid="menu-item-description"]').get_text()
+            desc = item.select_one('span[data-testid="menu-item-description"]')
+            if desc is None:
+                boba['Description'] = "Milk Tea"
+            else:
+                boba['Description'] = item.select_one('span[data-testid="menu-item-description"]').get_text()
             boba['Price'] = item.select_one('span[data-testid="menu-item-price"]').get_text()
-            menuItems.append(boba)
+
+            # check if newly created item is duplicate, if so don't append
+            if boba not in menuItems:
+                menuItems.append(boba)
     print("[FINISHED SCRAPING]")
 
     return menuItems
 
 # insert data collected into MongoDB
-shopMenus = get_menu(input('Grubhub Link?  '))
+bobaDrinks = get_menu(input('Grubhub Link?  '))
 client = pymongo.MongoClient("mongodb+srv://brandonllanes16:XIPZsFqtcLYtkQ4l@bobacluster.atdxi6u.mongodb.net/?retryWrites=true&w=majority")
-db = client.db.bobaShops
+db = client.db.bobaShop
 try:
-    db.insert_many(shopMenus)
-    print(f'inserted {len(shopMenus)} boba shop menus')
+    db.insert_many(bobaDrinks)
+    print(f'inserted {len(bobaDrinks)} boba drinks')
 except:
     print('an error occurred quotes were not stored to db')
 #example link: 'https://www.grubhub.com/restaurant/ume-tea-milpitas-272-barber-ct-milpitas/2642037'
