@@ -7,7 +7,7 @@ class ShopsSpider(scrapy.Spider):
     start_urls = ["https://www.allmenus.com/ca/san-francisco/-/teahouses/"]
 
     # Load Tea Flavors
-    f = open('tea.txt', mode='r+')
+    f = open('../../res/tea.txt', mode='r+')
 
     line = f.readline()
 
