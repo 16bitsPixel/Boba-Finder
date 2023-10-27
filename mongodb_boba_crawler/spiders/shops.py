@@ -8,14 +8,24 @@ class ShopsSpider(scrapy.Spider):
 
     # Load Tea Flavors
     f = open('../../res/tea.txt', mode='r+')
-
     line = f.readline()
-
     teaFlavors = set()
     while line:
         line = line.rstrip()
         teaFlavors.add(line.lower())
         line = f.readline() 
+    f.close()
+
+    # Load toppings:
+    f = open('../../res/toppings.txt', mode='r+')
+    line = f.readline()
+    toppings = set()
+    while line:
+        line = line.rstrip()
+        toppings.add(line.lower())
+        line = f.readline() 
+    f.close()
+
 
     def parse(self, response):
         # Follow each resaturant link on page to view
@@ -31,25 +41,26 @@ class ShopsSpider(scrapy.Spider):
 
             # Combine the extracted text into a single string
         text = ' '.join(text)
-
+        text = text.split(' ')
         teaSoldHere = False
+        currToppings = []
         for word in text:
             if word.lower() == 'tea' or word.lower() == 'boba' or word.lower() == 'tapioca':
                 teaSoldHere = True
+            if word.lower() in self.toppings:
+                if word.lower() not in currToppings:
+                    currToppings.append(word.lower())
         
         if teaSoldHere == False:
-            yield None
-        
-        # Parse each menu item div
-        item = MongodbBobaCrawlerItem()
+            return None
 
         # Caputure Restaurant name and Address
-        item['name'] = response.css('div.menu-header span::text').get()
-        item['address'] = response.css('div.right-content.pull-right ul.info-list li a::text').get()
+        restName = response.css('div.menu-header span::text').get()
+        restAddress = response.css('div.right-content.pull-right ul.info-list li a::text').get()
 
         # capture menu item name
         for menuItem in response.css('li.menu-items'):
-            teaRaw = menuItem.css('span.item-title::text').get()   
+            teaRaw = menuItem.css('span.item-title::text').get()
             # clean input string (remove non-alpha characters)
             teaClean = ''
             for char in teaRaw:
@@ -62,17 +73,14 @@ class ShopsSpider(scrapy.Spider):
             # remove initial lone letter ex: "P <tea>" (residual from formatting)
             if teaClean[1] == ' ':
                 teaClean = teaClean[2:]
-
-            item['menuItem'] = teaClean
             
-            # add what flavors item has
-            teaClean = teaClean.split(" ")
+            # add what tea flavors
+            teaName = teaClean.split(" ")
             flavors = []
-
             # check menu name
-            for i in teaClean:
+            for i in teaName:
                 if i.lower() in self.teaFlavors:
-                    flavors.append(i)   
+                    flavors.append(i.lower())   
             # check menu description
             description = menuItem.css('p.description::text').get()
             if description:
@@ -81,7 +89,19 @@ class ShopsSpider(scrapy.Spider):
                     if i.lower() in self.teaFlavors:
                         if i.lower() not in flavors:
                             flavors.append(i)
-            item['teaFlavors'] = flavors
 
+            # Check if item is non-tea item
+            if len(flavors) == 0:
+                yield None
+            else:
+            
+                item = MongodbBobaCrawlerItem()
 
-            yield item        
+                item['name'] = restName
+                item['address'] = restAddress
+                item['menuItem'] = teaClean
+                item['teaFlavors'] = flavors
+                # add any toppings found added to all drinks at this location
+                item['toppings'] = currToppings
+                
+                yield item        
