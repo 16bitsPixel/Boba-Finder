@@ -1,14 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // home screen to be implemented in another branch
-function HomeScreen() {
+function HomeScreen({navigation}) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
+      <Button title = "Drink Maker" onPress = {() => navigation.navigate("Custom")}/>
     </View>
   );
 }
@@ -53,8 +54,20 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Custom" component={CustomScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen
+          name = "Custom"
+          component={CustomScreen}
+          options = {{
+            headerTitle: "Drink Maker",
+            headerLeft: () => (
+              <Button
+                onPress={() => navigation("Home")}
+                title="< Back"
+                color="black"
+              />
+            )
+          }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
