@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, Image, View, Button, Pressable } from 'react-native';
+import { StyleSheet, Text, Image, ImageBackground, View, Button, Pressable } from 'react-native';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -17,18 +17,25 @@ function HomeScreen({navigation}) {
 /*
   Custom Screen where users can create their drink of choice
 */
-function CustomScreen() {
+function CustomScreen({navigation}) {
   return (
     <View style = {styles.container}>
       {/*div for the changing boba UI, randomizer, and favorite button*/}
-      <View style = {styles.container}>
-        <Text>Boba UI</Text>
+      <View style = {{
+        flex: 1,
+        width: "100%"
+      }}>
+        <ImageBackground source = {{
+          // we can change the background later
+          uri: "https://t3.ftcdn.net/jpg/03/31/26/12/360_F_331261291_R7zwjJUFaUQADitcjS0hfRPNKnELRtfj.jpg"
+        }} resizeMode = "cover" style = {{flex: 1}}>
+        </ImageBackground>
       </View>
 
       {/*div for two buttons: tea options, topping options, and search*/}
       <View style = {{
         backgroundColor: "#C5E7E2",
-        flex: 1,
+        flex: 1.3,
         width: "100%",
         alignItems: "center",
         gap: "30%"
@@ -38,9 +45,10 @@ function CustomScreen() {
         <Pressable style = {{
           backgroundColor: "white",
           width: "80%",
-          height: "20%",
-          marginTop: "10%"
-        }}>
+          height: "25%",
+          marginTop: "10%",
+          borderRadius: "12px"
+        }} onPress = {() => navigation.navigate("Tea Options")}>
           <View style = {{
             flexDirection: "row",
             flex: 1
@@ -59,7 +67,7 @@ function CustomScreen() {
               // we can change this to our logo later
               uri: "https://images.rawpixel.com/image_transparent_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsb2ZmaWNlMThfcGhvdG9fb2ZfYm9iYV9taWxrX3RlYV9pc29sYXRlX29uX3doaXRlX2JhY2tncl80NjBiNGJmZS04NDBlLTQxYTMtOTI4ZC1kOWIzZDM3ZGQ5ZTYucG5n.png"
               }}
-              style = {{width: "15%"}}
+              style = {{width: "15%", marginRight: "5%"}}
             />
           </View>
         </Pressable>
@@ -68,8 +76,9 @@ function CustomScreen() {
         <Pressable style = {{
           backgroundColor: "white",
           width: "80%",
-          height: "20%",
-        }}>
+          height: "25%",
+          borderRadius: "12px"
+        }} onPress = {() => navigation.navigate("Topping Options")}>
           <View style = {{
             flexDirection: "row",
             flex: 1
@@ -88,9 +97,22 @@ function CustomScreen() {
               // we can change this to our logo later
               uri: "https://images.rawpixel.com/image_transparent_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsb2ZmaWNlMThfcGhvdG9fb2ZfYm9iYV9taWxrX3RlYV9pc29sYXRlX29uX3doaXRlX2JhY2tncl80NjBiNGJmZS04NDBlLTQxYTMtOTI4ZC1kOWIzZDM3ZGQ5ZTYucG5n.png"
               }}
-              style = {{width: "15%"}}
+              style = {{width: "15%", marginRight: "5%"}}
             />
           </View>
+        </Pressable>
+
+        {/* button to submit the customized drink */}
+        <Pressable style = {{
+          backgroundColor: "#A4D9D1",
+          width: "50%",
+          height: "15%",
+          borderRadius: "12px",
+          justifyContent: "center",
+          alignItems: "center"
+        }}>
+          <Text style = {{fontSize: 30}}>Submit</Text>
+
         </Pressable>
       </View>
 
@@ -139,6 +161,8 @@ export default function App() {
               backgroundColor: "#C5E7E2"
             }
           }} />
+        <Stack.Screen name="Tea Options" component={TeaOptionsScreen} />
+        <Stack.Screen name="Topping Options" component={ToppingOptionsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
