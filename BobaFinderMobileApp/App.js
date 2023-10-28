@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, Image, View, Button, Pressable } from 'react-native';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -20,7 +20,80 @@ function HomeScreen({navigation}) {
 function CustomScreen() {
   return (
     <View style = {styles.container}>
-      <Text>Custom Screen</Text>
+      {/*div for the changing boba UI, randomizer, and favorite button*/}
+      <View style = {styles.container}>
+        <Text>Boba UI</Text>
+      </View>
+
+      {/*div for two buttons: tea options, topping options, and search*/}
+      <View style = {{
+        backgroundColor: "#C5E7E2",
+        flex: 1,
+        width: "100%",
+        alignItems: "center",
+        gap: "30%"
+      }}>
+
+        {/* button for the base tea, this should move to the teas screen */}
+        <Pressable style = {{
+          backgroundColor: "white",
+          width: "80%",
+          height: "20%",
+          marginTop: "10%"
+        }}>
+          <View style = {{
+            flexDirection: "row",
+            flex: 1
+          }}>
+            <View style = {{
+              flex: 1,
+              justifyContent: "center",
+              marginLeft: "5%"
+            }}>
+              <Text style = {{
+                fontSize: 20
+              }}>Base:</Text>
+              <Text>Thai Tea</Text>
+            </View>
+            <Image source = {{
+              // we can change this to our logo later
+              uri: "https://images.rawpixel.com/image_transparent_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsb2ZmaWNlMThfcGhvdG9fb2ZfYm9iYV9taWxrX3RlYV9pc29sYXRlX29uX3doaXRlX2JhY2tncl80NjBiNGJmZS04NDBlLTQxYTMtOTI4ZC1kOWIzZDM3ZGQ5ZTYucG5n.png"
+              }}
+              style = {{width: "15%"}}
+            />
+          </View>
+        </Pressable>
+
+        {/* button for the toppings, this should move to the toppings screen */}
+        <Pressable style = {{
+          backgroundColor: "white",
+          width: "80%",
+          height: "20%",
+        }}>
+          <View style = {{
+            flexDirection: "row",
+            flex: 1
+          }}>
+            <View style = {{
+              flex: 1,
+              justifyContent: "center",
+              marginLeft: "5%"
+            }}>
+              <Text style = {{
+                fontSize: 20
+              }}>Toppings:</Text>
+              <Text>Brown Sugar Boba</Text>
+            </View>
+            <Image source = {{
+              // we can change this to our logo later
+              uri: "https://images.rawpixel.com/image_transparent_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsb2ZmaWNlMThfcGhvdG9fb2ZfYm9iYV9taWxrX3RlYV9pc29sYXRlX29uX3doaXRlX2JhY2tncl80NjBiNGJmZS04NDBlLTQxYTMtOTI4ZC1kOWIzZDM3ZGQ5ZTYucG5n.png"
+              }}
+              style = {{width: "15%"}}
+            />
+          </View>
+        </Pressable>
+      </View>
+
     </View>
   );
 }
@@ -61,7 +134,10 @@ export default function App() {
           options = {{
             headerTitle: "Drink Maker",
             headerBackTitle: "Back",
-            headerTintColor: "black"
+            headerTintColor: "black",
+            headerStyle: {
+              backgroundColor: "#C5E7E2"
+            }
           }} />
       </Stack.Navigator>
     </NavigationContainer>
@@ -74,5 +150,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  }
 });
