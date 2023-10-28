@@ -60,13 +60,8 @@ export default function App() {
           component={CustomScreen}
           options = {{
             headerTitle: "Drink Maker",
-            headerLeft: () => (
-              <Button
-                onPress={() => navigation("Home")}
-                title="< Back"
-                color="black"
-              />
-            )
+            headerBackTitle: "Back",
+            headerTintColor: "black"
           }} />
       </Stack.Navigator>
     </NavigationContainer>
