@@ -15,19 +15,19 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Custom" component={CustomScreen} />
-          {/* options={{
-            headerTitle: "Drink Maker",
-            headerBackTitle: "Back",
+      <Stack.Navigator
+        screenOptions = {{
+          headerBackTitle: "Back",
             headerTintColor: "black",
             headerStyle: {
               backgroundColor: "#C5E7E2"
             }
-          }}  */}
-        <Stack.Screen name="Tea Options" component={TeaOptionsScreen} />
-        <Stack.Screen name="Topping Options" component={ToppingOptionsScreen} />
+        }}
+      >
+        <Stack.Screen name="Home" component={HomeScreen} options = {{headerTitle: "Home Screen"}} />
+        <Stack.Screen name="Custom" component={CustomScreen} options = {{headerTitle: "Drink Maker"}} />
+        <Stack.Screen name="Tea Options" component={TeaOptionsScreen} options = {{headerTitle: "Tea Bases"}} />
+        <Stack.Screen name="Topping Options" component={ToppingOptionsScreen} options = {{headerTitle: "Toppings"}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
