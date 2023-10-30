@@ -21,13 +21,10 @@ export default function CustomScreen({ navigation }) {
         flex: 1,
         width: "100%"
       }}>
-        <ImageBackground source={{
-          // we can change the background later
-          uri: "https://t4.ftcdn.net/jpg/05/27/53/67/360_F_527536721_ZfVLgwxlMNqcUflxbuUMA071XcxoJNnv.jpg"
-        }} resizeMode="cover" style={{ flex: 1 }}>
+        <ImageBackground source = {require("../../assets/searchbg.png")} resizeMode="cover" style={{ flex: 1 }}>
           <Image
-            source={{ uri: "https://images.rawpixel.com/image_transparent_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsb2ZmaWNlMThfcGhvdG9fb2ZfYm9iYV9taWxrX3RlYV9pc29sYXRlX29uX3doaXRlX2JhY2tncl80NjBiNGJmZS04NDBlLTQxYTMtOTI4ZC1kOWIzZDM3ZGQ5ZTYucG5n.png" }}
-            style={{ height: "100%", flex: 4, marginTop: "5%" }}
+            source = {require("../../assets/logo.png")}
+            style={{ height: "100%", flex: 4, marginTop: "5%", alignSelf: "center" }}
             resizeMode="contain"
           />
           <View style={{
@@ -75,7 +72,7 @@ export default function CustomScreen({ navigation }) {
             flex: 1
           }}>
             <View style={{
-              flex: 1,
+              flex: 2,
               justifyContent: "center",
               marginLeft: "5%"
             }}>
@@ -84,11 +81,8 @@ export default function CustomScreen({ navigation }) {
               }}>Base:</Text>
               <Text>Thai Tea</Text>
             </View>
-            <Image source={{
-              // we can change this to our logo later
-              uri: "https://images.rawpixel.com/image_transparent_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsb2ZmaWNlMThfcGhvdG9fb2ZfYm9iYV9taWxrX3RlYV9pc29sYXRlX29uX3doaXRlX2JhY2tncl80NjBiNGJmZS04NDBlLTQxYTMtOTI4ZC1kOWIzZDM3ZGQ5ZTYucG5n.png"
-            }}
-              style={{ width: "15%", marginRight: "5%" }}
+            <Image source = {require("../../assets/basecup.png")}
+              style={{ height: "100%", flex: 1 }} resizeMode = "contain"
             />
           </View>
         </Pressable>
@@ -105,7 +99,7 @@ export default function CustomScreen({ navigation }) {
             flex: 1
           }}>
             <View style={{
-              flex: 1,
+              flex: 2,
               justifyContent: "center",
               marginLeft: "5%"
             }}>
@@ -114,11 +108,8 @@ export default function CustomScreen({ navigation }) {
               }}>Toppings:</Text>
               <Text>Brown Sugar Boba</Text>
             </View>
-            <Image source={{
-              // we can change this to our logo later
-              uri: "https://images.rawpixel.com/image_transparent_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsb2ZmaWNlMThfcGhvdG9fb2ZfYm9iYV9taWxrX3RlYV9pc29sYXRlX29uX3doaXRlX2JhY2tncl80NjBiNGJmZS04NDBlLTQxYTMtOTI4ZC1kOWIzZDM3ZGQ5ZTYucG5n.png"
-            }}
-              style={{ width: "15%", marginRight: "5%" }}
+            <Image source = {require("../../assets/toppingscup.png")}
+              style={{ height: "100%", flex: 1, marginRight: "3%"}} resizeMode = "contain"
             />
           </View>
         </Pressable>
