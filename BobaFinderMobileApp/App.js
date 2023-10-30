@@ -27,7 +27,7 @@ function CustomScreen({navigation}) {
       }}>
         <ImageBackground source = {{
           // we can change the background later
-          uri: "https://t4.ftcdn.net/jpg/05/27/53/67/360_F_527536721_ZfVLgwxlMNqcUflxbuUMA071XcxoJNnv.jpg"
+          uri: "res\\searchbg.png"
         }} resizeMode = "cover" style = {{flex: 1}}>
           <Image 
             source = {{uri: "https://images.rawpixel.com/image_transparent_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsb2ZmaWNlMThfcGhvdG9fb2ZfYm9iYV9taWxrX3RlYV9pc29sYXRlX29uX3doaXRlX2JhY2tncl80NjBiNGJmZS04NDBlLTQxYTMtOTI4ZC1kOWIzZDM3ZGQ5ZTYucG5n.png"}}
