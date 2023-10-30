@@ -8,6 +8,7 @@ import {
   ImageBackground,
   StyleSheet
 } from 'react-native'
+import { images } from "../../constants"
 
 /*
   Custom Screen where users can create their drink of choice
@@ -16,18 +17,22 @@ import {
 export default function CustomScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      {/*div for the changing boba UI, randomizer, and favorite button*/}
       <View style={{
         flex: 1,
         width: "100%"
       }}>
-        <ImageBackground source={{
-          // we can change the background later
-          uri: "https://t4.ftcdn.net/jpg/05/27/53/67/360_F_527536721_ZfVLgwxlMNqcUflxbuUMA071XcxoJNnv.jpg"
-        }} resizeMode="cover" style={{ flex: 1 }}>
+        <ImageBackground 
+        source={images.searchbg}
+        resizeMode="cover" style={{ flex: 1 }}>
+          {/* Drink base image */}
           <Image
-            source={{ uri: "https://images.rawpixel.com/image_transparent_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsb2ZmaWNlMThfcGhvdG9fb2ZfYm9iYV9taWxrX3RlYV9pc29sYXRlX29uX3doaXRlX2JhY2tncl80NjBiNGJmZS04NDBlLTQxYTMtOTI4ZC1kOWIzZDM3ZGQ5ZTYucG5n.png" }}
-            style={{ height: "100%", flex: 4, marginTop: "5%" }}
+            source={images.basecup}
+            style={{
+              height: "100%",
+              flex: 4,
+              marginTop: "5%",
+              marginLeft: "25%",
+            }}
             resizeMode="contain"
           />
           <View style={{
