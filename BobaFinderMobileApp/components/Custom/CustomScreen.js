@@ -9,6 +9,8 @@ import {
   StyleSheet
 } from 'react-native'
 
+import { images } from '../../constants'
+
 /*
   Custom Screen where users can create their drink of choice
 */
@@ -21,9 +23,9 @@ export default function CustomScreen({ navigation }) {
         flex: 1,
         width: "100%"
       }}>
-        <ImageBackground source = {require("../../assets/searchbg.png")} resizeMode="cover" style={{ flex: 1 }}>
+        <ImageBackground source = {images.searchbg} resizeMode="cover" style={{ flex: 1 }}>
           <Image
-            source = {require("../../assets/logo.png")}
+            source = {images.logo}
             style={{ height: "100%", flex: 4, marginTop: "5%", alignSelf: "center" }}
             resizeMode="contain"
           />
@@ -81,7 +83,7 @@ export default function CustomScreen({ navigation }) {
               }}>Base:</Text>
               <Text>Thai Tea</Text>
             </View>
-            <Image source = {require("../../assets/basecup.png")}
+            <Image source = {images.basecup}
               style={{ height: "100%", flex: 1 }} resizeMode = "contain"
             />
           </View>
@@ -108,7 +110,7 @@ export default function CustomScreen({ navigation }) {
               }}>Toppings:</Text>
               <Text>Brown Sugar Boba</Text>
             </View>
-            <Image source = {require("../../assets/toppingscup.png")}
+            <Image source = {images.toppingscup}
               style={{ height: "100%", flex: 1, marginRight: "3%"}} resizeMode = "contain"
             />
           </View>
