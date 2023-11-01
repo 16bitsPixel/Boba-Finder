@@ -3,11 +3,7 @@ import {
   View,
   Text,
   Button,
-  Pressable,
-  StyleSheet
 } from 'react-native';
-
-import CustomScreen from '../Custom/CustomScreen/CustomScreen';
 
 export default function HomeScreen({ navigation }) {
   return (
