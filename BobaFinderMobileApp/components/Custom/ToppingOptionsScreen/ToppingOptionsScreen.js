@@ -10,7 +10,7 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
-import toppingList from '../../Data/toppings.json'
+import toppingList from '../../../data/toppings.json'
 
 /*
     Screen where users can see all options of toppings for their custom drink
@@ -18,7 +18,9 @@ import toppingList from '../../Data/toppings.json'
 
 export default function ToppingOptionsScreen() {
     return (
+        // SafeAreaView hides the top part of the screen where the camera is
         <SafeAreaView style={styles.container}>
+            {/* ScrollView allows for scrolling */}
             <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollView}>
                 {
                     toppingList.map(topping => {
@@ -49,8 +51,6 @@ const styles = StyleSheet.create({
     card: {
         backgroundColor: "white",
         padding: 16,
-        borderRadius: 8,
-        borderWidth: 1,
         marginBottom: 16,
     },
     cardtext: {

@@ -4,12 +4,15 @@ import {
   Text,
   Button,
   Pressable,
+  TouchableOpacity,
   Image,
   ImageBackground,
-  StyleSheet
+  StyleSheet,
+  SafeAreaView
 } from 'react-native'
 
-import { images } from '../../constants'
+import { images } from '../../../constants'
+import styles from './CustomScreenStyles'
 
 /*
   Custom Screen where users can create their drink of choice
@@ -17,16 +20,16 @@ import { images } from '../../constants'
 
 export default function CustomScreen({ navigation }) {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {/*div for the changing boba UI, randomizer, and favorite button*/}
       <View style={{
         flex: 1,
-        width: "100%"
+        width: "100%",
       }}>
-        <ImageBackground source = {images.searchbg} resizeMode="cover" style={{ flex: 1 }}>
+        <ImageBackground source={images.searchbg} resizeMode="cover" style={{ flex: 1 }}>
           <Image
-            source = {images.logo}
-            style={{ height: "100%", flex: 4, marginTop: "5%", alignSelf: "center" }}
+            source={images.logo}
+            style={styles.drinkBackground}
             resizeMode="contain"
           />
           <View style={{
@@ -34,41 +37,36 @@ export default function CustomScreen({ navigation }) {
             flex: 1,
             justifyContent: "space-between"
           }}>
-            <Pressable style={{ width: "20%", justifyContent: "center" }}>
+            <TouchableOpacity
+              style={styles.drinkButtonPosition}
+            >
               <Image source={{
                 uri: "https://cdn-icons-png.flaticon.com/512/4260/4260076.png"
               }} style={{ height: "80%" }}
                 resizeMode="contain"
               />
-            </Pressable>
-            <Pressable style={{ width: "20%", justifyContent: "center" }}>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.drinkButtonPosition}
+            >
               <Image source={{
                 uri: "https://www.iconpacks.net/icons/2/free-favourite-icon-2765-thumb.png"
               }} style={{ height: "80%" }}
                 resizeMode="contain"
               />
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </ImageBackground>
       </View>
 
       {/*div for two buttons: tea options, topping options, and search*/}
-      <View style={{
-        backgroundColor: "#C5E7E2",
-        flex: 1.3,
-        width: "100%",
-        alignItems: "center",
-        gap: "30%"
-      }}>
-
+      {<View
+        style={styles.customizationContainer}
+      >
         {/* button for the base tea, this should move to the teas screen */}
-        <Pressable style={{
-          backgroundColor: "white",
-          width: "80%",
-          height: "25%",
-          marginTop: "10%",
-          borderRadius: "12px"
-        }} onPress={() => navigation.navigate("Tea Options")}>
+        <TouchableOpacity
+          style={styles.customizationButton}
+          onPress={() => navigation.navigate("Tea Options")}>
           <View style={{
             flexDirection: "row",
             flex: 1
@@ -80,22 +78,22 @@ export default function CustomScreen({ navigation }) {
             }}>
               <Text style={{
                 fontSize: 20
-              }}>Base:</Text>
+              }}>
+                Base:
+              </Text>
               <Text>Thai Tea</Text>
             </View>
-            <Image source = {images.basecup}
-              style={{ height: "100%", flex: 1 }} resizeMode = "contain"
+            <Image source={images.basecup}
+              style={styles.customizationIcon}
+              resizeMode="contain"
             />
           </View>
-        </Pressable>
+        </TouchableOpacity>
 
         {/* button for the toppings, this should move to the toppings screen */}
-        <Pressable style={{
-          backgroundColor: "white",
-          width: "80%",
-          height: "25%",
-          borderRadius: "12px"
-        }} onPress={() => navigation.navigate("Topping Options")}>
+        <TouchableOpacity
+          style={styles.customizationButton}
+          onPress={() => navigation.navigate("Topping Options")}>
           <View style={{
             flexDirection: "row",
             flex: 1
@@ -107,38 +105,26 @@ export default function CustomScreen({ navigation }) {
             }}>
               <Text style={{
                 fontSize: 20
-              }}>Toppings:</Text>
+              }}>
+                Toppings:
+              </Text>
               <Text>Brown Sugar Boba</Text>
             </View>
-            <Image source = {images.toppingscup}
-              style={{ height: "100%", flex: 1, marginRight: "3%"}} resizeMode = "contain"
+            <Image source={images.toppingscup}
+              style={styles.customizationIcon}
+              resizeMode="contain"
             />
           </View>
-        </Pressable>
+        </TouchableOpacity>
 
         {/* button to submit the customized drink */}
-        <Pressable style={{
-          backgroundColor: "#A4D9D1",
-          width: "50%",
-          height: "15%",
-          borderRadius: "12px",
-          justifyContent: "center",
-          alignItems: "center"
-        }}>
-          <Text style={{ fontSize: 30 }}>Submit</Text>
+        <TouchableOpacity
+          style={styles.submitButton}>
+          <Text style={{ fontSize: 20 }}>Submit</Text>
 
-        </Pressable>
-      </View>
+        </TouchableOpacity>
+      </View>}
 
-    </View>
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
-});
