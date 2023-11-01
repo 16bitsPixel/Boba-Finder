@@ -1,5 +1,16 @@
 import React from "react";
-import { Text, View, StyleSheet } from 'react-native';
+import {
+    Text,
+    ScrollView,
+    View,
+    SafeAreaView,
+    StatusBar,
+    FlatList,
+    StyleSheet,
+    TouchableOpacity,
+} from 'react-native';
+
+import toppingList from '../../Data/toppings.json'
 
 /*
     Screen where users can see all options of toppings for their custom drink
@@ -7,10 +18,20 @@ import { Text, View, StyleSheet } from 'react-native';
 
 export default function ToppingOptionsScreen() {
     return (
-        <View style={styles.container}>
-            <Text>Topping Options Screen</Text>
-        </View>
-    );
+        <SafeAreaView style={styles.container}>
+            <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollView}>
+                {
+                    toppingList.map(topping => {
+                        return (
+                            <TouchableOpacity style={styles.card} key={topping.id}>
+                                <Text style={styles.cardtext}> {topping.name}</Text>
+                            </TouchableOpacity>
+                        )
+                    })
+                }
+            </ScrollView>
+        </SafeAreaView>
+    )
 }
 
 
@@ -20,5 +41,19 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        paddingTop: StatusBar.currentHeight,
+    },
+    scrollView: {
+        /* scrollView styles */
+    },
+    card: {
+        backgroundColor: "white",
+        padding: 16,
+        borderRadius: 8,
+        borderWidth: 1,
+        marginBottom: 16,
+    },
+    cardtext: {
+        fontSize: 30,
     }
 });
