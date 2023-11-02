@@ -1,6 +1,9 @@
 import React, {useState} from "react";
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'react-native';
 import Accordion from 'react-native-collapsible/Accordion';
+
+import styles from './TeaOptionsScreenStyles'
+import { images } from '../../../constants'
 
 /*
     Screen where users can see all options of tea bases for their custom drink
@@ -13,15 +16,32 @@ export default function TeaOptionsScreen() {
     const [ activeSections, setActiveSections ] = useState([]);
     const sections = [
         {
-            title: 'Milk Teas',
+            title: "Milk Teas",
             content:
-                <TouchableOpacity>
-                    
-                </TouchableOpacity>
+                <View style = {styles.customizationContainer}>
+                    <TouchableOpacity style = {styles.customizationButton}>
+                        <Text style = {{fontSize: 20, marginLeft: "5%"}}>
+                            Black Tea
+                        </Text>
+                        <Image source={images.basecup}
+                            style={styles.customizationIcon}
+                            resizeMode="contain"
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity style = {styles.customizationButton}>
+                        <Text style = {{fontSize: 20, marginLeft: "5%", flex: 1}}>
+                            Green Tea
+                        </Text>
+                        <Image source={images.basecup}
+                            style={styles.customizationIcon}
+                            resizeMode="contain"
+                        />
+                    </TouchableOpacity>
+                </View>
         },
         {
-            title: 'Fruit Teas',
-            content: <Text>test2</Text>
+            title: "Fruits Teas",
+            content: <Text>Test</Text>
         }
     ];
 
@@ -35,9 +55,7 @@ export default function TeaOptionsScreen() {
 
     function renderContent(section, _, isActive) {
         return (
-          <View style={styles.accordBody}>
-            {section.content}
-          </View>
+          section.content
         );
     }
 
@@ -58,36 +76,3 @@ export default function TeaOptionsScreen() {
         </SafeAreaView>
     );
 }
-
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#C5E7E2',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    accordContainer: {
-        paddingBottom: 4
-    },
-    accordHeader: {
-        padding: 12,
-        backgroundColor: '#666',
-        color: '#eee',
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent:'space-between'
-    },
-    accordTitle: {
-        fontSize: 20,
-    },
-    accordBody: {
-        padding: 12
-    },
-    textSmall: {
-        fontSize: 16
-    },
-    seperator: {
-        height: 12
-    }
-});
