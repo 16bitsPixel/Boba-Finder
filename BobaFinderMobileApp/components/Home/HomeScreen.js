@@ -15,7 +15,7 @@ export default function HomeScreen({ navigation }) {
           onPress={() => navigation.navigate("Search")}
         />
         <Button
-          title="Favorite Screen"
+          title="Favorites"
           onPress={() => navigation.navigate("FavoriteScreen")}
         />
     </View>
