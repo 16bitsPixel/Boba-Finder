@@ -22,16 +22,14 @@ export default styles = StyleSheet.create({
         width: "100%",
         textAlign: "center"
     },
-    accordBody: {
-        height: "100%"
-    },
     customizationContainer: {
         backgroundColor: "#C5E7E2",
         flex: 1,
         height: "100%",
         width: "100%",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        paddingBottom: "4%"
     },
     customizationButton: {
         backgroundColor: "white",

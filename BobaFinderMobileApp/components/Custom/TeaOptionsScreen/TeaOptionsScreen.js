@@ -4,6 +4,9 @@ import Accordion from 'react-native-collapsible/Accordion';
 
 import styles from './TeaOptionsScreenStyles'
 import { images } from '../../../constants'
+import milkTeaList from '../../../data/milkTeas.json'
+import fruitTeaList from '../../../data/fruitTeas.json'
+import smoothiesList from '../../../data/smoothies.json'
 
 /*
     Screen where users can see all options of tea bases for their custom drink
@@ -19,29 +22,61 @@ export default function TeaOptionsScreen() {
             title: "Milk Teas",
             content:
                 <View style = {styles.customizationContainer}>
-                    <TouchableOpacity style = {styles.customizationButton}>
-                        <Text style = {{fontSize: 20, marginLeft: "5%"}}>
-                            Black Tea
-                        </Text>
-                        <Image source={images.basecup}
-                            style={styles.customizationIcon}
-                            resizeMode="contain"
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity style = {styles.customizationButton}>
-                        <Text style = {{fontSize: 20, marginLeft: "5%"}}>
-                            Green Tea
-                        </Text>
-                        <Image source={images.basecup}
-                            style={styles.customizationIcon}
-                            resizeMode="contain"
-                        />
-                    </TouchableOpacity>
+                    {
+                        milkTeaList.map(tea => {
+                            return (
+                                <TouchableOpacity style={styles.customizationButton} key={tea.id}>
+                                    <Text style = {{fontSize: 20, marginLeft: "5%"}}>
+                                        {tea.name}
+                                    </Text>
+                                    <Image source={images.basecup}
+                                        style={styles.customizationIcon}
+                                        resizeMode="contain"
+                                    />
+                                </TouchableOpacity>
+                            )})
+                     }
                 </View>
         },
         {
             title: "Fruits Teas",
-            content: <Text>Test</Text>
+            content:
+            <View style = {styles.customizationContainer}>
+                {
+                    fruitTeaList.map(tea => {
+                        return (
+                            <TouchableOpacity style={styles.customizationButton} key={tea.id}>
+                                <Text style = {{fontSize: 20, marginLeft: "5%"}}>
+                                    {tea.name}
+                                </Text>
+                                <Image source={images.basecup}
+                                    style={styles.customizationIcon}
+                                    resizeMode="contain"
+                                />
+                            </TouchableOpacity>
+                        )})
+                }
+            </View>
+        },
+        {
+            title: "Smoothies",
+            content:
+            <View style = {styles.customizationContainer}>
+                {
+                    smoothiesList.map(tea => {
+                        return (
+                            <TouchableOpacity style={styles.customizationButton} key={tea.id}>
+                                <Text style = {{fontSize: 20, marginLeft: "5%"}}>
+                                    {tea.name}
+                                </Text>
+                                <Image source={images.basecup}
+                                    style={styles.customizationIcon}
+                                    resizeMode="contain"
+                                />
+                            </TouchableOpacity>
+                        )})
+                }
+            </View>
         }
     ];
 
