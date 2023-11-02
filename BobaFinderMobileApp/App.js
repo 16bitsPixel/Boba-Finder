@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, Pressable, Image, ImageBackground} from 'react-native';
+import { StyleSheet, Text, View, Button, Pressable, Image, ImageBackground, ScrollView} from 'react-native';
 
 export default function App() {
   return (
@@ -52,198 +52,68 @@ export default function App() {
       </View>
 
       {/*div for each pressable:favorite drink elements */}
-      <View style ={{
-        flex: .9,
-        flexDirection: 'column',
-        backgroundColor: "white",
-        borderWidth: 2,
-        borderColor: "black",
-        alignItems: "center",
-        justifyContent: "flex-start",
-        paddingVertical: 18,
-        }}>
-        <Pressable style={{ 
-            flex: .15,
-            flexDirection: "row",
-            justifyContent: "space-around",
-            width: "80%",
-            backgroundColor: "#F1F1F1",
-            borderWidth: 2,
-            borderColor: "black",
-            borderRadius: 20,
-            marginVertical: 10,
+        <View style ={{
+          flex: 1,
+          backgroundColor: "white",
+          borderColor: "black",
+          }}>
+          <ScrollView 
+            horizontal={false} 
+            style={{
+            flex:1,
             }}>
-            <Image source= {require("./assets/logo.png")}
-              style={{
-              flex: .3,
-              width: "25%",
-              height: "90%",
-              }}
-              resizeMode="contain"
-            />
-            <View style={{ 
-              flex: 0.7,
-              height: "100%",
-              flexDirection: "column",
-              justifyContent: "space-between", 
-              }}>
-              <Text style={{
-                fontSize: 30,
-                }}>Drink#1</Text>
-              <Text style={{
-                fontSize: 17,
-                }}>Description of drink</Text>
-              <View style={{ 
-                flex: 0.5,
-                height: "100%",
-                flexDirection: "column",
-                justifyContent: "flex-end", 
-                alignItems: "flex-start",
-                }}>
-                <Text style={{
-                  fontSize: 17,
-                  }}>Rating:</Text>
-              </View>
-            </View>
-          </Pressable>
-
-          <Pressable style={{ 
-            flex: .15,
-            flexDirection: "row",
-            justifyContent: "space-around",
-            width: "80%",
-            backgroundColor: "#F1F1F1",
-            borderWidth: 2,
-            borderColor: "black",
-            borderRadius: 20,
-            marginVertical: 10,
+            <View style={{
+              flex:1,
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              
             }}>
-            <Image source= {require("./assets/logo.png")}
-              style={{
-              flex: .3,
-              width: "25%",
-              height: "90%",
-              }}
-              resizeMode="contain"
-            />
-            <View style={{ 
-              flex: 0.7,
-              height: "100%",
-              flexDirection: "column",
-              justifyContent: "space-between", 
-              }}>
-              <Text style={{
-                fontSize: 30,
-                }}>Drink#2</Text>
-              <Text style={{
-                fontSize: 17,
-                }}>Description of drink</Text>
-              <View style={{ 
-                flex: 0.5,
-                height: "100%",
-                flexDirection: "column",
-                justifyContent: "flex-end", 
-                alignItems: "flex-start",
-                }}>
-                <Text style={{
-                  fontSize: 17,
-                  }}>Rating:</Text>
+              <Pressable style={{ 
+                  flex: .35,
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                  width: "85%",
+                  height: 100,
+                  backgroundColor: "#F1F1F1",
+                  borderWidth: 1,
+                  borderColor: "black",
+                  borderRadius: 20,
+                  marginVertical: 10,
+                  }}>
+                    <Image source= {require("./assets/logo.png")}
+                      style={{
+                      flex: .3,
+                      width: "25%",
+                      height: "90%",
+                      }}
+                      resizeMode="contain"
+                    />
+                    <View style={{ 
+                      flex: 0.7,
+                      height: "100%",
+                      flexDirection: "column",
+                      justifyContent: "space-evenly",
+                      }}>
+                        <View>
+                        <Text style={{
+                          fontSize: 30,
+                          }}>Drink #1</Text>
+                          </View>
+                        <View style={{
+                          flexDirection: "column",
+                          flex: .7
+                        }}>
+                        <Text style={{
+                          fontSize: 17,
+                          }}>Description of Drink </Text>
+                        </View>
+                    </View>
+                </Pressable>
               </View>
-            </View>
-          </Pressable>
+            </ScrollView>
 
-          <Pressable style={{ 
-            flex: .15,
-            flexDirection: "row",
-            justifyContent: "space-around",
-            width: "80%",
-            backgroundColor: "#F1F1F1",
-            borderWidth: 2,
-            borderColor: "black",
-            borderRadius: 20,
-            marginVertical: 10,
-            }}>
-            <Image source= {require("./assets/logo.png")}
-              style={{
-              flex: .3,
-              width: "25%",
-              height: "90%",
-              }}
-              resizeMode="contain"
-            />
-            <View style={{ 
-              flex: 0.7,
-              height: "100%",
-              flexDirection: "column",
-              justifyContent: "space-between", 
-              }}>
-              <Text style={{
-                fontSize: 30,
-                }}>Drink#3</Text>
-              <Text style={{
-                fontSize: 17,
-                }}>Description of drink</Text>
-              <View style={{ 
-                flex: 0.5,
-                height: "100%",
-                flexDirection: "column",
-                justifyContent: "flex-end", 
-                alignItems: "flex-start",
-                }}>
-                <Text style={{
-                  fontSize: 17,
-                  }}>Rating:</Text>
-              </View>
             </View>
-          </Pressable>
-
-          <Pressable style={{ 
-            flex: .15,
-            flexDirection: "row",
-            justifyContent: "space-around",
-            width: "80%",
-            backgroundColor: "#F1F1F1",
-            borderWidth: 2,
-            borderColor: "black",
-            borderRadius: 20,
-            marginVertical: 10,
-            }}>
-            <Image source= {require("./assets/logo.png")}
-              style={{
-              flex: .3,
-              width: "25%",
-              height: "90%",
-              }}
-              resizeMode="contain"
-            />
-            <View style={{ 
-              flex: 0.7,
-              height: "100%",
-              flexDirection: "column",
-              justifyContent: "space-between", 
-              }}>
-              <Text style={{
-                fontSize: 30,
-                }}>Drink#4</Text>
-              <Text style={{
-                fontSize: 17,
-                }}>Description of drink</Text>
-              <View style={{ 
-                flex: 0.5,
-                height: "100%",
-                flexDirection: "column",
-                justifyContent: "flex-end", 
-                alignItems: "flex-start",
-                }}>
-                <Text style={{
-                  fontSize: 17,
-                  }}>Rating:</Text>
-              </View>
-            </View>
-          </Pressable>
-        
-      </View>
-
     </View>
   </View>
   );
