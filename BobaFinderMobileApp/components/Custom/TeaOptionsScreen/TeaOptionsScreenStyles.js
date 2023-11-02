@@ -44,7 +44,6 @@ export default styles = StyleSheet.create({
         alignItems: "center"
     },
     customizationIcon: {
-        height: "100%",
-        marginLeft: 50
+        height: "100%"
     },
 });

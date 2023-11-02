@@ -29,7 +29,7 @@ export default function TeaOptionsScreen() {
                         />
                     </TouchableOpacity>
                     <TouchableOpacity style = {styles.customizationButton}>
-                        <Text style = {{fontSize: 20, marginLeft: "5%", flex: 1}}>
+                        <Text style = {{fontSize: 20, marginLeft: "5%"}}>
                             Green Tea
                         </Text>
                         <Image source={images.basecup}
