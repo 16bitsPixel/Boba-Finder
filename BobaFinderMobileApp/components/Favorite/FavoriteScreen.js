@@ -1,8 +1,25 @@
+import { useCallback } from 'react';
 import { StyleSheet, Text, View, Pressable, Image, ScrollView} from 'react-native';
 import CustomScreen from '../Custom/CustomScreen/CustomScreen';
-
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
 
 export default function FavoriteScreen({navigation}) {
+  const [fontsLoaded, fontError] = useFonts({
+    'Assistant': require('../../assets/fonts/Assistant-Light.ttf'),
+    'ComingSoon': require('../../assets/fonts/ComingSoon-Regular.ttf'),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded || fontError) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontError]);
+
+  if(!fontsLoaded && !fontError) {
+    return null;
+  }
+
   return (
   <View style={styles.container}>
     {/*div for favorites bar w/ back button and favorite drink pressables*/}
@@ -47,9 +64,9 @@ export default function FavoriteScreen({navigation}) {
           height: "100%",
           flex: .75,
         }}>
-          <Text style={{
-          fontSize: 40,
-            }}>Favorites</Text>
+          <Text style={
+            styles.header
+          }>Favorites</Text>
         </View>
       </View>
 
@@ -71,7 +88,7 @@ export default function FavoriteScreen({navigation}) {
               justifyContent: 'center',
               
             }}>
-                 <Pressable style={{ 
+                <Pressable style={{ 
                     flex: .35,
                     flexDirection: "row",
                     justifyContent: "space-around",
@@ -98,20 +115,20 @@ export default function FavoriteScreen({navigation}) {
                       justifyContent: "space-evenly",
                       }}>
                         <View>
-                          <Text style={{
-                            fontSize: 30,
-                            }}>Drink #1</Text>
+                          <Text style={
+                            styles.drink
+                          }>Drink #1</Text>
                         </View>
                         <View style={{
                           flexDirection: "column",
                           flex: .7
                           }}>
-                        <Text style={{
-                          fontSize: 17,
-                          }}>Description of Drink </Text>
+                        <Text style={
+                          styles.drinkdesc
+                        }>Description of Drink </Text>
                         </View>
                     </View>
-                 </Pressable>
+                </Pressable>
               
               </View>
           </ScrollView>
@@ -121,7 +138,6 @@ export default function FavoriteScreen({navigation}) {
   );
 }
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -129,4 +145,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  header: {
+    fontFamily: 'ComingSoon',
+    fontSize: 40,
+  },
+  drink: {
+    fontFamily: 'Assistant',
+    fontSize: 30,
+  },
+  drinkdesc: {
+    fontFamily: 'Assistant',
+    fontSize: 17,
+  }
 });
