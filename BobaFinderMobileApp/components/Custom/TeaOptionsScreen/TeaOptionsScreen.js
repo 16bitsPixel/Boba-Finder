@@ -16,7 +16,7 @@ import smoothiesList from '../../../data/smoothies.json'
 */
 
 export default function TeaOptionsScreen() {
-    const [ activeSections, setActiveSections ] = useState([]);
+    const [ activeSections, setActiveSections ] = useState([0, 1, 2]);
     const sections = [
         {
             title: "Milk Teas",
@@ -106,6 +106,7 @@ export default function TeaOptionsScreen() {
                 renderContent={renderContent}
                 onChange={(sections) => setActiveSections(sections)}
                 sectionContainerStyle={styles.accordContainer}
+                expandMultiple = {true}
               />
           </ScrollView>
         </SafeAreaView>
