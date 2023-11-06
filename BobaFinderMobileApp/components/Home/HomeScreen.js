@@ -11,7 +11,7 @@ export default function HomeScreen({ navigation }) {
       <Text>Home Screen</Text>
         <Button
           title="Drink Maker"
-          onPress={() => navigation.navigate("Search")}
+          onPress={() => navigation.navigate("Drink Maker")}
         />
     </View>
   );

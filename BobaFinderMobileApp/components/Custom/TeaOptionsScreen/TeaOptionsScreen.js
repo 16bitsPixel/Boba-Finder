@@ -1,5 +1,12 @@
 import React, {useState} from "react";
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'react-native';
+import {
+    View,
+    Text,
+    SafeAreaView,
+    ScrollView,
+    TouchableOpacity,
+    Image
+} from 'react-native';
 import Accordion from 'react-native-collapsible/Accordion';
 
 import styles from './TeaOptionsScreenStyles'
