@@ -2,12 +2,9 @@ import React from 'react'
 import {
   View,
   Text,
-  Button,
-  Pressable,
   TouchableOpacity,
   Image,
   ImageBackground,
-  StyleSheet,
   SafeAreaView
 } from 'react-native'
 

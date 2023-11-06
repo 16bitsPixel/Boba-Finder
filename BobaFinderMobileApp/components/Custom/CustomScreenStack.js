@@ -13,7 +13,9 @@ export default function CustomStack() {
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator
+        initialRouteName='Custom'
         screenOptions={{
+          gestureDirection: 'vertical',
           headerShadowVisible: false,
           headerStyle: {
             backgroundColor: "#C5E7E2"
