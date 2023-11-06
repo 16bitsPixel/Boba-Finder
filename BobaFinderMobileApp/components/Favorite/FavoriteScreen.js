@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { StyleSheet, Text, View, Pressable, Image, ScrollView} from 'react-native';
-import CustomScreen from '../Custom/CustomScreen/CustomScreen';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import favStyles from './FavoriteScreenStyles'
 
 export default function FavoriteScreen({navigation}) {
   const [fontsLoaded, fontError] = useFonts({
@@ -21,7 +21,7 @@ export default function FavoriteScreen({navigation}) {
   }
 
   return (
-  <View style={styles.container}>
+  <View style={favStyles.container}>
     {/*div for favorites bar w/ back button and favorite drink pressables*/}
     <View style={{
       flex: 1,
@@ -29,43 +29,21 @@ export default function FavoriteScreen({navigation}) {
       }}>
       
       {/*div for top bar w/ 'Favorites' and return button*/}
-      <View style ={{
-        flex: .15,
-        width: "100%",
-        backgroundColor: "#C5E7E2",
-        flexDirection: "row",
-        alignItems: "center",
-        paddingHorizontal: 10,
-        }}>
+      <View style ={favStyles.headerBar}>
         
         {/*pressable element for back button to return to custom screen*/}
-        <Pressable style={{ 
-          width: "20%", 
-          height: "100%",
-          justifyContent: "flex-end",
-          alignItems: "flex-start",   
-          }}
+        <Pressable style={favStyles.backButton}
           onPress={() => navigation.navigate("Search")}>
           <Image source= {require("../../assets/images/arrowLeft.png")}
-          style={{
-          height: "65%" ,
-          alignItems: "flex-start",
-          justifyContent: "flex-end",
-        }}
+          style={favStyles.backButtonImage}
           resizeMode="center"
           />
         </Pressable>
         
         {/*div for text 'Favorites' */}
-        <View style ={{
-          alignItems: "center",
-          justifyContent: "flex-end",
-          width: "20%",
-          height: "100%",
-          flex: .75,
-        }}>
+        <View style ={favStyles.favHeaderText}>
           <Text style={
-            styles.header
+            favStyles.header
           }>Favorites</Text>
         </View>
       </View>
@@ -81,13 +59,7 @@ export default function FavoriteScreen({navigation}) {
             style={{
             flex:1,
             }}>
-            <View style={{
-              flex:1,
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              
-            }}>
+            <View style={favStyles.pressableBG}>
                 <Pressable style={{ 
                     flex: .35,
                     flexDirection: "row",
@@ -116,7 +88,7 @@ export default function FavoriteScreen({navigation}) {
                       }}>
                         <View>
                           <Text style={
-                            styles.drink
+                            favStyles.drink
                           }>Drink #1</Text>
                         </View>
                         <View style={{
@@ -124,7 +96,7 @@ export default function FavoriteScreen({navigation}) {
                           flex: .7
                           }}>
                         <Text style={
-                          styles.drinkdesc
+                          favStyles.drinkdesc
                         }>Description of Drink </Text>
                         </View>
                     </View>
@@ -137,24 +109,3 @@ export default function FavoriteScreen({navigation}) {
   </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  header: {
-    fontFamily: 'ComingSoon',
-    fontSize: 40,
-  },
-  drink: {
-    fontFamily: 'Assistant',
-    fontSize: 30,
-  },
-  drinkdesc: {
-    fontFamily: 'Assistant',
-    fontSize: 17,
-  }
-});
