@@ -14,6 +14,7 @@ import FavoritesScreen from './components/Favorites/FavoritesScreen';
 const Stack = createNativeStackNavigator();
 
 // function to run the app, works as a navigator for all our pages
+// Changed headershown to false for Home page
 export default function App() {
   return (
     <NavigationContainer>
@@ -26,7 +27,7 @@ export default function App() {
             }
         }}
       >
-        <Stack.Screen name="Home" component={HomeScreen} options = {{headerTitle: "Home Screen"}} />
+        <Stack.Screen name="Home" component={HomeScreen} options = {{headerShown: false, headerTitle: "Home Screen"}} />
         <Stack.Screen name="Custom" component={CustomScreen} options = {{headerTitle: "Drink Maker"}} />
         <Stack.Screen name="Tea Options" component={TeaOptionsScreen} options = {{headerTitle: "Tea Bases"}} />
         <Stack.Screen name="Topping Options" component={ToppingOptionsScreen} options = {{headerTitle: "Toppings"}} />
