@@ -4,6 +4,7 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import favStyles from './FavoriteScreenStyles';
 import FavButton from './FavButton';
+import FavButtonArray from './FavButtonArray';
 
 export default function FavoriteScreen({navigation}) {
   const [fontsLoaded, fontError] = useFonts({
@@ -20,6 +21,13 @@ export default function FavoriteScreen({navigation}) {
   if(!fontsLoaded && !fontError) {
     return null;
   }
+  
+  const data = [
+    { base: 'Fruit Tea', topping: 'Aloe Jelly' },
+    { base: 'Jasmine', topping: 'Lychee Jelly' },
+    { base: 'Thai Tea', topping: 'Boba' },
+  ];
+    
 
   return (
   <View style={favStyles.container}>
@@ -61,10 +69,7 @@ export default function FavoriteScreen({navigation}) {
             flex:1,
             }}>
             {/*Favorite Pressables: */}
-            <FavButton 
-            base = "Thai Tea"
-            topping = "boba"
-            />
+            <FavButtonArray data={data} /> 
           </ScrollView>
         </View>
     </View>
