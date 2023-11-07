@@ -40,16 +40,34 @@ export default favStyles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-      header: {
+    header: {
         fontFamily: 'ComingSoon',
         fontSize: 40,
     },
-      drink: {
+    drink: {
         fontFamily: 'Assistant',
         fontSize: 30,
     },
-      drinkdesc: {
+    drinkdesc: {
         fontFamily: 'Assistant',
         fontSize: 17,
-    }
+    },
+    favPressable: { 
+        flex: .35,
+        flexDirection: "row",
+        justifyContent: "space-around",
+        width: "85%",
+        height: 100,
+        backgroundColor: "#F1F1F1",
+        borderWidth: 1,
+        borderColor: "black",
+        borderRadius: 20,
+        marginVertical: 10,
+    },
+    favPressText: { 
+        flex: 0.7,
+        height: "100%",
+        flexDirection: "column",
+        justifyContent: "space-evenly",
+    },
 });

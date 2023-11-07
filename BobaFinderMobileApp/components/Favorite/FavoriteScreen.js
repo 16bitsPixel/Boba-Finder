@@ -1,8 +1,9 @@
 import { useCallback } from 'react';
-import { StyleSheet, Text, View, Pressable, Image, ScrollView} from 'react-native';
+import { Text, View, Pressable, Image, ScrollView} from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import favStyles from './FavoriteScreenStyles'
+import favStyles from './FavoriteScreenStyles';
+import FavButton from './FavButton';
 
 export default function FavoriteScreen({navigation}) {
   const [fontsLoaded, fontError] = useFonts({
@@ -59,50 +60,8 @@ export default function FavoriteScreen({navigation}) {
             style={{
             flex:1,
             }}>
-            <View style={favStyles.pressableBG}>
-                <Pressable style={{ 
-                    flex: .35,
-                    flexDirection: "row",
-                    justifyContent: "space-around",
-                    width: "85%",
-                    height: 100,
-                    backgroundColor: "#F1F1F1",
-                    borderWidth: 1,
-                    borderColor: "black",
-                    borderRadius: 20,
-                    marginVertical: 10,
-                    }}>
-                    <Image source= {require("../../assets/images/logo.png")}
-                      style={{
-                      flex: .3,
-                      width: "25%",
-                      height: "90%",
-                      }}
-                      resizeMode="contain"
-                    />
-                    <View style={{ 
-                      flex: 0.7,
-                      height: "100%",
-                      flexDirection: "column",
-                      justifyContent: "space-evenly",
-                      }}>
-                        <View>
-                          <Text style={
-                            favStyles.drink
-                          }>Drink #1</Text>
-                        </View>
-                        <View style={{
-                          flexDirection: "column",
-                          flex: .7
-                          }}>
-                        <Text style={
-                          favStyles.drinkdesc
-                        }>Description of Drink </Text>
-                        </View>
-                    </View>
-                </Pressable>
-              
-              </View>
+            {/*Favorite Pressables: */}
+            <FavButton base = "Thai Tea"/>
           </ScrollView>
         </View>
     </View>
