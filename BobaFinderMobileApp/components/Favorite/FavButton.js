@@ -1,7 +1,7 @@
 import { Text, View, Pressable, Image} from 'react-native';
 import favStyles from './FavoriteScreenStyles';
 
-export default function FavButton({base}){
+export default function FavButton({base , topping}){
     return (
     <View style={favStyles.pressableBG}>
                 <Pressable style={favStyles.favPressable}>
@@ -25,7 +25,7 @@ export default function FavButton({base}){
                           }}>
                         <Text style={
                           favStyles.drinkdesc
-                        }>Description of Drink </Text>
+                        }>{topping}</Text>
                         </View>
                     </View>
                 </Pressable>

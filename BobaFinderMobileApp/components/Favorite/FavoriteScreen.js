@@ -61,7 +61,10 @@ export default function FavoriteScreen({navigation}) {
             flex:1,
             }}>
             {/*Favorite Pressables: */}
-            <FavButton base = "Thai Tea"/>
+            <FavButton 
+            base = "Thai Tea"
+            topping = "boba"
+            />
           </ScrollView>
         </View>
     </View>
