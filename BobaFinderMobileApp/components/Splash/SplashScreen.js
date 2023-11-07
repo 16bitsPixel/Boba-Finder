@@ -9,10 +9,16 @@ import {
   StyleSheet
 } from 'react-native'
 
+import { useFonts } from 'expo-font';
+
 const image = { uri: "https://raw.githubusercontent.com/16bitsPixel/Boba-Finder/main/imgs/splashbg.png" };
 
 /*
-  Splash Screen where the user lands (CURRENTLY lands on HOME page though!!!)
+  Splash Screen where the user lands (CURRENTLY lands on HOME page though!!!) v1.0
+*/
+
+/*
+  NOW REDUNDANT, No longer used, has replaced home screen v1.0
 */
 
 export default function SplashScreen({ navigation }) {
@@ -61,21 +67,6 @@ export default function SplashScreen({ navigation }) {
             alignItems: "center"
             }} onPress={() => navigation.navigate("Favorites")}>
             <Text style={{ fontSize: 30 }}>Favorites</Text>
-            </Pressable>
-
-            {/* button for Account/Login, this should move to the Account/Login screen */}
-            {/* CURRENTLY does nothing, there is no Account page made !!! */}
-            <Pressable style={{
-            backgroundColor: "#C5E7E2",
-            width: "60%",
-            height: "10%",
-            borderRadius: "6px",
-            marginTop: '4%',
-            marginLeft: '20%',
-            justifyContent: "center",
-            alignItems: "center"
-            }}>
-            <Text style={{ fontSize: 30 }}>Account</Text>
             </Pressable>
 
           </View>
