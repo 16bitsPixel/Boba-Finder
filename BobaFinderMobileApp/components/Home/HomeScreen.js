@@ -41,7 +41,7 @@ export default function HomeScreen({ navigation }) {
   }
 
   return (
-    <AnimatedAppLoader image={{ uri: "https://raw.githubusercontent.com/16bitsPixel/Boba-Finder/main/imgs/splashbg.png" }}>
+    <AnimatedAppLoader image={{ uri: "https://raw.githubusercontent.com/16bitsPixel/Boba-Finder/SplashScreen/BobaFinderMobileApp/assets/splash.png" }}>
       <View style={styles.container}>
         <View style={{
           flex: 1,
