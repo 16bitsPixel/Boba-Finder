@@ -24,8 +24,7 @@ export default function FavoriteScreen({navigation}) {
   
   const data = [
     { base: 'Fruit Tea', topping: 'Aloe Jelly' },
-    { base: 'Jasmine', topping: 'Lychee Jelly' },
-    { base: 'Thai Tea', topping: 'Boba' },
+    
   ];
     
 

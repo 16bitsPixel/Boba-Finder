@@ -13,6 +13,15 @@ export default function FavButton({base , topping}){
                       }}
                       resizeMode="contain"
                     />
+                    <Pressable style ={favStyles.xButton}
+                      >
+                        <Image source= {require("../../assets/images/x.png")}
+                          style={{
+                          flex: 1,
+                          }}
+                          resizeMode="contain"
+                        />
+                    </Pressable>
                     <View style={favStyles.favPressText}>
                         <View>
                           <Text style={

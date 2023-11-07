@@ -31,8 +31,7 @@ export default favStyles = StyleSheet.create({
         flex:1,
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
-        
+        justifyContent: 'center',        
     },
     container: {
         flex: 1,
@@ -69,5 +68,13 @@ export default favStyles = StyleSheet.create({
         height: "100%",
         flexDirection: "column",
         justifyContent: "space-evenly",
+    },
+    xButton: {
+        flex: .25,
+        width: "10%",
+        height: "15%",
+        position: 'absolute',
+        left: 290,
+        top: 9,
     },
 });
