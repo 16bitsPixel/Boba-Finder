@@ -5,6 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import CustomStack from './components/Custom/CustomScreenStack'
 import HomeScreen from './components/Home/HomeScreen';
+import FavoriteScreen from './components/Favorite/FavoriteScreen/FavoriteScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -21,6 +22,7 @@ export default function App() {
         }}>
         <Drawer.Screen name="Home" component={ HomeScreen }/>
         <Drawer.Screen name="Drink Maker" component={ CustomStack }/>
+        <Drawer.Screen name="Favorites" component={ FavoriteScreen } />
       </Drawer.Navigator>
     </NavigationContainer>
   );
