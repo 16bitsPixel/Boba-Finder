@@ -4,7 +4,7 @@ import {
   Text,
   Button,
 } from 'react-native';
-import FavoriteScreen from '../Favorite/FavoriteScreen'
+
 
 export default function HomeScreen({ navigation }) {
   return (
@@ -12,11 +12,7 @@ export default function HomeScreen({ navigation }) {
       <Text>Home Screen</Text>
         <Button
           title="Drink Maker"
-          onPress={() => navigation.navigate("Search")}
-        />
-        <Button
-          title="Favorites"
-          onPress={() => navigation.navigate("FavoriteScreen")}
+          onPress={() => navigation.navigate("Drink Maker")}
         />
     </View>
   );

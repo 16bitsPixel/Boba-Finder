@@ -1,5 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, Image, ImageBackground, View, Button, Pressable, ScrollView } from 'react-native';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -15,7 +13,9 @@ export default function CustomStack() {
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator
+        initialRouteName='Custom'
         screenOptions={{
+          gestureDirection: 'vertical',
           headerShadowVisible: false,
           headerStyle: {
             backgroundColor: "#C5E7E2"

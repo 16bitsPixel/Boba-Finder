@@ -1,5 +1,12 @@
 import React, {useState} from "react";
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'react-native';
+import {
+    View,
+    Text,
+    SafeAreaView,
+    ScrollView,
+    TouchableOpacity,
+    Image
+} from 'react-native';
 import Accordion from 'react-native-collapsible/Accordion';
 
 import styles from './TeaOptionsScreenStyles'
@@ -16,7 +23,7 @@ import smoothiesList from '../../../data/smoothies.json'
 */
 
 export default function TeaOptionsScreen() {
-    const [ activeSections, setActiveSections ] = useState([]);
+    const [ activeSections, setActiveSections ] = useState([0, 1, 2]);
     const sections = [
         {
             title: "Milk Teas",
@@ -26,7 +33,7 @@ export default function TeaOptionsScreen() {
                         milkTeaList.map(tea => {
                             return (
                                 <TouchableOpacity style={styles.customizationButton} key={tea.id}>
-                                    <Text style = {{fontSize: 20, marginLeft: "5%"}}>
+                                    <Text style = {{fontSize: 20, marginLeft: "5%", flex: 1}}>
                                         {tea.name}
                                     </Text>
                                     <Image source={images.basecup}
@@ -46,7 +53,7 @@ export default function TeaOptionsScreen() {
                     fruitTeaList.map(tea => {
                         return (
                             <TouchableOpacity style={styles.customizationButton} key={tea.id}>
-                                <Text style = {{fontSize: 20, marginLeft: "5%"}}>
+                                <Text style = {{fontSize: 20, marginLeft: "5%", flex: 1}}>
                                     {tea.name}
                                 </Text>
                                 <Image source={images.basecup}
@@ -66,7 +73,7 @@ export default function TeaOptionsScreen() {
                     smoothiesList.map(tea => {
                         return (
                             <TouchableOpacity style={styles.customizationButton} key={tea.id}>
-                                <Text style = {{fontSize: 20, marginLeft: "5%"}}>
+                                <Text style = {{fontSize: 20, marginLeft: "5%", flex: 1}}>
                                     {tea.name}
                                 </Text>
                                 <Image source={images.basecup}
@@ -97,7 +104,7 @@ export default function TeaOptionsScreen() {
     return (
         <SafeAreaView style={styles.container}>
           <ScrollView
-            contentInsetAdjustmentBehavior="automatic">
+            contentInsetAdjustmentBehavior="automatic" style = {{width: "100%"}} >
               <Accordion
                 align="bottom"
                 sections={sections}
@@ -106,6 +113,7 @@ export default function TeaOptionsScreen() {
                 renderContent={renderContent}
                 onChange={(sections) => setActiveSections(sections)}
                 sectionContainerStyle={styles.accordContainer}
+                expandMultiple = {true}
               />
           </ScrollView>
         </SafeAreaView>

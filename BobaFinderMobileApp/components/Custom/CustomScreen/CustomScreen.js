@@ -2,22 +2,18 @@ import React from 'react'
 import {
   View,
   Text,
-  Button,
-  Pressable,
   TouchableOpacity,
   Image,
   ImageBackground,
-  StyleSheet,
   SafeAreaView
 } from 'react-native'
 
 import { images } from '../../../constants'
 import styles from './CustomScreenStyles'
-import FavoriteScreen from '../../Favorite/FavoriteScreen';
+
 /*
   Custom Screen where users can create their drink of choice
 */
-
 export default function CustomScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
@@ -48,7 +44,6 @@ export default function CustomScreen({ navigation }) {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.drinkButtonPosition}
-              onPress={() => navigation.navigate(FavoriteScreen)}
             >
               <Image source={{
                 uri: "https://www.iconpacks.net/icons/2/free-favourite-icon-2765-thumb.png"
