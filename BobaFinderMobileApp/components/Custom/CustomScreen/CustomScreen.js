@@ -14,7 +14,6 @@ import styles from './CustomScreenStyles'
 /*
   Custom Screen where users can create their drink of choice
 */
-
 export default function CustomScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>

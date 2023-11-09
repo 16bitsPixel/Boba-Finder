@@ -11,6 +11,7 @@ import {
 
 import styles from '../ToppingOptionsScreen/ToppingOptionsScreenStyles'
 import toppingList from '../../../data/toppings.json'
+
 import { images } from "../../../constants";
 
 /*

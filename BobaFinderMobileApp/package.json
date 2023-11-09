@@ -1,5 +1,5 @@
 {
-  "name": "bobafindermobileapp",
+  "name": "favscreen",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
@@ -9,15 +9,14 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@react-navigation/bottom-tabs": "^6.5.11",
-    "@react-navigation/drawer": "^6.6.6",
-    "@react-navigation/material-top-tabs": "^6.6.5",
+    "expo-font": "~11.4.0",
+    "expo-splash-screen": "~0.20.5",
+    "expo-status-bar": "~1.6.0",
+    "expo": "^49.0.16",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.16",
-    "@showtime-xyz/tab-view": "^0.1.7",
+    "@react-navigation/drawer": "^6.6.6",
     "@types/react": "~18.2.14",
-    "expo": "^49.0.16",
-    "expo-status-bar": "~1.6.0",
     "react": "18.2.0",
     "react-native": "0.72.6",
     "react-native-collapsible": "^1.6.1",
