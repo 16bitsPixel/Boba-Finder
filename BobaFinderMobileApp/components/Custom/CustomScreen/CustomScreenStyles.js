@@ -7,14 +7,14 @@ export default styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    drinkBackground: {
+    logoBackground: {
         height: "100%",
         flex: 4,
         padding: '5%',
         alignSelf: "center",
     },
-    drinkButtonPosition: {
-        width: "20%",
+    extraButtonPosition: {
+        width: "15%",
         justifyContent: "center",
     },
     customizationContainer: {
