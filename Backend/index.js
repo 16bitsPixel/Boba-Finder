@@ -43,7 +43,17 @@ app.post('/shops', async (req, resp) => {
 
         const shop = await Shop.create(newShop);
         return resp.status(201).send(shop);
+    } catch (error) {
+        console.log(error.message);
+        resp.status(500).send({ message: error.message });
+    }
+});
 
+// route to get all shops from database
+app.get("/shops", async (req, resp) => {
+    try {
+        const shops = await Shop.find({});
+        return resp.status(200).json(shops);
     } catch (error) {
         console.log(error.message);
         resp.status(500).send({ message: error.message });

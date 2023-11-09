@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+/* //the final schema we will use ?
 const shopSchema = mongoose.Schema(
     {
         name: {
@@ -31,5 +32,24 @@ const shopSchema = mongoose.Schema(
         timestamps: true
     }
 );
+*/
 
-export const Shop = mongoose.model('Cat', shopSchema);
+// current schema for individual drinks we will delete later
+const shopSchema = mongoose.Schema(
+    {
+        "Drink Name": {
+            type: String,
+            required: true
+        },
+        Description: {
+            type: String,
+            required: true
+        },
+        Price: {
+            type: String,
+            required: true
+        }
+    }
+);
+
+export const Shop = mongoose.model('Cat', shopSchema, 'bobaShop');
