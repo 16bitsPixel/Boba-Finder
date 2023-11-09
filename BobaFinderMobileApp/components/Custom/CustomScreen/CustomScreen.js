@@ -116,9 +116,14 @@ export default function CustomScreen({ navigation }) {
 
         {/* button to submit the customized drink */}
         <TouchableOpacity
-          style={styles.submitButton}>
-          <Text style={{ fontSize: 20 }}>Submit</Text>
-
+          style={styles.submitButton}
+          onPress={() => navigation.navigate("Stores")}
+        >
+          <Text
+            style={{ fontSize: 20 }}
+          >
+            Submit
+          </Text>
         </TouchableOpacity>
       </View>}
 
