@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import toppingList from '../../../data/toppings.json'
+
 import { images } from "../../../constants";
 
 /*
