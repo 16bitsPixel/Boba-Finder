@@ -14,6 +14,10 @@ export default function HomeScreen({ navigation }) {
           title="Drink Maker"
           onPress={() => navigation.navigate("Drink Maker")}
         />
+        <Button
+          title="Favorites"
+          onPress={() => navigation.navigate("Favorites")}
+        />
     </View>
   );
 }
