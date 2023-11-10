@@ -5,7 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import CustomStack from './components/Custom/CustomScreenStack'
 import HomeScreen from './components/Home/HomeScreen';
-import FavScreen from './components/Favorite/FavoriteScreen'
+import FavoriteScreen from './components/Favorite/FavoriteScreen/FavoriteScreen';
 
 import {
   View,
@@ -24,6 +24,7 @@ import Constants from "expo-constants";
 import * as SplashScreen from "expo-splash-screen";
 /* import * as Updates from "expo-updates"; */
 import { useCallback, useEffect, useMemo, useState } from "react";
+
 
 const Drawer = createDrawerNavigator();
 
@@ -46,7 +47,7 @@ export default function App() {
           }}>
           <Drawer.Screen name="Home" component={ HomeScreen }/>
           <Drawer.Screen name="Drink Maker" component={ CustomStack }/>
-          <Drawer.Screen name="Favorites" component={ FavScreen }/>
+          <Drawer.Screen name="Favorites" component={ FavoriteScreen }/>
         </Drawer.Navigator>
       </NavigationContainer>
     </AnimatedAppLoader>

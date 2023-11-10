@@ -25,7 +25,7 @@ export default function CustomScreen({ navigation }) {
         <ImageBackground source={images.searchbg} resizeMode="cover" style={{ flex: 1 }}>
           <Image
             source={images.logo}
-            style={styles.drinkBackground}
+            style={styles.logoBackground}
             resizeMode="contain"
           />
           <View style={{
@@ -34,20 +34,20 @@ export default function CustomScreen({ navigation }) {
             justifyContent: "space-between"
           }}>
             <TouchableOpacity
-              style={styles.drinkButtonPosition}
+              style={styles.extraButtonPosition}
             >
-              <Image source={{
-                uri: "https://cdn-icons-png.flaticon.com/512/4260/4260076.png"
-              }} style={{ height: "80%" }}
+              <Image
+                source={{ uri: "https://cdn-icons-png.flaticon.com/512/4260/4260076.png" }}
+                style={{ height: "80%" }}
                 resizeMode="contain"
               />
             </TouchableOpacity>
             <TouchableOpacity
-              style={styles.drinkButtonPosition}
+              style={styles.extraButtonPosition}
             >
-              <Image source={{
-                uri: "https://www.iconpacks.net/icons/2/free-favourite-icon-2765-thumb.png"
-              }} style={{ height: "80%" }}
+              <Image
+                source={{ uri: "https://www.iconpacks.net/icons/2/free-favourite-icon-2765-thumb.png" }}
+                style={{ height: "80%" }}
                 resizeMode="contain"
               />
             </TouchableOpacity>
@@ -115,9 +115,14 @@ export default function CustomScreen({ navigation }) {
 
         {/* button to submit the customized drink */}
         <TouchableOpacity
-          style={styles.submitButton}>
-          <Text style={{ fontSize: 20 }}>Submit</Text>
-
+          style={styles.submitButton}
+          onPress={() => navigation.navigate("Stores")}
+        >
+          <Text
+            style={{ fontSize: 20 }}
+          >
+            Submit
+          </Text>
         </TouchableOpacity>
       </View>}
 
