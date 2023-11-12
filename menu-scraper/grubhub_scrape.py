@@ -25,6 +25,7 @@ def get_menu(url):
 
     innerHTML = browser.page_source
 
+    # Parse text in HTML element
     soup = BeautifulSoup(innerHTML, 'html.parser')
 
     menu = soup.find("div", {"data-testid" : "menu-sections-container"})
