@@ -7,8 +7,11 @@ import scrapy
 
 
 class MongodbBobaCrawlerItem(scrapy.Item):
-    menuItem = scrapy.Field()
+    # Tea Flavors found at this restaurant
     teaFlavors = scrapy.Field()
+    # Toppings found at this restaurant
     toppings = scrapy.Field()
+    # Name of Restaraunt
     name = scrapy.Field()
+    # Address of Restaraunt
     address = scrapy.Field()
