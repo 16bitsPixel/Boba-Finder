@@ -15,15 +15,7 @@ const shopSchema = mongoose.Schema(
             type: Array,
             required: true
         },
-        teaPrices: {
-            type: Array,
-            required: true
-        },
         toppings: {
-            type: Array,
-            required: true
-        },
-        toppingPrices: {
             type: Array,
             required: true
         }
