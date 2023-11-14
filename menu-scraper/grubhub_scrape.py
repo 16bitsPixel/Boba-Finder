@@ -41,10 +41,10 @@ def get_menu(url):
     entry = {}
 
     # Extract Name
-    entry['Restaurant Name'] = rName
+    entry['restaurantName'] = rName
     # Extract Address
     button_element = soup.find('button', {'data-testid': 'restaurant-address'})
-    entry['Address'] = button_element.find('span', {'class': 'sc-dkrFOg gSBpp'}).text
+    entry['address'] = button_element.find('span', {'class': 'sc-dkrFOg gSBpp'}).text
 
     teaFlavors = []
     teaToppings = []
@@ -81,8 +81,8 @@ def get_menu(url):
         print("No tea at this restaurant")
         return 0
 
-    entry['Tea Bases'] = list(set(teaFlavors))
-    entry['Tea Toppings'] = list(set(teaToppings))
+    entry['teaBases'] = list(set(teaFlavors))
+    entry['teaToppings'] = list(set(teaToppings))
     menuItems.append(entry)
     print("[FINISHED SCRAPING]")
 
@@ -185,6 +185,7 @@ def getNearByRestaurants(loc):
     
     time.sleep(2)
 
+    # TODO Wrap in try-except in case less than 30 restaurants show up
     # Click See more to get full list
     button = browser.find_element(By.CSS_SELECTOR, "button.sc-bqWxrE.fJgFJo")
     button.click()
@@ -210,13 +211,15 @@ def getNearByRestaurants(loc):
     return restaurantURLTotal
 
 def main():
+    # Generate url links of nearby restaurants
     nearByRestaurants = getNearByRestaurants(input('Enter Location: '))
-    print(f'Gathering Data from {len(nearByRestaurants)} restaurants')
+    print(f'Gathering data from {len(nearByRestaurants)} restaurants')
+
     # Process nearby Restuarant's Data
     for restaurant in nearByRestaurants:
         # scrape data from each URL
         bobaDrinks = get_menu(restaurant)
-        # insert data collected into MongoDB if menu or tea found
+        # insert data collected into MongoDB if menu and tea found
         if bobaDrinks:
             uploadMongoDB(bobaDrinks)
 
