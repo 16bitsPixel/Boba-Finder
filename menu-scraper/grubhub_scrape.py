@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import pymongo
 
-def get_menu(url):
+def get_menu(url: str):
     """ given a valid grubhub url, scrape the menu of a restaurant """
 
     # Initialize ChromeOptions instance
@@ -33,6 +33,13 @@ def get_menu(url):
     if not menuCheck(soup):
         return 0
 
+    # Click Pickup Option
+    pickup_option = WebDriverWait(browser, 10).until(
+    EC.element_to_be_clickable((By.CSS_SELECTOR, 'label[for="PICKUP"]')))
+    pickup_option.click()
+    time.sleep(1)
+
+
     previous_height = browser.execute_script('return window.pageYOffset;')
     body = browser.find_element(By.TAG_NAME, 'body')
     body.click()
@@ -54,17 +61,17 @@ def get_menu(url):
     teaFlavorsKW = load('../res/tea.txt')
     teaToppingsKW = load('../res/toppings.txt')
 
-    #TODO Capture toppings by clicking on a tea drink
-
     while True:    
         for item in soup.select('.menuItem'):              
                 # Check drink Name for KeyWords
-                drinkName = cleanName(item.select_one('h6').get_text())
+                drinkName = cleanName(str(item.select_one('h6').get_text()))
                 scan(drinkName, teaFlavors, teaToppings, teaFlavorsKW, teaToppingsKW)
                 
                 # Check drink description for KeyWords
-                desc = item.select_one('span[data-testid="menu-item-description"]')
-                scan(str(desc), teaFlavors, teaToppings, teaFlavorsKW, teaToppingsKW)
+                desc = cleanDesc(str(item.select_one('span[data-testid="menu-item-description"]')))
+                if(len(desc) > 0):
+                    scan(desc, teaFlavors, teaToppings, teaFlavorsKW, teaToppingsKW)
+
 
         body.send_keys(Keys.PAGE_DOWN)
         time.sleep(1)
@@ -120,6 +127,11 @@ def cleanName(teaRaw):
         teaClean = teaClean[2:]
     return teaClean
 
+def cleanDesc(desc):
+    desc = desc.replace('<span class="sc-dkrFOg qpMvb menuItemNew-description--truncate-3" color="#6B6B83" data-testid="menu-item-description">', "")
+    desc = desc.replace("</span>", "")
+    return desc
+
 def load(path):
     f = open(path, mode='r+')
     line = f.readline()
@@ -132,15 +144,18 @@ def load(path):
     return text
 
 def scan(text, teaFlavors, teaToppings, teaFlavorsKW, teaToppingsKW):
+    found = 0
     if not text:
         return 0
+    text = text.lower()
     for i in text.split(' '):
         if i in teaFlavorsKW:
-            if i not in teaToppings:
+            if i not in teaFlavors:
                 teaFlavors.append(i)
         if i in teaToppingsKW:
             if i not in teaToppings:
                 teaToppings.append
+    return found
 
 def uploadMongoDB(entry):
 # test db:
@@ -148,7 +163,7 @@ def uploadMongoDB(entry):
 
 # production db:
 # mongodb+srv://brandonllanes16:XIPZsFqtcLYtkQ4l@bobacluster.atdxi6u.mongodb.net/?retryWrites=true&w=majority
-    client = pymongo.MongoClient("mongodb+srv://brandonllanes16:XIPZsFqtcLYtkQ4l@bobacluster.atdxi6u.mongodb.net/?retryWrites=true&w=majority")
+    client = pymongo.MongoClient("mongodb+srv://vcasanov:i3DFbeGAHi05CWA0@test.i44ykno.mongodb.net/?retryWrites=true&w=majority")
     db = client.db.bobaShop
     try:
         db.insert_many(entry)
@@ -185,11 +200,13 @@ def getNearByRestaurants(loc):
     
     time.sleep(2)
 
-    # TODO Wrap in try-except in case less than 30 restaurants show up
-    # Click See more to get full list
-    button = browser.find_element(By.CSS_SELECTOR, "button.sc-bqWxrE.fJgFJo")
-    button.click()
-    time.sleep(1)
+    # Click See more to get full list if more than 36 near by
+    try:
+        button = browser.find_element(By.CSS_SELECTOR, "button.sc-bqWxrE.fJgFJo")
+        button.click()
+        time.sleep(1)
+    except:
+        print("Less than 36 nearby restaurants found")
 
     # Scrape URL link of every Restuarant
     htmlContent = browser.page_source
@@ -210,15 +227,36 @@ def getNearByRestaurants(loc):
         restaurantURLTotal.append(newLink)
     return restaurantURLTotal
 
+def findToppings(teaToppingsKW, teaToppings, item, browser, switch):
+    # TODO
+    if not switch:
+        return 0
+    found = False
+    # click on item to see available toppings
+    button = WebDriverWait(browser, 10).until(
+    EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[data-testid="restaurant-menu-item-button"]')))
+    time.sleep(3)
+    button.click()
+
+
+
+    # Find element with name 'item'
+    #body = browser.find_element(By.TAG_NAME, 'body')
+    # scan element for toppigns and extract
+    return found
+
 def main():
+    
     # Generate url links of nearby restaurants
     nearByRestaurants = getNearByRestaurants(input('Enter Location: '))
     print(f'Gathering data from {len(nearByRestaurants)} restaurants')
 
     # Process nearby Restuarant's Data
     for restaurant in nearByRestaurants:
+        
         # scrape data from each URL
         bobaDrinks = get_menu(restaurant)
+        
         # insert data collected into MongoDB if menu and tea found
         if bobaDrinks:
             uploadMongoDB(bobaDrinks)
