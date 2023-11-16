@@ -15,15 +15,7 @@ const shopSchema = mongoose.Schema(
             type: Array,
             required: true
         },
-        teaPrices: {
-            type: Array,
-            required: true
-        },
         toppings: {
-            type: Array,
-            required: true
-        },
-        toppingPrices: {
             type: Array,
             required: true
         }
@@ -32,6 +24,10 @@ const shopSchema = mongoose.Schema(
         timestamps: true
     }
 );
+*/
+
+/*
+    {restaurantName, address, teaBases, teaToppings}
 */
 
 // current schema for individual drinks we will delete later
