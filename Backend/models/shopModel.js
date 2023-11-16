@@ -26,6 +26,10 @@ const shopSchema = mongoose.Schema(
 );
 */
 
+/*
+    {restaurantName, address, teaBases, teaToppings}
+*/
+
 // current schema for individual drinks we will delete later
 const shopSchema = mongoose.Schema(
     {
