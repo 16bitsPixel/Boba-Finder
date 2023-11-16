@@ -15,6 +15,7 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.company.bobafinder",
       "supportsTablet": true
     },
     "android": {
