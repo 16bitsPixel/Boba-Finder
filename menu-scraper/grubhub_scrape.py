@@ -53,8 +53,13 @@ def get_menu(url: str):
     # Extract Name
     entry['restaurantName'] = rName
     # Extract Address
-    button_element = soup.find('button', {'data-testid': 'restaurant-address'})
-    entry['address'] = button_element.find('span', {'class': 'sc-dkrFOg gSBpp'}).text
+    for div in soup.find_all('a', {'class': 'sc-hBxehG flfcph'}):
+        link_text = div['href']
+        if "http" in link_text:
+            entry['gMapsLink'] = link_text
+            link_parts = link_text.partition("daddr=")
+            entry['address'] = link_parts[2]
+            break
 
     # Scan menu items for key TeaBase and TeaToppings words
     # Load Tea Flavors & Toppings
