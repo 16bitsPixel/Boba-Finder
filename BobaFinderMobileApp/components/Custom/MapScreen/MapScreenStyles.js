@@ -5,11 +5,10 @@ export default styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#C5E7E2',
         alignItems: 'center',
-        justifyContent: 'center',
         width: "100%",
     },
     map: {
-        height: '80%',
+        height: '60%',
         width: '100%',
     }
 })

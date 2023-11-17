@@ -36,7 +36,7 @@ SplashScreen.preventAutoHideAsync().catch(() => {
 // Stack for Custom Screen to be nested inside TAB navigation in App.js
 export default function App() {
   return (
-    <AnimatedAppLoader image={{ uri: "https://raw.githubusercontent.com/16bitsPixel/Boba-Finder/SplashScreen/BobaFinderMobileApp/assets/splash.png" }}>
+    <AnimatedAppLoader image={{ uri: "https://raw.githubusercontent.com/16bitsPixel/Boba-Finder/main/BobaFinderMobileApp/assets/splash.png" }}>
       <NavigationContainer>
         <Drawer.Navigator
           screenOptions={{

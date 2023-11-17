@@ -7,7 +7,8 @@ import {
     ActivityIndicator,
     FlatList
 } from 'react-native';
-import axios from 'axios';
+//comment this back in to use axios, i commented it out b/c it was given me errors for now
+//import axios from 'axios';
 
 import styles from './StoresScreenStyles';
 
