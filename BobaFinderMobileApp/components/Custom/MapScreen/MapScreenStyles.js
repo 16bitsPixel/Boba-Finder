@@ -9,7 +9,7 @@ export default styles = StyleSheet.create({
         width: "100%",
     },
     map: {
-        height: '80%',
+        height: '100%',
         width: '100%',
     }
 })
