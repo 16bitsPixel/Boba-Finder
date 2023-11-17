@@ -16,7 +16,7 @@ import { useFonts } from 'expo-font';
 const image = { uri: "https://raw.githubusercontent.com/16bitsPixel/Boba-Finder/main/imgs/splashbg.png" };
 
 
-export default function HomeScreen({ navigation }) {
+export default function DashboardScreen({ navigation }) {
   const [loaded] = useFonts({
     'Assistant': require('../../assets/fonts/Assistant-Light.ttf'),
     'ComingSoon': require('../../assets/fonts/ComingSoon-Regular.ttf'),
