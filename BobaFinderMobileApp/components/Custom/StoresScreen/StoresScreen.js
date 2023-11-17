@@ -36,11 +36,10 @@ export default function StoresScreen({ navigation }) {
       const response = await fetch('http://10.0.0.77:5555/shops');
       const json = await response.json();
       setData(json);
-      console.log(json);
     } catch (error) {
-      console.error(error);
+        console.error(error);
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
   };
 
@@ -71,7 +70,7 @@ export default function StoresScreen({ navigation }) {
                   keyExtractor={({id}) => id}
                   renderItem={({item}) => (
                     <Text>
-                      {item.Description}, {item.Price}
+                      {item.restaurantName}, {item.address}
                     </Text>
                   )}
                 />
