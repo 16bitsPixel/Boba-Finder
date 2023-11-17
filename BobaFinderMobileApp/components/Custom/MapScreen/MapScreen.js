@@ -22,15 +22,6 @@ export default function MapScreen() {
 
     return (
         <SafeAreaView style={styles.container}>
-<<<<<<< HEAD
-          <View>
-            <Text>
-                MapScreen
-            </Text>
-          </View>
-
-          <StoresMenu />
-=======
           <MapView                        /* Map currently just shows user location */
             style={styles.map}            /* Need to grab user location to show direction */
             provider={ PROVIDER_GOOGLE }
@@ -57,7 +48,7 @@ export default function MapScreen() {
           <Text>
               MapScreen
           </Text>
->>>>>>> 763c3c5f423e410c5cf24ed4b005b187f8d684cf
+          <StoresMenu />
         </SafeAreaView>
     );
 }
