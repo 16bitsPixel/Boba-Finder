@@ -1,62 +1,38 @@
 [
     {
         "id": "1",
-        "name": "topping1"
+        "name": "brown sugar boba"
     },
     {
         "id": "2",
-        "name": "topping2"
+        "name": "honey boba"
     },
     {
         "id": "3",
-        "name": "topping3"
+        "name": "grass jelly"
     },
     {
         "id": "4",
-        "name": "topping4"
+        "name": "custard pudding"
     },
     {
         "id": "5",
-        "name": "topping5"
+        "name": "lychee jelly"
     },
     {
         "id": "6",
-        "name": "topping6"
+        "name": "coconut jelly"
     },
     {
         "id": "7",
-        "name": "topping7"
+        "name": "mochi"
     },
     {
         "id": "8",
-        "name": "topping8"
+        "name": "red beans"
     },
     {
         "id": "9",
-        "name": "topping9"
-    },
-    {
-        "id": "10",
-        "name": "topping10"
-    },
-    {
-        "id": "11",
-        "name": "topping11"
-    },
-    {
-        "id": "12",
-        "name": "topping12"
-    },
-    {
-        "id": "13",
-        "name": "topping13"
-    },
-    {
-        "id": "14",
-        "name": "topping14"
-    },
-    {
-        "id": "15",
-        "name": "topping15"
+        "name": "salted cheese foam"
     }
 ]

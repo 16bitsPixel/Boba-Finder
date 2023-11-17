@@ -7,5 +7,15 @@ export default styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: "100%",
+        paddingTop: 200,
+        borderWidth: "2",
     },
+    contentContainer: {
+        backgroundColor: "white",
+      },
+      itemContainer: {
+        padding: 6,
+        margin: 6,
+        backgroundColor: "#eee",
+      },
 })

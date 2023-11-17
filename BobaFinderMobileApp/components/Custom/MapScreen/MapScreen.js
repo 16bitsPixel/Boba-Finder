@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 
 import styles from './MapScreenStyles';
+import StoresMenu from "../StoresMenu/StoresMenu";
 
 export default function MapScreen() {
     return (
@@ -15,6 +16,8 @@ export default function MapScreen() {
                 MapScreen
             </Text>
           </View>
+
+          <StoresMenu />
         </SafeAreaView>
     );
 }
