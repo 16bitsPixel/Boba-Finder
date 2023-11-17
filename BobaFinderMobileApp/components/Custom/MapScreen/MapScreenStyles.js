@@ -8,4 +8,8 @@ export default styles = StyleSheet.create({
         justifyContent: 'center',
         width: "100%",
     },
+    map: {
+        height: '80%',
+        width: '100%',
+    }
 })
