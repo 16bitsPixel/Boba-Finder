@@ -33,19 +33,22 @@ const shopSchema = mongoose.Schema(
 // current schema for individual drinks we will delete later
 const shopSchema = mongoose.Schema(
     {
-        "Drink Name": {
+        restaurantName: {
             type: String,
             required: true
         },
-        Description: {
+        address: {
             type: String,
             required: true
         },
-        Price: {
-            type: String,
+        teaBases: {
+            type: Array,
             required: true
+        },
+        teaToppings: {
+            type: Array,
         }
     }
 );
 
-export const Shop = mongoose.model('Cat', shopSchema, 'bobaShop');
+export const Shop = mongoose.model('Cat', shopSchema, 'bobaNewShop');
