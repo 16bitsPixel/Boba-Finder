@@ -45,10 +45,7 @@ export default function MapScreen() {
                 />
               ))}
             </MapView>
-          <Text>
-              MapScreen
-          </Text>
-          <StoresMenu />
+            <StoresMenu />
         </SafeAreaView>
     );
 }
