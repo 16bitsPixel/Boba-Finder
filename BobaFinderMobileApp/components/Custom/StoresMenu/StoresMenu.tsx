@@ -3,19 +3,23 @@ import {
     View,
     Text,
     FlatList,
+    TouchableOpacity,
 } from 'react-native';
 import axios from 'axios';
 import BottomSheet, { BottomSheetFlatList, BottomSheetScrollView, BottomSheetView } from "@gorhom/bottom-sheet";
 
 import styles from './StoresMenuStyles';
+import stores from '../../../data/stores.json';
 
 export default function StoresMenu() {
     // make an array for the shops
     const [shops, setShops] = useState([]);
+    const [isLoading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
 
-    /*
+    // use iPv4 address
     useEffect(() => {
-        fetch('http://10.0.0.77:5555/shops')
+        fetch('http://10.0.0.112/shops')
             .then((response) => {
                 console.log(response);
                 setShops(response.data.data);
@@ -24,11 +28,10 @@ export default function StoresMenu() {
                 console.log(error);
             })
     }, []);
-    */
 
     const getMovies = async () => {
         try {
-            const response = await fetch('http://10.0.0.77:5555/shops');
+            const response = await fetch('http://10.0.0.112:5555/shops');
             const json = await response.json();
             setData(json);
             console.log(json);
@@ -42,12 +45,11 @@ export default function StoresMenu() {
     useEffect(() => {
         getMovies();
     }, []);
+
     // hooks
     const sheetRef = useRef<BottomSheet>(null);
 
     // variables
-    const [isLoading, setLoading] = useState(true);
-    const [data, setData] = useState([]);
     const snapPoints = useMemo(() => ["25", "90%"], []);
 
     // callbacks
@@ -55,12 +57,23 @@ export default function StoresMenu() {
         console.log("handleSheetChange", index);
     }, []);
 
-    // render
+    // render card from data.json
     const renderItem = useCallback(
         (item) => (
-            <View key={item} style={styles.itemContainer}>
-                <Text>{item}</Text>
-            </View>
+            <TouchableOpacity
+                style={styles.card}
+                key={item.id}
+                // TODO: pressing a store card will route the user to the store's pin on the map
+                onPress={() => {}}
+            >
+                <Text style={styles.cardText}>
+                    {item.restaurantName}, {item.address}
+                    {"\n"}
+                    Bases: {item.teaBases.join(', ')}
+                    {"\n"}
+                    Toppings: {item.teaToppings.join(', ')}
+                </Text>
+            </TouchableOpacity>
         ),
         []
     );
@@ -71,15 +84,12 @@ export default function StoresMenu() {
             snapPoints={snapPoints}
             onChange={handleSheetChange}
         >
-            <BottomSheetFlatList
-                data={data}
-                keyExtractor={({ id }) => id}
-                renderItem={({ item }) => (
-                    <Text>
-                        {item.Description}, {item.Price}
-                    </Text>
-                )}
-            />
+            <BottomSheetScrollView
+                contentContainerStyle={styles.container}
+                scrollEnabled={true}
+            >
+                {data.map(renderItem)}
+            </BottomSheetScrollView>
         </BottomSheet>
     );
 };
