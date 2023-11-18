@@ -1,6 +1,5 @@
 Almond Roca
 Cantaloupe
-Macadamia Nut
 Papaya
 Caramel
 Sweet Potato
@@ -8,7 +7,6 @@ Ceylon
 Mocha
 Wintermelon
 Kiwi
-Chocolate Banana
 Vanilla
 Black Currant Milk
 White
@@ -46,7 +44,6 @@ Rooibos
 Oolong
 Matcha 
 Green
-Sesame
 Mint
 Sweet Corn
 Lavender
@@ -153,3 +150,4 @@ Black Sugar Pearl
 Raspberry
 Lychee Coconut
 Guava
+Tea
