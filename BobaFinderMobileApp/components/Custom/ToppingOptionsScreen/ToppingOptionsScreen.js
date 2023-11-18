@@ -23,23 +23,28 @@ export default function ToppingOptionsScreen() {
         // SafeAreaView hides the top part of the screen where the camera is
         <SafeAreaView style={styles.container}>
             <ScrollView
-                contentInsetAdjustmentBehavior="automatic" style = {{width: "100%"}}
+                contentInsetAdjustmentBehavior="automatic"
+                style = {{width: "100%"}}
             >
                 <View style={styles.customizationContainer}>
                     {/* ScrollView allows for scrolling */}
-                    <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollView}>
+                    <ScrollView
+                        showsVerticalScrollIndicator={false}
+                        style={styles.scrollView}
+                    >
                         {
                             toppingList.map(topping => {
                                 return (
                                     <TouchableOpacity
-                                        style={styles.customizationButton}
+                                        style={styles.card}
                                         key={topping.id}
                                     >
-                                        <Text style = {{fontSize: 20, marginLeft: "5%", flex: 1}}>
+                                        <Text style = {styles.cardText}>
                                             {topping.name}
                                         </Text>
-                                        <Image source={images.toppingscup}
-                                            style={styles.customizationIcon}
+                                        <Image 
+                                            source={images.toppingscup}
+                                            style={styles.cardIcon}
                                             resizeMode="contain"
                                         />
                                     </TouchableOpacity>

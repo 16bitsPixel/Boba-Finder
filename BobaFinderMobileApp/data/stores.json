@@ -1,0 +1,17 @@
+[
+    {
+        "id": "1",
+        "restaurantName": "Tastea",
+        "address": "123 ABG Dr"
+    },
+    {
+        "id": "2",
+        "restaurantName": "Sunright",
+        "address": "123 ABG Dr"
+    },
+    {
+        "id": "3",
+        "restaurantName": "Half and Half",
+        "address": "123 ABG Dr"
+    }
+]

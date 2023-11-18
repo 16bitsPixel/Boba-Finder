@@ -21,7 +21,7 @@ export default styles = StyleSheet.create({
         flex: 1,
         width: '80%',
     },
-    customizationButton: {
+    card: {
         backgroundColor: "white",
         width: '100%',
         height: 80,
@@ -32,7 +32,12 @@ export default styles = StyleSheet.create({
         justifyContent: "space-between",
         flex: 1,
     },
-    customizationIcon: {
+    cardText: {
+        fontSize: 20,
+        marginLeft: "5%", 
+        flex: 1,
+    },
+    cardIcon: {
         height: "100%",
         flex: 1,
     },
