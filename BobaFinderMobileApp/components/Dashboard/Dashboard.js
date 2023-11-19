@@ -13,7 +13,7 @@ import {
 
 import { useFonts } from 'expo-font';
 
-const image = { uri: "https://raw.githubusercontent.com/16bitsPixel/Boba-Finder/main/imgs/splashbg.png" };
+const image = { uri: "https://raw.githubusercontent.com/16bitsPixel/Boba-Finder/main/BobaFinderMobileApp/assets/images/splashbg.png" };
 
 
 export default function DashboardScreen({ navigation }) {
