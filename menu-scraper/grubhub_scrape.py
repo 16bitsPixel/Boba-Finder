@@ -59,8 +59,7 @@ def get_menu(url: str):
     # Extract Name
     entry['restaurantName'] = rName
     # Extract Address
-    button_element = soup.find('button', {'data-testid': 'restaurant-address'})
-    entry['address'] = button_element.find('span', {'class': 'sc-dkrFOg gSBpp'}).text
+    getAddress(soup, entry)
 
     # Scan menu items for key TeaBase and TeaToppings words
     # Load Tea Flavors & Toppings
@@ -365,6 +364,14 @@ def findToppings(teaToppingsKW, teaToppings, item, browser):
     return found
 
 
+def getAddress(soup, entry):
+    for div in soup.find_all('a', {'class': 'sc-hBxehG flfcph'}):
+        link_text = div['href']
+        if "http" in link_text:
+            entry['gMapsLink'] = link_text
+            link_parts = link_text.partition("daddr=")
+            entry['address'] = link_parts[2]
+            break
 def main():
     # Generate url links of nearby restaurants
     nearByRestaurants = getNearByRestaurants(input('Enter Location: '))
@@ -374,7 +381,7 @@ def main():
     i = 0
     for restaurant in nearByRestaurants:
         i += 1
-        print(f"\n{i}/{len(nearByRestaurants)}", end=" Minutes Elapsed: ")
+        print(f"\n[{i}/{len(nearByRestaurants)}]", end=" Minutes Elapsed: ")
         print(round((time.time() - start) / 60, 2))
 
         # scrape data from each URL
@@ -384,8 +391,6 @@ def main():
                 uploadMongoDB(bobaDrinks)
         except:
             print(f"Restuarnt: {restaurant}\n could not be scraped")
-        # insert data collected into MongoDB if menu and tea found
-
 
 
 if __name__ == '__main__':
