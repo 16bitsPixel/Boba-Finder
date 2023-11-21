@@ -14,11 +14,14 @@ import toppingList from '../../../data/toppings.json'
 
 import { images } from "../../../constants";
 
+import { useRoute } from "@react-navigation/native"
+
 /*
     Screen where users can see all options of toppings for their custom drink
 */
 
-export default function ToppingOptionsScreen() {
+export default function ToppingOptionsScreen({ route, navigation }) {
+    const { drink, topping } = route.params;
     return (
         // SafeAreaView hides the top part of the screen where the camera is
         <SafeAreaView style={styles.container}>
@@ -38,6 +41,7 @@ export default function ToppingOptionsScreen() {
                                     <TouchableOpacity
                                         style={styles.card}
                                         key={topping.id}
+                                        onPress={() => navigation.navigate("Custom", {drink: drink, topping: topping.name})}
                                     >
                                         <Text style = {styles.cardText}>
                                             {topping.name}

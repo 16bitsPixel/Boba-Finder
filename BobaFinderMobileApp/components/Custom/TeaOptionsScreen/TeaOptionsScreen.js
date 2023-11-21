@@ -15,6 +15,8 @@ import milkTeaList from '../../../data/milkTeas.json'
 import fruitTeaList from '../../../data/fruitTeas.json'
 import smoothiesList from '../../../data/smoothies.json'
 
+import { useRoute } from "@react-navigation/native"
+
 /*
     Screen where users can see all options of tea bases for their custom drink
     Requires collapsible
@@ -22,7 +24,8 @@ import smoothiesList from '../../../data/smoothies.json'
     npm install react-native-collapsible
 */
 
-export default function TeaOptionsScreen() {
+export default function TeaOptionsScreen({ route, navigation }) {
+    const { drink, topping } = route.params;
     const [ activeSections, setActiveSections ] = useState([0, 1, 2]);
     const sections = [
         {
@@ -32,7 +35,11 @@ export default function TeaOptionsScreen() {
                     {
                         milkTeaList.map(tea => {
                             return (
-                                <TouchableOpacity style={styles.customizationButton} key={tea.id}>
+                                <TouchableOpacity 
+                                style={styles.customizationButton} 
+                                key={tea.id} 
+                                onPress={() => navigation.navigate("Custom", {drink: tea.name, topping: topping})}
+                                >
                                     <Text style = {{fontSize: 20, marginLeft: "5%", flex: 1}}>
                                         {tea.name}
                                     </Text>
@@ -52,7 +59,11 @@ export default function TeaOptionsScreen() {
                 {
                     fruitTeaList.map(tea => {
                         return (
-                            <TouchableOpacity style={styles.customizationButton} key={tea.id}>
+                            <TouchableOpacity 
+                            style={styles.customizationButton} 
+                            key={tea.id} 
+                            onPress={() => navigation.navigate("Custom", {drink: tea.name, topping: topping})}
+                            >
                                 <Text style = {{fontSize: 20, marginLeft: "5%", flex: 1}}>
                                     {tea.name}
                                 </Text>
@@ -72,7 +83,11 @@ export default function TeaOptionsScreen() {
                 {
                     smoothiesList.map(tea => {
                         return (
-                            <TouchableOpacity style={styles.customizationButton} key={tea.id}>
+                            <TouchableOpacity 
+                            style={styles.customizationButton} 
+                            key={tea.id} 
+                            onPress={() => navigation.navigate("Custom", {drink: tea.name, topping: topping})}
+                            >
                                 <Text style = {{fontSize: 20, marginLeft: "5%", flex: 1}}>
                                     {tea.name}
                                 </Text>
