@@ -27,7 +27,7 @@ export default function CustomStack() {
         <Stack.Screen name="Custom" component={CustomScreen} options={{ headerTitle: "Drink Maker" }} initialParams={{ drink: "", topping: "" }} />
         <Stack.Screen name="Tea Options" component={TeaOptionsScreen} options={{ headerTitle: "Tea Bases" }} />
         <Stack.Screen name="Topping Options" component={ToppingOptionsScreen} options={{ headerTitle: "Toppings" }} />
-        <Stack.Screen name="Map" component={MapScreen} options={{ headerTitle: "Map" }} />
+        <Stack.Screen name="Map" component={MapScreen} options={{ headerTitle: "Results" }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
