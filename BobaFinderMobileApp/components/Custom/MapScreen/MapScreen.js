@@ -8,6 +8,7 @@ import {
 
 
 import styles from './MapScreenStyles';
+import StoresMenu from "../StoresMenu/StoresMenu";
 
 
 export default function MapScreen() {
@@ -59,6 +60,7 @@ export default function MapScreen() {
           <Text>
               Make another view thing and put the stores here
           </Text>
+          <StoresMenu />
         </SafeAreaView>
     );
 }
