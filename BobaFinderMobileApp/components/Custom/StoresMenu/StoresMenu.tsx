@@ -21,7 +21,7 @@ export default function StoresMenu() {
 
     // use iPv4 address
     useEffect(() => {
-        fetch('http://10.0.0.112/shops')
+        fetch('https://us-west-2.aws.data.mongodb-api.com/app/application-1-agiaq/endpoint/shops')
             .then((response) => {
                 console.log(response);
                 setShops(response.data.data);
@@ -34,7 +34,7 @@ export default function StoresMenu() {
     const getMovies = async () => {
         try {
             // use iPv4 address
-            const response = await fetch('http://10.0.0.112:5555/shops');
+            const response = await fetch('https://us-west-2.aws.data.mongodb-api.com/app/application-1-agiaq/endpoint/shops');
             const json = await response.json();
             setData(json);
             console.log(json);
@@ -86,7 +86,7 @@ export default function StoresMenu() {
                         {/* Example: */}
                         {/* <StarRating rating={store.rating} /> */}
                         <Text>
-                            <StarRating rating="5"/>
+                            <StarRating rating="4.5"/>
                         </Text>
                     </View>
 
