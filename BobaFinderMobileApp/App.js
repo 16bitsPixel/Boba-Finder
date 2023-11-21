@@ -32,7 +32,7 @@ export default function App() {
             }
           }}>
           <Drawer.Screen name="Dashboard" component={ DashboardScreen } options={{ headerTitle: "" }}/>
-          <Drawer.Screen name="Drink Maker" component={ CustomStack } options={{ headerShown: false, headerTitle: "" }}/>
+          <Drawer.Screen name="Drink Maker" component={ CustomStack } options={{ headerShown: false, headerTitle: "" }} initialParams={{ drink: "", topping: "" }}/>
           <Drawer.Screen name="Favorites" component={ FavoriteScreen } options={{ headerShown: false, headerTitle: "" }}/>
         </Drawer.Navigator>
       </NavigationContainer>

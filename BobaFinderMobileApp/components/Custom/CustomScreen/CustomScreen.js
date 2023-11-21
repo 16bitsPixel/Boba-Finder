@@ -11,10 +11,14 @@ import {
 import { images } from '../../../constants'
 import styles from './CustomScreenStyles'
 
+import { useRoute } from "@react-navigation/native"
+
 /*
   Custom Screen where users can create their drink of choice
 */
-export default function CustomScreen({ navigation }) {
+
+export default function CustomScreen({ route, navigation }) {
+  const { drink, topping } = route.params;
   return (
     <SafeAreaView style={styles.container}>
       {/*div for the changing boba UI, randomizer, and favorite button*/}
@@ -62,7 +66,7 @@ export default function CustomScreen({ navigation }) {
         {/* button for the base tea, this should move to the teas screen */}
         <TouchableOpacity
           style={styles.customizationButton}
-          onPress={() => navigation.navigate("Tea Options")}>
+          onPress={() => navigation.navigate("Tea Options", {drink: drink, topping: topping})}>
           <View style={{
             flexDirection: "row",
             flex: 1
@@ -77,7 +81,7 @@ export default function CustomScreen({ navigation }) {
               }}>
                 Base:
               </Text>
-              <Text>Thai Tea</Text>
+              <Text>{drink}</Text>
             </View>
             <Image source={images.basecup}
               style={styles.customizationIcon}
@@ -89,7 +93,7 @@ export default function CustomScreen({ navigation }) {
         {/* button for the toppings, this should move to the toppings screen */}
         <TouchableOpacity
           style={styles.customizationButton}
-          onPress={() => navigation.navigate("Topping Options")}>
+          onPress={() => navigation.navigate("Topping Options", {drink: drink, topping: topping})}>
           <View style={{
             flexDirection: "row",
             flex: 1
@@ -104,7 +108,7 @@ export default function CustomScreen({ navigation }) {
               }}>
                 Toppings:
               </Text>
-              <Text>Brown Sugar Boba</Text>
+              <Text>{topping}</Text>
             </View>
             <Image source={images.toppingscup}
               style={styles.customizationIcon}
