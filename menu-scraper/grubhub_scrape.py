@@ -11,28 +11,20 @@ import pymongo
 
 def get_menu(url: str):
     """ given a valid grubhub url, scrape the menu of a restaurant """
-    # Initialize ChromeOptions instance
-    chrome_options = initChromeOptions()
-
     # Initialize Chrome Webdriver instance
-    browser = webdriver.Chrome(options=chrome_options)
+    browser = webdriver.Chrome(options=initChromeOptions())
 
     # Navigate to specific URL
     browser.get(url)
     time.sleep(2)
 
-    # Retrieve HTML source Code
-    innerHTML = browser.page_source
-
     # Parse text in HTML element
-    soup = BeautifulSoup(innerHTML, 'html.parser')
+    soup = BeautifulSoup(browser.page_source, 'html.parser')
 
     # Check if menu found
     rName = soup.find('h1', {'data-testid': 'restaurant-nameHeader'}).text
-    print(f"Looking for menu of {rName}")
-    if not menuCheck(soup):
+    if not menuCheck(soup, rName):
         return 0
-
 
     # Click Pickup Option if available
     try:
@@ -56,7 +48,6 @@ def get_menu(url: str):
         time.sleep(2)
     except:
         pass
-
 
     previous_height = browser.execute_script('return window.pageYOffset;')
     body = browser.find_element(By.TAG_NAME, 'body')
@@ -88,6 +79,7 @@ def get_menu(url: str):
                     and (not foundToppings)):
                 # If keywords found, click item to view and extract toppings (only done once per restaurant)
                 foundToppings = findToppings(teaToppingsKW, teaToppings, item, browser)
+                time.sleep(2)
 
             # Check drink description for KeyWords
             desc = cleanDesc(str(item.select_one('span[data-testid="menu-item-description"]')))
@@ -105,12 +97,13 @@ def get_menu(url: str):
         innerHTML = browser.page_source
         soup = BeautifulSoup(innerHTML, 'html.parser')
 
-    if (not teaFlavors) or ('boba' not in teaToppings):
-        print("No tea/boba at this restaurant")
+    if (not teaFlavors) or ('boba' not in teaToppings and 'pearl' not in teaToppings):
+        print("Tea and Boba not sold at this restaurant")
         return 0
 
+    print(f"Tea Found:\n{teaFlavors}")
+    print(f"Toppings Found:\n{teaToppings}")
     entry['teaBases'] = list(set(teaFlavors))
-    print(set(teaFlavors))
     entry['teaToppings'] = list(set(teaToppings))
     menuItems.append(entry)
     print("[FINISHED SCRAPING]")
@@ -130,7 +123,8 @@ def initChromeOptions():
     return chrome_options
 
 
-def menuCheck(soup):
+def menuCheck(soup, rName):
+    print(f"Looking for menu of {rName}")
     menu = soup.find("div", {"data-testid": "menu-sections-container"})
     if menu is None:
         print('[MENU FAIL]')
@@ -181,14 +175,26 @@ def scan(text, teaFlavors, teaToppings, teaFlavorsKW, teaToppingsKW):
     if not text:
         return 0
     text = text.lower()
-    for i in text.split(' '):
-        if i in teaFlavorsKW:
-            if i not in teaFlavors:
+    text = text.split(' ')
+    for i, n in enumerate(text):
+        if n == 'tea':
+            found +=1
+        if n in teaFlavorsKW:
+            if n not in teaFlavors:
                 found += 1
-                teaFlavors.append(i)
-        if i in teaToppingsKW:
-            if i not in teaToppings:
-                teaToppings.append(i)
+                teaFlavors.append(n)
+        if n in teaToppingsKW:
+            if n not in teaToppings:
+                teaToppings.append(n)
+        if i < len(text) - 1:
+            currPlusNext = f'{n} {text[i + 1]}'
+            if currPlusNext in teaFlavorsKW:
+                if currPlusNext not in teaFlavors:
+                    found += 1
+                    teaFlavors.append(currPlusNext)
+            if currPlusNext in teaToppingsKW:
+                if currPlusNext not in teaToppings:
+                    teaToppings.append(currPlusNext)
     return found
 
 
@@ -197,11 +203,18 @@ def scanToppings(text, teaToppings, teaToppingsKW):
     if not text:
         return 0
     text = text.lower()
-    for i in text.split(' '):
-        if i in teaToppingsKW:
-            if i not in teaToppings:
-                teaToppings.append(i)
+    text = text.split(' ')
+    for i, n in enumerate(text):
+        if n in teaToppingsKW:
+            if n not in teaToppings:
+                teaToppings.append(n)
                 found = True
+        if i < len(text) - 1:
+            currPlusNext = f'{n} {text[i + 1]}'
+            if currPlusNext in teaToppingsKW:
+                if currPlusNext not in teaToppings:
+                    teaToppings.append(currPlusNext)
+                    found = True
     return found
 
 
@@ -213,7 +226,7 @@ def uploadMongoDB(entry):
     # mongodb+srv://brandonllanes16:XIPZsFqtcLYtkQ4l@bobacluster.atdxi6u.mongodb.net/?retryWrites=true&w=majority
     client = pymongo.MongoClient(
         "mongodb+srv://vcasanov:i3DFbeGAHi05CWA0@test.i44ykno.mongodb.net/?retryWrites=true&w=majority")
-    db = client.db.bobaShopTest
+    db = client.db.bobaShopTestNewSet
     try:
         db.insert_many(entry)
         print(f'Inserted {len(entry)} entries')
@@ -287,58 +300,72 @@ def findToppings(teaToppingsKW, teaToppings, item, browser):
     data_test_id = specific_div.get('data-testid')
     cssSelector = f'div[data-testid="{data_test_id}"] button[data-testid="restaurant-menu-item-button"]'
     time.sleep(1)
-    # click on item to see available toppings
-    button = WebDriverWait(browser, 3).until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, cssSelector)))
-    button.click()
+    # click on item to see available toppings or try a different one
+    try:
+        button = WebDriverWait(browser, 3).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, cssSelector)))
+        button.click()
+    except:
+        return found
     time.sleep(2)
 
     # Parse text in HTML element
-    innerHTML = browser.page_source
-    soup = BeautifulSoup(innerHTML, 'html.parser')
-
-    # TODO
-    # Handle both types of pop up menus
-    # Scan each element's text in popup for toppings
-    drinkOptions = soup.find_all('span', class_='menuItemModal-choice-option-description')
-    for options in drinkOptions:
-        result = scanToppings(cleanName(options.text.strip()), teaToppings, teaToppingsKW)
-        if not found:
-            found = result
-
-    if teaToppings:
-        print("Toppings Found: ")
-        print(teaToppings)
-    else:
-        print("No toppings found")
-
+    soup = BeautifulSoup(browser.page_source, 'html.parser')
     found = True
-    # Close pop up
     try:
         # Menu type 1
-
-        button = WebDriverWait(browser, 3).until(
+        exitButton = WebDriverWait(browser, 3).until(
             EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[data-testid="close-add-item-modal"]')))
-        button.click()
+        drinkOptions = soup.find_all('span', class_='menuItemModal-choice-option-description')
+        for options in drinkOptions:
+            result = scanToppings(cleanName(options.text.strip()), teaToppings, teaToppingsKW)
+            if not found:
+                found = result
+        exitButton.click()
         print("Menu type 1")
     except:
         # Menu type 2
         print("Menu type 2")
-        # Find the button element by its data-testid attribute
-        button = WebDriverWait(browser, 3).until(
+        try:
+            # Find additional toppings element
+            element = WebDriverWait(browser, 10).until(
+                EC.element_to_be_clickable(
+                    (
+                        By.XPATH,
+                        "//h5[text()='Add Toppings' or text()='Add-Ons' or text()='Add-ons' or text()='Toppings' or text()='DRINKS ADD-ONS:' or text()='Additional Toppings' or text()='Topping' or text()='Add toppings']"
+                    )
+                )
+            )
+            # Open toppings menu
+            element.click()
+            time.sleep(3)
+            soup = BeautifulSoup(browser.page_source, 'html.parser')
+            drinkOptions = soup.find_all('span', {'class': 'u-stack-x-3'})
+            if drinkOptions:
+                for options in drinkOptions:
+                    result = scanToppings(cleanName(options.text.strip()), teaToppings, teaToppingsKW)
+                    if not found:
+                        found = result
+            else:
+                soup = BeautifulSoup(browser.page_source, 'html.parser')
+                drinkOptions = soup.find_all('div', class_='emi-list-cell')
+                for options in drinkOptions:
+                    result = scanToppings(cleanName(options.text.strip()), teaToppings, teaToppingsKW)
+                    if not found:
+                        found = result
+
+            # Close Toppings Menu
+            element.click()
+        except:
+            print("Toppings couldn't be scraped")
+        # Close Drink item pop up
+        exitButton = WebDriverWait(browser, 6).until(
             EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[data-testid="emi-header-backButton"]')))
-        button.click()
+        exitButton.click()
     return found
 
 
 def main():
-
-    ####################3
-    #get_menu('https://www.grubhub.com/restaurant/manleys-donuts-5721-camden-ave-san-jose/2817412')
-    #return 0
-    #####################
-
-
     # Generate url links of nearby restaurants
     nearByRestaurants = getNearByRestaurants(input('Enter Location: '))
     print(f'Gathering data from {len(nearByRestaurants)} restaurants')
@@ -347,14 +374,18 @@ def main():
     i = 0
     for restaurant in nearByRestaurants:
         i += 1
-        print(f"{i}/{len(nearByRestaurants)}",end=" Minutes Elapsed: ")
+        print(f"\n{i}/{len(nearByRestaurants)}", end=" Minutes Elapsed: ")
         print(round((time.time() - start) / 60, 2))
-        # scrape data from each URL
-        bobaDrinks = get_menu(restaurant)
 
+        # scrape data from each URL
+        try:
+            bobaDrinks = get_menu(restaurant)
+            if bobaDrinks:
+                uploadMongoDB(bobaDrinks)
+        except:
+            print(f"Restuarnt: {restaurant}\n could not be scraped")
         # insert data collected into MongoDB if menu and tea found
-        if bobaDrinks:
-            uploadMongoDB(bobaDrinks)
+
 
 
 if __name__ == '__main__':
