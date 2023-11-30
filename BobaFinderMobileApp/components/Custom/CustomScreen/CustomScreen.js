@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 
 import { images } from '../../../constants'
+import { baseTeas } from '../../../constants/images'
 import styles from './CustomScreenStyles'
 
 import { useRoute } from "@react-navigation/native"
@@ -28,7 +29,7 @@ export default function CustomScreen({ route, navigation }) {
       }}>
         <ImageBackground source={images.searchbg} resizeMode="cover" style={{ flex: 1 }}>
           <Image
-            source={images.logo}
+            source={drink ? baseTeas.teaName[drink] : images.logo}
             style={styles.logoBackground}
             resizeMode="contain"
           />
@@ -83,7 +84,7 @@ export default function CustomScreen({ route, navigation }) {
               </Text>
               <Text>{drink}</Text>
             </View>
-            <Image source={images.basecup}
+            <Image source={drink ? baseTeas.teaName[drink] : images.basecup}
               style={styles.customizationIcon}
               resizeMode="contain"
             />

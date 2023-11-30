@@ -11,6 +11,7 @@ import Accordion from 'react-native-collapsible/Accordion';
 
 import styles from './TeaOptionsScreenStyles'
 import { images } from '../../../constants'
+import { baseTeas } from '../../../constants/images'
 import milkTeaList from '../../../data/milkTeas.json'
 import fruitTeaList from '../../../data/fruitTeas.json'
 import classicTeaList from '../../../data/classicTeas.json'
@@ -43,7 +44,7 @@ export default function TeaOptionsScreen({ route, navigation }) {
                                 <Text style = {{fontSize: 20, marginLeft: "5%", flex: 1}}>
                                     {tea.name}
                                 </Text>
-                                <Image source={images.basecup}
+                                <Image source={baseTeas.teaName[tea.name]}
                                     style={styles.customizationIcon}
                                     resizeMode="contain"
                                 />
@@ -67,7 +68,7 @@ export default function TeaOptionsScreen({ route, navigation }) {
                                     <Text style = {{fontSize: 20, marginLeft: "5%", flex: 1}}>
                                         {tea.name}
                                     </Text>
-                                    <Image source={images.basecup}
+                                    <Image source={baseTeas.teaName[tea.name]}
                                         style={styles.customizationIcon}
                                         resizeMode="contain"
                                         loa
@@ -92,7 +93,7 @@ export default function TeaOptionsScreen({ route, navigation }) {
                                 <Text style = {{fontSize: 20, marginLeft: "5%", flex: 1}}>
                                     {tea.name}
                                 </Text>
-                                <Image source={images.basecup}
+                                <Image source={baseTeas.teaName[tea.name]}
                                     style={styles.customizationIcon}
                                     resizeMode="contain"
                                 />
