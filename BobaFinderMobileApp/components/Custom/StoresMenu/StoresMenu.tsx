@@ -1,14 +1,6 @@
 import React, { useCallback, useRef, useMemo, useEffect, useState } from "react";
-import {
-    View,
-    Text,
-    Image,
-    FlatList,
-    TouchableOpacity,
-} from 'react-native';
-import axios from 'axios';
-import BottomSheet, { BottomSheetFlatList, BottomSheetScrollView, BottomSheetView } from "@gorhom/bottom-sheet";
-
+import {View, Text, Image, TouchableOpacity,} from 'react-native';
+import BottomSheet, {BottomSheetScrollView,} from "@gorhom/bottom-sheet";
 import styles from './StoresMenuStyles';
 import StarRating from "./Rating";
 import { images } from "../../../constants";
@@ -53,7 +45,7 @@ export default function StoresMenu() {
             <TouchableOpacity
                 style={styles.card}
                 key={item.id}
-                // TODO: pressing a store card will route the user to the store's pin on the map
+                // Pressing a store card will route the user to the store's pin on the map
                 onPress={() => { }}
             >
                 {/* Left side: Image */}
@@ -79,10 +71,10 @@ export default function StoresMenu() {
 
                     {/* Description */}
                     <Text style={styles.description}>
-                        {/* TODO: show matching bases */}
+                        {/* Show matching bases */}
                         Bases: {item.teaBases.slice(0, 2).join(', ')}
                         {"\n"}
-                        {/* TODO: show matching toppings */}
+                        {/* Show matching toppings */}
                         Toppings: {item.teaToppings.slice(0, 2).join(', ')}
                     </Text>
 

@@ -7,12 +7,9 @@ import {
   ImageBackground,
   SafeAreaView
 } from 'react-native'
-
 import { images } from '../../../constants'
 import { baseTeas } from '../../../constants/images'
 import styles from './CustomScreenStyles'
-
-import { useRoute } from "@react-navigation/native"
 
 /*
   Custom Screen where users can create their drink of choice

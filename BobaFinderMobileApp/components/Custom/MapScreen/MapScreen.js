@@ -1,20 +1,12 @@
-import React, { useEffect, useState } from "react";
-import MapView, { Marker, Heatmap, PROVIDER_GOOGLE } from 'react-native-maps';
-import {
-    View,
-    Text,
-    SafeAreaView,
-} from 'react-native';
-
-
+import React, { useState } from "react";
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import {Text, SafeAreaView,} from 'react-native';
 import styles from './MapScreenStyles';
 import StoresMenu from "../StoresMenu/StoresMenu";
-
 
 export default function MapScreen() {
   const [mapLat, setMapLat] = useState(37.0016); /* Map initial location: Santa Cruz College Nine */
   const [mapLong, setMapLong] = useState(-122.0573);
-
 
   const markers = [
     {
@@ -41,7 +33,6 @@ export default function MapScreen() {
     ));
   };
 
-
     return (
         <SafeAreaView style={styles.container}>
           <MapView                        /* Map currently just shows user location */
@@ -55,8 +46,8 @@ export default function MapScreen() {
               longitudeDelta: 0.0421, /* This configures the user's view of the map */
             }}
             >
-              {renderMarkers()}
-            </MapView>
+            {renderMarkers()}
+          </MapView>
           <Text>
               Make another view thing and put the stores here
           </Text>
