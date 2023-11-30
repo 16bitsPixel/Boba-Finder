@@ -1,25 +1,12 @@
 import React from "react";
-import {
-    Text,
-    ScrollView,
-    View,
-    SafeAreaView,
-    Image,
-    StyleSheet,
-    TouchableOpacity,
-} from 'react-native';
-
+import {Text, ScrollView, View, SafeAreaView, Image, TouchableOpacity,} from 'react-native';
 import styles from '../ToppingOptionsScreen/ToppingOptionsScreenStyles'
 import toppingList from '../../../data/toppings.json'
-
 import { images } from "../../../constants";
-
-import { useRoute } from "@react-navigation/native"
 
 /*
     Screen where users can see all options of toppings for their custom drink
 */
-
 export default function ToppingOptionsScreen({ route, navigation }) {
     const { drink, topping } = route.params;
     return (
