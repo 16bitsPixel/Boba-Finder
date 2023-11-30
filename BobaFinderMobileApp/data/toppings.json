@@ -1,38 +1,30 @@
 [
     {
         "id": "1",
-        "name": "brown sugar boba"
+        "name": "Boba"
     },
     {
         "id": "2",
-        "name": "honey boba"
+        "name": "Crystal Boba"
     },
     {
         "id": "3",
-        "name": "grass jelly"
+        "name": "Pudding"
     },
     {
         "id": "4",
-        "name": "custard pudding"
+        "name": "Creama/Foam"
     },
     {
         "id": "5",
-        "name": "lychee jelly"
+        "name": "Lychee Jelly"
     },
     {
         "id": "6",
-        "name": "coconut jelly"
+        "name": "Strawberry Popping Boba"
     },
     {
         "id": "7",
-        "name": "mochi"
-    },
-    {
-        "id": "8",
-        "name": "red beans"
-    },
-    {
-        "id": "9",
-        "name": "salted cheese foam"
+        "name": "Mango Popping Boba"
     }
 ]

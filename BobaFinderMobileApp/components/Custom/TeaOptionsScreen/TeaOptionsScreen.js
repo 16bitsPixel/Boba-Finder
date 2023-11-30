@@ -13,7 +13,7 @@ import styles from './TeaOptionsScreenStyles'
 import { images } from '../../../constants'
 import milkTeaList from '../../../data/milkTeas.json'
 import fruitTeaList from '../../../data/fruitTeas.json'
-import smoothiesList from '../../../data/smoothies.json'
+import classicTeaList from '../../../data/classicTeas.json'
 
 import { useRoute } from "@react-navigation/native"
 
@@ -29,35 +29,11 @@ export default function TeaOptionsScreen({ route, navigation }) {
     const [ activeSections, setActiveSections ] = useState([0, 1, 2]);
     const sections = [
         {
-            title: "Milk Teas",
-            content:
-                <View style = {styles.customizationContainer}>
-                    {
-                        milkTeaList.map(tea => {
-                            return (
-                                <TouchableOpacity 
-                                style={styles.customizationButton} 
-                                key={tea.id} 
-                                onPress={() => navigation.navigate("Custom", {drink: tea.name, topping: topping})}
-                                >
-                                    <Text style = {{fontSize: 20, marginLeft: "5%", flex: 1}}>
-                                        {tea.name}
-                                    </Text>
-                                    <Image source={images.basecup}
-                                        style={styles.customizationIcon}
-                                        resizeMode="contain"
-                                    />
-                                </TouchableOpacity>
-                            )})
-                     }
-                </View>
-        },
-        {
-            title: "Fruits Teas",
+            title: "Classics",
             content:
             <View style = {styles.customizationContainer}>
                 {
-                    fruitTeaList.map(tea => {
+                    classicTeaList.map(tea => {
                         return (
                             <TouchableOpacity 
                             style={styles.customizationButton} 
@@ -77,11 +53,36 @@ export default function TeaOptionsScreen({ route, navigation }) {
             </View>
         },
         {
-            title: "Smoothies",
+            title: "Milk Teas",
+            content:
+                <View style = {styles.customizationContainer}>
+                    {
+                        milkTeaList.map(tea => {
+                            return (
+                                <TouchableOpacity 
+                                style={styles.customizationButton} 
+                                key={tea.id} 
+                                onPress={() => navigation.navigate("Custom", {drink: tea.name, topping: topping})}
+                                >
+                                    <Text style = {{fontSize: 20, marginLeft: "5%", flex: 1}}>
+                                        {tea.name}
+                                    </Text>
+                                    <Image source={images.basecup}
+                                        style={styles.customizationIcon}
+                                        resizeMode="contain"
+                                        loa
+                                    />
+                                </TouchableOpacity>
+                            )})
+                     }
+                </View>
+        },
+        {
+            title: "Fruit Teas",
             content:
             <View style = {styles.customizationContainer}>
                 {
-                    smoothiesList.map(tea => {
+                    fruitTeaList.map(tea => {
                         return (
                             <TouchableOpacity 
                             style={styles.customizationButton} 

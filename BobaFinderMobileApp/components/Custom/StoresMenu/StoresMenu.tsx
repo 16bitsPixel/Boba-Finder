@@ -19,25 +19,12 @@ export default function StoresMenu() {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
 
-    // use iPv4 address
-    useEffect(() => {
-        fetch('https://us-west-2.aws.data.mongodb-api.com/app/application-1-agiaq/endpoint/shops')
-            .then((response) => {
-                console.log(response);
-                setShops(response.data.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-    }, []);
-
-    const getMovies = async () => {
+    const getShops = async () => {
         try {
             // use iPv4 address
             const response = await fetch('https://us-west-2.aws.data.mongodb-api.com/app/application-1-agiaq/endpoint/shops');
             const json = await response.json();
             setData(json);
-            console.log(json);
         } catch (error) {
             console.error(error);
         } finally {
@@ -46,7 +33,7 @@ export default function StoresMenu() {
     };
 
     useEffect(() => {
-        getMovies();
+        getShops();
     }, []);
 
     // hooks
