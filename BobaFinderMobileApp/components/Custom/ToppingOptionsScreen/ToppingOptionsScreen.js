@@ -1,27 +1,28 @@
 import React from "react";
-import {
-    Text,
-    ScrollView,
-    View,
-    SafeAreaView,
-    Image,
-    StyleSheet,
-    TouchableOpacity,
-} from 'react-native';
-
+import {Text, ScrollView, View, SafeAreaView, Image, TouchableOpacity,} from 'react-native';
 import styles from '../ToppingOptionsScreen/ToppingOptionsScreenStyles'
 import toppingList from '../../../data/toppings.json'
-
 import { images } from "../../../constants";
+import { useFonts } from 'expo-font';
 
 import { useRoute } from "@react-navigation/native"
 
 /*
     Screen where users can see all options of toppings for their custom drink
 */
-
 export default function ToppingOptionsScreen({ route, navigation }) {
     const { drink, topping } = route.params;
+
+    // for fonts
+    const [loaded] = useFonts({
+        'Assistant': require('../../../assets/fonts/Assistant-Light.ttf'),
+        'ComingSoon': require('../../../assets/fonts/ComingSoon-Regular.ttf'),
+    });
+    
+    if (!loaded) {
+        return null;
+    }
+
     return (
         // SafeAreaView hides the top part of the screen where the camera is
         <SafeAreaView style={styles.container}>
@@ -43,7 +44,7 @@ export default function ToppingOptionsScreen({ route, navigation }) {
                                         key={topping.id}
                                         onPress={() => navigation.navigate("Custom", {drink: drink, topping: topping.name})}
                                     >
-                                        <Text style = {styles.cardText}>
+                                        <Text style = {[styles.cardText, {fontFamily: "Assistant"}]}>
                                             {topping.name}
                                         </Text>
                                         <Image 

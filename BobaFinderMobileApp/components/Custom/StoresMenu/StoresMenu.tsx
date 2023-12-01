@@ -1,14 +1,6 @@
 import React, { useCallback, useRef, useMemo, useEffect, useState } from "react";
-import {
-    View,
-    Text,
-    Image,
-    FlatList,
-    TouchableOpacity,
-} from 'react-native';
-import axios from 'axios';
-import BottomSheet, { BottomSheetFlatList, BottomSheetScrollView, BottomSheetView } from "@gorhom/bottom-sheet";
-
+import {View, Text, Image, TouchableOpacity,} from 'react-native';
+import BottomSheet, {BottomSheetScrollView,} from "@gorhom/bottom-sheet";
 import styles from './StoresMenuStyles';
 import StarRating from "./Rating";
 import { images } from "../../../constants";
@@ -19,25 +11,12 @@ export default function StoresMenu() {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
 
-    // use iPv4 address
-    useEffect(() => {
-        fetch('http://10.0.0.112/shops')
-            .then((response) => {
-                console.log(response);
-                setShops(response.data.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-    }, []);
-
-    const getMovies = async () => {
+    const getShops = async () => {
         try {
             // use iPv4 address
-            const response = await fetch('http://10.0.0.112:5555/shops');
+            const response = await fetch('https://us-west-2.aws.data.mongodb-api.com/app/application-1-agiaq/endpoint/shops');
             const json = await response.json();
             setData(json);
-            console.log(json);
         } catch (error) {
             console.error(error);
         } finally {
@@ -46,7 +25,7 @@ export default function StoresMenu() {
     };
 
     useEffect(() => {
-        getMovies();
+        getShops();
     }, []);
 
     // hooks
@@ -66,7 +45,7 @@ export default function StoresMenu() {
             <TouchableOpacity
                 style={styles.card}
                 key={item.id}
-                // TODO: pressing a store card will route the user to the store's pin on the map
+                // Pressing a store card will route the user to the store's pin on the map
                 onPress={() => { }}
             >
                 {/* Left side: Image */}
@@ -86,16 +65,16 @@ export default function StoresMenu() {
                         {/* Example: */}
                         {/* <StarRating rating={store.rating} /> */}
                         <Text>
-                            <StarRating rating="5"/>
+                            <StarRating rating="4.5"/>
                         </Text>
                     </View>
 
                     {/* Description */}
                     <Text style={styles.description}>
-                        {/* TODO: show matching bases */}
+                        {/* Show matching bases */}
                         Bases: {item.teaBases.slice(0, 2).join(', ')}
                         {"\n"}
-                        {/* TODO: show matching toppings */}
+                        {/* Show matching toppings */}
                         Toppings: {item.teaToppings.slice(0, 2).join(', ')}
                     </Text>
 

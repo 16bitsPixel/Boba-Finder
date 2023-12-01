@@ -1,15 +1,15 @@
 [
     {
         "id": "1",
-        "name": "Black Tea"
+        "name": "Black Milk Tea"
     },
     {
         "id": "2",
-        "name": "Green Tea"
+        "name": "Jasmine Green Milk Tea"
     },
     {
         "id": "3",
-        "name": "Thai Tea"
+        "name": "Oolong Milk Tea"
     },
     {
         "id": "4",
@@ -17,10 +17,22 @@
     },
     {
         "id": "5",
-        "name": "Oolong Milk Tea"
+        "name": "Thai Tea"
     },
     {
         "id": "6",
-        "name": "Jasmine Milk Tea"
+        "name": "Hokkaido Milk Tea"
+    },
+    {
+        "id": "7",
+        "name": "Okinawa Milk Tea"
+    },
+    {
+        "id": "8",
+        "name": "Matcha"
+    },
+    {
+        "id": "9",
+        "name": "Brown Sugar Milk"
     }
 ]

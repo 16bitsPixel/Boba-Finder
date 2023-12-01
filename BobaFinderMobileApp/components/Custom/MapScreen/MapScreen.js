@@ -12,7 +12,7 @@ import {
 import * as Location from 'expo-location';
 
 import styles from './MapScreenStyles';
-
+import StoresMenu from "../StoresMenu/StoresMenu";
 
 export default function MapScreen() {
   const [mapLat, setMapLat] = useState(37.0016); /* Map initial location: Santa Cruz College Nine */
@@ -82,7 +82,6 @@ export default function MapScreen() {
       />
     ));
   };
-
 
     return (
         <SafeAreaView style={styles.container}>

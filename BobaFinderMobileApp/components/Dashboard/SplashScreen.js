@@ -1,15 +1,9 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
-import {
-  View,
-  StyleSheet,
-  Animated,
-} from 'react-native'
-
+import { View, StyleSheet, Animated} from 'react-native'
 import { Asset } from "expo-asset";
 import Constants from "expo-constants";
 import * as SplashScreen from "expo-splash-screen";
-/* import * as Updates from "expo-updates"; */
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 export default function AnimatedAppLoader({ children, image }) {
