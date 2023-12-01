@@ -7,6 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 import pymongo
+from geopy.geocoders import Nominatim
 
 
 class Scraper:
@@ -113,6 +114,14 @@ class Scraper:
         entry['teaToppings'] = list(set(teaToppings))
         menuItems.append(entry)
         print("[FINISHED SCRAPING]")
+
+        # Generate Coordinates
+        coordinates = self.generateCoordinates(entry['address'])
+        if coordinates:
+            entry['lattitude'] = coordinates[0]
+            entry['longitude'] = coordinates[1]
+        else:
+            print("Could not generate coordinates")
 
         return menuItems
 
@@ -384,7 +393,23 @@ class Scraper:
         for div in soup.find_all('a', {'class': 'sc-hBxehG flfcph'}):
             link_text = div['href']
             if "http" in link_text:
-                entry['gMapsLink'] = link_text
+                entry['gMapsLink'] = self.extractGmapLink(link_text)
                 link_parts = link_text.partition("daddr=")
                 entry['address'] = link_parts[2]
                 break
+
+    def extractGmapLink(self, link):
+        newLink = 'http://maps.google.com/maps/place/'
+        index = link.rfind('daddr=')
+        newLink += link[index + 6:]
+        return newLink
+
+    def generateCoordinates(self, address):
+        # Generate coordinates from address
+        geolocator = Nominatim(user_agent="boba-finder")
+        location = geolocator.geocode(address)
+        if location:
+            coordinates = [location.latitude, location.longitude]
+            return coordinates
+        else:
+            return []
