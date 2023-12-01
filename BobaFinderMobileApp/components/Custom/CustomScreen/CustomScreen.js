@@ -12,6 +12,8 @@ import { baseTeas } from '../../../constants/images'
 import { useFonts } from 'expo-font';
 import styles from './CustomScreenStyles'
 
+import { useRoute } from "@react-navigation/native"
+
 /*
   Custom Screen where users can create their drink of choice
 */

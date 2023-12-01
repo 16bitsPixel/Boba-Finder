@@ -8,6 +8,8 @@ import milkTeaList from '../../../data/milkTeas.json'
 import fruitTeaList from '../../../data/fruitTeas.json'
 import classicTeaList from '../../../data/classicTeas.json'
 
+import { useRoute } from "@react-navigation/native"
+
 /*
     Screen where users can see all options of tea bases for their custom drink
     Requires collapsible

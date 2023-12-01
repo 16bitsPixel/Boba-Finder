@@ -5,6 +5,8 @@ import toppingList from '../../../data/toppings.json'
 import { images } from "../../../constants";
 import { useFonts } from 'expo-font';
 
+import { useRoute } from "@react-navigation/native"
+
 /*
     Screen where users can see all options of toppings for their custom drink
 */
