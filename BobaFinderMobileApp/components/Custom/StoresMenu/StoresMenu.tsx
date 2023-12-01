@@ -1,11 +1,11 @@
 import React, { useCallback, useRef, useMemo, useEffect, useState } from "react";
-import {View, Text, Image, TouchableOpacity,} from 'react-native';
-import BottomSheet, {BottomSheetScrollView,} from "@gorhom/bottom-sheet";
+import { View, Text, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
+import BottomSheet, { BottomSheetScrollView, } from "@gorhom/bottom-sheet";
 import styles from './StoresMenuStyles';
 import StarRating from "./Rating";
 import { images } from "../../../constants";
 
-export default function StoresMenu() {
+export default function StoresMenu({ getAddress }) {
     // make an array for the shops
     const [shops, setShops] = useState([]);
     const [isLoading, setLoading] = useState(true);
@@ -39,6 +39,10 @@ export default function StoresMenu() {
         console.log("handleSheetChange", index);
     }, []);
 
+    const sendAddress = (store) => {
+        getAddress(store.address)
+    }
+
     // render store card from data.json
     const renderItem = useCallback(
         (item) => (
@@ -46,10 +50,10 @@ export default function StoresMenu() {
                 style={styles.card}
                 key={item.id}
                 // Pressing a store card will route the user to the store's pin on the map
-                onPress={() => { }}
+                onPress={() => sendAddress(item)}
             >
                 {/* Left side: Image */}
-                <Image source={ images.basecup } style={styles.image} resizeMode="contain" />
+                <Image source={images.basecup} style={styles.image} resizeMode="contain" />
 
                 {/* Right side: Details */}
                 <View style={styles.detailsContainer}>
@@ -65,7 +69,7 @@ export default function StoresMenu() {
                         {/* Example: */}
                         {/* <StarRating rating={store.rating} /> */}
                         <Text>
-                            <StarRating rating="4.5"/>
+                            <StarRating rating="4.5" />
                         </Text>
                     </View>
 
@@ -94,20 +98,43 @@ export default function StoresMenu() {
         ),
         []
     );
-    return (
-        <BottomSheet
-            handleStyle={styles.handle}
-            ref={sheetRef}
-            index={1}
-            snapPoints={snapPoints}
-            onChange={handleSheetChange}
-        >
-            <BottomSheetScrollView
-                contentContainerStyle={styles.container}
-                scrollEnabled={true}
+
+    if (isLoading) {
+        return (
+            <BottomSheet
+                handleStyle={styles.handle}
+                ref={sheetRef}
+                index={1}
+                snapPoints={snapPoints}
+                onChange={handleSheetChange}
             >
-                {data.map(renderItem)}
-            </BottomSheetScrollView>
-        </BottomSheet>
-    );
+                <BottomSheetScrollView
+                        contentContainerStyle={styles.loadingContainer}
+                        scrollEnabled={true}
+                    >
+                        <ActivityIndicator size="large" />
+                        <Text>
+                            Finding Stores...
+                        </Text>
+                    </BottomSheetScrollView>
+            </BottomSheet>
+                )
+    }
+
+                return (
+                <BottomSheet
+                    handleStyle={styles.handle}
+                    ref={sheetRef}
+                    index={1}
+                    snapPoints={snapPoints}
+                    onChange={handleSheetChange}
+                >
+                    <BottomSheetScrollView
+                        contentContainerStyle={styles.container}
+                        scrollEnabled={true}
+                    >
+                        {data.map(renderItem)}
+                    </BottomSheetScrollView>
+                </BottomSheet>
+                );
 };

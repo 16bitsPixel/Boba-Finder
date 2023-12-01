@@ -5,6 +5,10 @@ import styles from './MapScreenStyles';
 import StoresMenu from "../StoresMenu/StoresMenu";
 
 export default function MapScreen() {
+  const getAddress = (address) => {
+    console.log('Address: ', address)
+  };
+
   const [mapLat, setMapLat] = useState(37.0016); /* Map initial location: Santa Cruz College Nine */
   const [mapLong, setMapLong] = useState(-122.0573);
 
@@ -51,7 +55,7 @@ export default function MapScreen() {
           <Text>
               Make another view thing and put the stores here
           </Text>
-          <StoresMenu />
+          <StoresMenu getAddress={getAddress} />
         </SafeAreaView>
     );
 }
