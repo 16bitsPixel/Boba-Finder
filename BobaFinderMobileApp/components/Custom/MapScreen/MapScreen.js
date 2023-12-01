@@ -15,10 +15,6 @@ import styles from './MapScreenStyles';
 import StoresMenu from "../StoresMenu/StoresMenu";
 
 export default function MapScreen() {
-  const getAddress = (address) => {
-    console.log('Address: ', address)
-  };
-
   const [mapLat, setMapLat] = useState(37.0016); /* Map initial location: Santa Cruz College Nine */
   const [mapLong, setMapLong] = useState(-122.0573);
   const [location, setLocation] = useState(null);
@@ -87,6 +83,11 @@ export default function MapScreen() {
     ));
   };
 
+  // get the address
+  const getAddress = (address) => {
+    console.log('Address: ', address)
+  };
+
     return (
         <SafeAreaView style={styles.container}>
           <MapView                        /* Map currently just shows user location */
@@ -100,11 +101,13 @@ export default function MapScreen() {
               longitudeDelta: 0.0421, /* This configures the user's view of the map */
             }}
             >
-            {renderMarkers()}
-          </MapView>
-          <Text>
-              Make another view thing and put the stores here
-          </Text>
+              {renderMarkers()}
+            </MapView>
+          <Text>Distance to marker: {distance} mi</Text>
+          <Text>Latitude: {userLatitude}</Text>
+          <Text>Longitude: {userLongitude}</Text>
+
+          <StoresMenu getAddress={getAddress} />
         </SafeAreaView>
     );
 }
