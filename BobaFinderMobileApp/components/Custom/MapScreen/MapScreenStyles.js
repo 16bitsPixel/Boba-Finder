@@ -9,7 +9,16 @@ export default styles = StyleSheet.create({
         width: "100%",
     },
     map: {
-        height: '100%',
+        height: '90%',
         width: '100%',
+    },
+    mapButton: {
+        backgroundColor: "#A4D9D1",
+        width: "50%",
+        height: "8%",
+        marginTop: "5%",
+        borderRadius: "12px",
+        justifyContent: "center",
+        alignItems: "center",
     }
 })

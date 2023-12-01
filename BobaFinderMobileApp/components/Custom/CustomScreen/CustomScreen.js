@@ -9,7 +9,10 @@ import {
 } from 'react-native'
 import { images } from '../../../constants'
 import { baseTeas } from '../../../constants/images'
+import { useFonts } from 'expo-font';
 import styles from './CustomScreenStyles'
+
+import { useRoute } from "@react-navigation/native"
 
 /*
   Custom Screen where users can create their drink of choice
@@ -17,6 +20,17 @@ import styles from './CustomScreenStyles'
 
 export default function CustomScreen({ route, navigation }) {
   const { drink, topping } = route.params;
+
+  // for fonts
+  const [loaded] = useFonts({
+    'Assistant': require('../../../assets/fonts/Assistant-Light.ttf'),
+    'ComingSoon': require('../../../assets/fonts/ComingSoon-Regular.ttf'),
+  });
+
+  if (!loaded) {
+      return null;
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       {/*div for the changing boba UI, randomizer, and favorite button*/}
@@ -75,11 +89,12 @@ export default function CustomScreen({ route, navigation }) {
               marginLeft: "5%"
             }}>
               <Text style={{
-                fontSize: 20
+                fontSize: 25,
+                fontFamily: "Assistant"
               }}>
                 Base:
               </Text>
-              <Text>{drink}</Text>
+              <Text style = {{fontSize: 18, fontFamily: "Assistant"}}>{drink}</Text>
             </View>
             <Image source={drink ? baseTeas.teaName[drink] : images.basecup}
               style={styles.customizationIcon}
@@ -102,11 +117,12 @@ export default function CustomScreen({ route, navigation }) {
               marginLeft: "5%"
             }}>
               <Text style={{
-                fontSize: 20
+                fontSize: 25,
+                fontFamily: "Assistant"
               }}>
                 Toppings:
               </Text>
-              <Text>{topping}</Text>
+              <Text style = {{fontSize: 18, fontFamily: "Assistant"}}>{topping}</Text>
             </View>
             <Image source={images.toppingscup}
               style={styles.customizationIcon}
@@ -121,7 +137,7 @@ export default function CustomScreen({ route, navigation }) {
           onPress={() => navigation.navigate("Map")}
         >
           <Text
-            style={{ fontSize: 20 }}
+            style={{ fontSize: 30, fontFamily: "ComingSoon" }}
           >
             Submit
           </Text>
