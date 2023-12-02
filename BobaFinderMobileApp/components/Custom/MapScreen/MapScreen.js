@@ -21,8 +21,30 @@ export default function MapScreen() {
   const [userLatitude, setUserLatitude] = useState(null);
   const [userLongitude, setUserLongitude] = useState(null);
   const [distance, setDistance] = useState(null)
+  const [dynamicMarkers, setMarkers] = useState([]);
 
-  const markers = [
+  // load in the data
+    const [isLoading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
+
+    const getShops = async () => {
+        try {
+            // use iPv4 address
+            const response = await fetch('https://us-west-2.aws.data.mongodb-api.com/app/application-1-agiaq/endpoint/shops');
+            const json = await response.json();
+            setData(json);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        getShops();
+    }, []);
+
+  let markers = [
     {
       coordinate: {latitude: 36.9650, longitude: -122.0413,},
       title: "TZone",
@@ -35,6 +57,20 @@ export default function MapScreen() {
     },
     // Add more markers as needed
   ];
+
+  // here we put the data in the format we want in dynamicMarkers
+  // we would also only want to put the boba shops in that match the user's boba request
+  data.map((item) => {
+    let lat = item.lattitude;
+    let long = item.longitude;
+    markers.push(
+      {
+        coordinate: {latitude: lat, longitude: long},
+        title: item.restaurantName,
+        description: item.address
+      }
+    );
+  });
 
   useEffect(() => {
     // Gets permission from user to get user location

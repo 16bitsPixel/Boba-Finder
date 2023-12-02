@@ -7,7 +7,6 @@ import { images } from "../../../constants";
 
 export default function StoresMenu({ getAddress }) {
     // make an array for the shops
-    const [shops, setShops] = useState([]);
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
 
