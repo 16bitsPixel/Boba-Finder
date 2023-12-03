@@ -13,6 +13,18 @@ export default styles = StyleSheet.create({
         padding: '5%',
         alignSelf: "center",
     },
+    searchImages: {
+        alignSelf: "center",
+        position: "absolute",
+    },
+    searchIcons: {
+        height: "100%",
+        width: "100%",
+        flex: 1,
+        //alignSelf: "flex-start",
+        //position: "absolute",
+        //right: 0,
+    },
     extraButtonPosition: {
         width: "15%",
         justifyContent: "center",
