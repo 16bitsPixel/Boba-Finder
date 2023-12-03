@@ -1,7 +1,6 @@
 import logo from "../assets/images/logo.png";
 import basecup from "../assets/images/basecup.png";
 import searchbg from "../assets/images/searchbg.png";
-import toppingscup from "../assets/images/toppingscup.png";
 import randomize from "../assets/images/randomize.png";
 import favorite from "../assets/images/favourite.png";
 import arrowLeft from "../assets/images/arrowLeft.png";
@@ -11,7 +10,6 @@ export default {
   logo,
   basecup,
   searchbg,
-  toppingscup,
   randomize,
   favorite,
   arrowLeft,
@@ -39,5 +37,18 @@ export const baseTeas = {
     "Mango Tea": require("../assets/images/teaBases/mangoFruitTeaBase.png"),
     "Passion Fruit Tea": require("../assets/images/teaBases/passionFruitTeaBase.png"),
     "Strawberry Tea": require("../assets/images/teaBases/strawberryFruitTeaBase.png"),
+  }
+}
+
+// topping images
+export const toppings = {
+  topName: {
+    "Boba": require("../assets/images/toppings/bobaTopping.png"),
+    "Crystal Boba": require("../assets/images/toppings/crystalBobaTopping.png"),
+    "Creama/Foam": require("../assets/images/toppings/foamTopping.png"),
+    "Pudding": require("../assets/images/toppings/puddingTopping.png"),
+    "Lychee Jelly": require("../assets/images/toppings/lychJellyTopping.png"),
+    "Mango Popping Boba": require("../assets/images/toppings/mgoPopBobaTopping.png"),
+    "Strawberry Popping Boba": require("../assets/images/toppings/sbPopBobaTopping.png"),
   }
 }

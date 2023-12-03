@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import { images } from '../../../constants'
 import { baseTeas } from '../../../constants/images'
+import { toppings } from '../../../constants/images'
 import { useFonts } from 'expo-font';
 import styles from './CustomScreenStyles'
 
@@ -37,33 +38,44 @@ export default function CustomScreen({ route, navigation }) {
       <View style={{
         flex: 1,
         width: "100%",
+        flexDirection: "column",
       }}>
         <ImageBackground source={images.searchbg} resizeMode="cover" style={{ flex: 1 }}>
-          <Image
-            source={drink ? baseTeas.teaName[drink] : images.logo}
-            style={styles.logoBackground}
-            resizeMode="contain"
-          />
-          <View style={{
-            flexDirection: "row",
-            flex: 1,
-            justifyContent: "space-between"
-          }}>
+          <View
+            style={{ flex: 5 }}
+          >
+            <Image
+              source={drink ? baseTeas.teaName[drink] : images.basecup}
+              style={styles.searchImages}
+              resizeMode="contain"
+            />
+            <Image
+              source={topping ? toppings.topName[topping] : images.basecup}
+              style={styles.searchImages}
+              resizeMode="contain"
+            />
+          </View>
+          <View
+            style={{ flex: 1, flexDirection: "row", justifyContent: "space-around"}}
+          >
             <TouchableOpacity
-              style={styles.extraButtonPosition}
+              style={{ flex: 1.25 }}
             >
               <Image
                 source={{ uri: "https://cdn-icons-png.flaticon.com/512/4260/4260076.png" }}
-                style={{ height: "80%" }}
+                style={styles.searchIcons}
                 resizeMode="contain"
               />
             </TouchableOpacity>
+            <View 
+              style={{ flex: 5.5 }}
+            />
             <TouchableOpacity
-              style={styles.extraButtonPosition}
+              style={{ flex: 1.25 }}
             >
               <Image
                 source={{ uri: "https://www.iconpacks.net/icons/2/free-favourite-icon-2765-thumb.png" }}
-                style={{ height: "80%" }}
+                style={styles.searchIcons}
                 resizeMode="contain"
               />
             </TouchableOpacity>
@@ -124,7 +136,7 @@ export default function CustomScreen({ route, navigation }) {
               </Text>
               <Text style = {{fontSize: 18, fontFamily: "Assistant"}}>{topping}</Text>
             </View>
-            <Image source={images.toppingscup}
+            <Image source={topping ? toppings.topName[topping] : images.basecup}
               style={styles.customizationIcon}
               resizeMode="contain"
             />

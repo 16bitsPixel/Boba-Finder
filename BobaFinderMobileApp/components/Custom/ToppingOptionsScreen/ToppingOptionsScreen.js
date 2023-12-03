@@ -2,7 +2,7 @@ import React from "react";
 import {Text, ScrollView, View, SafeAreaView, Image, TouchableOpacity,} from 'react-native';
 import styles from '../ToppingOptionsScreen/ToppingOptionsScreenStyles'
 import toppingList from '../../../data/toppings.json'
-import { images } from "../../../constants";
+import { toppings } from "../../../constants/images";
 import { useFonts } from 'expo-font';
 
 import { useRoute } from "@react-navigation/native"
@@ -48,7 +48,7 @@ export default function ToppingOptionsScreen({ route, navigation }) {
                                             {topping.name}
                                         </Text>
                                         <Image 
-                                            source={images.toppingscup}
+                                            source={toppings.topName[topping.name]}
                                             style={styles.cardIcon}
                                             resizeMode="contain"
                                         />
