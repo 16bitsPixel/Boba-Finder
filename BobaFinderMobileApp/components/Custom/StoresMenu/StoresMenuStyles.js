@@ -65,4 +65,14 @@ export default styles = StyleSheet.create({
     fontSize: 12,
     color: '#555',
   },
+  loadingContainer: {
+    flex: 1,
+    backgroundColor: "#C5E7E2",
+    textAlign: 'center',
+  },
+  loader: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 })

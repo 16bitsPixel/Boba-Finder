@@ -61,6 +61,34 @@ export default function StoresMenu({ getAddress, passDetails }) {
         getAddress(store.address)
     }
 
+    // Image Preloader
+    const ImagePreLoader = ({ imageUrl }) => {
+        const [imageLoaded, setImageLoaded] = useState(false);
+
+        useEffect(() => {
+            const image = { uri: imageUrl };
+
+            // Preload the image
+            Image.prefetch(image.uri).then(
+                () => {
+                    setImageLoaded(true);
+                },
+                (error) => {
+                    console.error(`Failed to load image: $(imageUrl)`, error);
+                    setImageLoaded(true);
+                }
+            );
+        }, [imageUrl]);
+
+        return (
+            <View>
+                {!imageLoaded && <ActivityIndicator size="large" color="black" />}
+                {imageLoaded && <Image source={{uri: imageUrl}} style={styles.image} resizeMode="contain"/>}
+            </View>
+        );
+    };
+
+    const imageUrl = "https://github.com/16bitsPixel/Boba-Finder/blob/main/BobaFinderMobileApp/assets/images/basecup.png?raw=true";
     // render store card from data.json
     const renderItem = useCallback(
         (item) => (
@@ -71,7 +99,7 @@ export default function StoresMenu({ getAddress, passDetails }) {
                 onPress={() => sendAddress(item)}
             >
                 {/* Left side: Image */}
-                <Image source={images.basecup} style={styles.image} resizeMode="contain" />
+                <ImagePreLoader imageUrl={imageUrl}/>
 
                 {/* Right side: Details */}
                 <View style={styles.detailsContainer}>
@@ -129,12 +157,14 @@ export default function StoresMenu({ getAddress, passDetails }) {
                 <BottomSheetScrollView
                         contentContainerStyle={styles.loadingContainer}
                         scrollEnabled={true}
-                    >
-                        <ActivityIndicator size="large" />
+                >
+                    <View style={styles.loader}>
+                        <ActivityIndicator size="large" color="black" />
                         <Text>
                             Finding Stores...
                         </Text>
-                    </BottomSheetScrollView>
+                    </View>
+                </BottomSheetScrollView>
             </BottomSheet>
                 )
     }
