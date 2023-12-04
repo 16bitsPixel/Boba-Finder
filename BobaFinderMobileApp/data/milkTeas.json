@@ -1,31 +1,31 @@
 [
     {
         "id": "1",
-        "name": "Black Milk Tea"
+        "name": "Black Milk"
     },
     {
         "id": "2",
-        "name": "Jasmine Green Milk Tea"
+        "name": "Jasmine Milk"
     },
     {
         "id": "3",
-        "name": "Oolong Milk Tea"
+        "name": "Oolong Milk"
     },
     {
         "id": "4",
-        "name": "Taro Milk"
+        "name": "Taro"
     },
     {
         "id": "5",
-        "name": "Thai Tea"
+        "name": "Thai"
     },
     {
         "id": "6",
-        "name": "Hokkaido Milk Tea"
+        "name": "Hokkaido"
     },
     {
         "id": "7",
-        "name": "Okinawa Milk Tea"
+        "name": "Okinawa"
     },
     {
         "id": "8",
@@ -33,6 +33,10 @@
     },
     {
         "id": "9",
-        "name": "Brown Sugar Milk"
+        "name": "Brown Sugar"
+    },
+    {
+        "id": "10",
+        "name": "Green Milk"
     }
 ]
