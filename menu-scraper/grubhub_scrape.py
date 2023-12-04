@@ -23,7 +23,7 @@ def main():
             if bobaDrinks:
                 newScraper.uploadMongoDB(bobaDrinks)
         except:
-            print(f"Restaurant: {restaurant}\n could not be scraped")
+            print(f"Restaurant: {restaurant}\n could not be scraped or stored to database")
 
 
 if __name__ == '__main__':
