@@ -42,6 +42,7 @@ export default function StoresMenu({ getAddress }) {
         getAddress(store.address)
     }
 
+    // Image Preloader
     const ImagePreLoader = ({ imageUrl }) => {
         const [imageLoaded, setImageLoaded] = useState(false);
 
