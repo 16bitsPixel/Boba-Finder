@@ -154,6 +154,13 @@ export default function MapScreen({ route, navigation }) {
     console.log('Address: ', address)
   };
 
+  const passDetails = {
+    longitude: userLatitude,
+    latitude: userLongitude,
+    base: drink.toLowerCase(),
+    toppings: topping.toLowerCase(),
+  }
+
     return (
         <SafeAreaView style={styles.container}>
           <MapView                        /* Map currently just shows user location */
@@ -173,7 +180,7 @@ export default function MapScreen({ route, navigation }) {
           <Text>Latitude: {userLatitude}</Text>
           <Text>Longitude: {userLongitude}</Text>
 
-          <StoresMenu getAddress={getAddress} />
+          <StoresMenu getAddress={getAddress} passDetails={passDetails} />
         </SafeAreaView>
     );
 }
