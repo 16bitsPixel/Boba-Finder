@@ -20,21 +20,6 @@ export default function StoresMenu({ getAddress, passDetails }) {
             const response = await fetch('https://us-west-2.aws.data.mongodb-api.com/app/application-1-agiaq/endpoint/shops');
             const json = await response.json();
             setData(json);
-            //Filter bases
-            const bfilter = passDetails.base;
-            //Filter toppings
-            var tfilter = passDetails.toppings;
-            if (tfilter == "creama/foam") {
-                tfilter = "foam";
-              } else if (tfilter == "strawberry popping boba" || tfilter == "mango popping boba") {
-                tfilter = "popping boba";
-              }
-            var tcfilter = tfilter;
-            //Filter both base and toppings
-            const intersectData = data.filter((item) => {return ((item.teaBases.indexOf(bfilter) >= 0) && (item.teaToppings.indexOf(tcfilter) >= 0))});
-            setFinalData(intersectData);
-            console.log(finaldata);
-            console.log("Final Data Length: " + finaldata.length);
         } catch (error) {
             console.error(error);
         } finally {
@@ -45,6 +30,21 @@ export default function StoresMenu({ getAddress, passDetails }) {
     useEffect(() => {
         getShops();
     }, []);
+
+    //Filter bases
+    const bfilter = passDetails.base;
+    //Filter toppings
+    var tfilter = passDetails.toppings;
+    if (tfilter == "creama/foam") {
+        tfilter = "foam";
+      } else if (tfilter == "strawberry popping boba" || tfilter == "mango popping boba") {
+        tfilter = "popping boba";
+      }
+    var tcfilter = tfilter;
+    //Filter both base and toppings
+    const intersectData = data.filter((item) => {return ((item.teaBases.indexOf(bfilter) >= 0) && (item.teaToppings.indexOf(tcfilter) >= 0))});
+    console.log(intersectData);
+    console.log("Final Data Length: " + intersectData.length);
 
     // hooks
     const sheetRef = useRef<BottomSheet>(null);
@@ -168,6 +168,9 @@ export default function StoresMenu({ getAddress, passDetails }) {
             </BottomSheet>
                 )
     }
+    else {
+
+    }
 
                 return (
                 <BottomSheet
@@ -184,7 +187,7 @@ export default function StoresMenu({ getAddress, passDetails }) {
                         {/* To run, change this to: finaldata.map(renderItem) */}
                         {/* Then Save and Expo app should update */}
                         {/* If it doesn't work, try switching between data and final data a few times */}
-                        {data.map(renderItem)}
+                        {intersectData.map(renderItem)}
                     </BottomSheetScrollView>
                 </BottomSheet>
                 );
