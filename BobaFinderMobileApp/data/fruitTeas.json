@@ -1,26 +1,26 @@
 [
     {
         "id": "1",
-        "name": "Grapefruit Tea"
+        "name": "Grapefruit"
     },
     {
         "id": "2",
-        "name": "Honey Lemon Tea"
+        "name": "Honey Lemon"
     },
     {
         "id": "3",
-        "name": "Kiwi Fruit Tea"
+        "name": "Kiwi Fruit"
     },
     {
         "id": "4",
-        "name": "Mango Tea"
+        "name": "Mango"
     },
     {
         "id": "5",
-        "name": "Passion Fruit Tea"
+        "name": "Passion Fruit"
     },
     {
         "id": "6",
-        "name": "Strawberry Tea"
+        "name": "Strawberry"
     }
 ]

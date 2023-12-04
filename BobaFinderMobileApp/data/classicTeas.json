@@ -5,10 +5,14 @@
     },
     {
         "id": "2",
-        "name": "Jasmine Green Tea"
+        "name": "Jasmine Tea"
     },
     {
         "id": "3",
+        "name": "Green Tea"
+    },
+    {
+        "id": "4",
         "name": "Oolong Tea"
     }
 ]
