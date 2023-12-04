@@ -5,17 +5,36 @@ import styles from './StoresMenuStyles';
 import StarRating from "./Rating";
 import { images } from "../../../constants";
 
-export default function StoresMenu({ getAddress }) {
+export default function StoresMenu({ getAddress, passDetails }) {
+    console.log(passDetails.latitude);
+    console.log(passDetails.longitude);
+    console.log(passDetails.base);
+    console.log(passDetails.toppings);
     // make an array for the shops
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-
+    const [finaldata, setFinalData] = useState([]);
     const getShops = async () => {
         try {
             // use iPv4 address
             const response = await fetch('https://us-west-2.aws.data.mongodb-api.com/app/application-1-agiaq/endpoint/shops');
             const json = await response.json();
             setData(json);
+            //Filter bases
+            const bfilter = passDetails.base;
+            //Filter toppings
+            var tfilter = passDetails.toppings;
+            if (tfilter == "creama/foam") {
+                tfilter = "foam";
+              } else if (tfilter == "strawberry popping boba" || tfilter == "mango popping boba") {
+                tfilter = "popping boba";
+              }
+            var tcfilter = tfilter;
+            //Filter both base and toppings
+            const intersectData = data.filter((item) => {return ((item.teaBases.indexOf(bfilter) >= 0) && (item.teaToppings.indexOf(tcfilter) >= 0))});
+            setFinalData(intersectData);
+            console.log(finaldata);
+            console.log("Final Data Length: " + finaldata.length);
         } catch (error) {
             console.error(error);
         } finally {
@@ -162,7 +181,10 @@ export default function StoresMenu({ getAddress }) {
                         contentContainerStyle={styles.container}
                         scrollEnabled={true}
                     >
-                            {data.map(renderItem)}
+                        {/* To run, change this to: finaldata.map(renderItem) */}
+                        {/* Then Save and Expo app should update */}
+                        {/* If it doesn't work, try switching between data and final data a few times */}
+                        {data.map(renderItem)}
                     </BottomSheetScrollView>
                 </BottomSheet>
                 );
