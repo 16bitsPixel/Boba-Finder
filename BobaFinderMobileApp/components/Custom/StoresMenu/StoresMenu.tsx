@@ -13,7 +13,6 @@ export default function StoresMenu({ getAddress, passDetails }) {
     // make an array for the shops
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-    const [finaldata, setFinalData] = useState([]);
     const getShops = async () => {
         try {
             // use iPv4 address
@@ -35,14 +34,18 @@ export default function StoresMenu({ getAddress, passDetails }) {
     const bfilter = passDetails.base;
     //Filter toppings
     var tfilter = passDetails.toppings;
+    var altfilter = "alternative";
     if (tfilter == "creama/foam") {
         tfilter = "foam";
+        altfilter = "foam";
       } else if (tfilter == "strawberry popping boba" || tfilter == "mango popping boba") {
-        tfilter = "popping boba";
+        altfilter = "popping boba";
+      } else if (tfilter == "boba") {
+        altfilter = "pearl";
       }
     var tcfilter = tfilter;
     //Filter both base and toppings
-    const intersectData = data.filter((item) => {return ((item.teaBases.indexOf(bfilter) >= 0) && (item.teaToppings.indexOf(tcfilter) >= 0))});
+    const intersectData = data.filter((item) => {return ((item.teaBases.indexOf(bfilter) >= 0) && ((item.teaToppings.indexOf(tcfilter) >= 0) || (item.teaToppings.indexOf(altfilter) >= 0)))});
     console.log(intersectData);
     console.log("Final Data Length: " + intersectData.length);
 
@@ -184,9 +187,6 @@ export default function StoresMenu({ getAddress, passDetails }) {
                         contentContainerStyle={styles.container}
                         scrollEnabled={true}
                     >
-                        {/* To run, change this to: finaldata.map(renderItem) */}
-                        {/* Then Save and Expo app should update */}
-                        {/* If it doesn't work, try switching between data and final data a few times */}
                         {intersectData.map(renderItem)}
                     </BottomSheetScrollView>
                 </BottomSheet>
