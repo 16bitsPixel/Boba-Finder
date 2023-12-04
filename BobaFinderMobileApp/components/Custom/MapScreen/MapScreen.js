@@ -19,8 +19,8 @@ import { useRoute } from "@react-navigation/native"
 export default function MapScreen({ route, navigation }) {
   const { drink, topping } = route.params;
 
-  const [mapLat, setMapLat] = useState(37.0016); /* Map initial location: Santa Cruz College Nine */
-  const [mapLong, setMapLong] = useState(-122.0573);
+  const [mapLat, setMapLat] = useState(37.3387); /* Map initial location: San Jose */
+  const [mapLong, setMapLong] = useState(-121.8853);
   const [location, setLocation] = useState(null);
   const [userLatitude, setUserLatitude] = useState(null);
   const [userLongitude, setUserLongitude] = useState(null);
@@ -116,14 +116,24 @@ export default function MapScreen({ route, navigation }) {
     var matchTop = false;
     //Check if shop has topping
     var fixedtop = topping.toLowerCase();
-    if (fixedtop == "creama/foam") {
-      fixedtop = "foam";
-    } else if (fixedtop == "strawberry popping boba" || fixedtop == "mango popping boba") {
-      fixedtop = "popping boba";
-    }
     for (top in item.teaToppings) {
       if (item.teaToppings[top] === fixedtop) {
         matchTop = true;
+      }
+      if (fixedtop == "strawberry popping boba" || fixedtop == "mango popping boba") {
+          if (item.teaToppings[top] === fixedtop || item.teaToppings[top] === "popping boba") {
+            matchTop = true;
+          }
+      }
+      if (fixedtop == "creama/foam") {
+        if (item.teaToppings[top] === "foam" || item.teaToppings[top] === "creama") {
+          matchTop = true;
+        }
+      }
+      if (fixedtop == "boba") {
+        if (item.teaToppings[top] === "boba" || item.teaToppings[top] === "pearl") {
+          matchTop = true;
+        }
       }
     }
     //Check if shop has both drink and topping

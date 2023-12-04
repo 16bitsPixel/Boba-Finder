@@ -1,15 +1,15 @@
 [
     {
         "id": "1",
-        "name": "Black Milk"
+        "name": "Black Milk Tea"
     },
     {
         "id": "2",
-        "name": "Jasmine Milk"
+        "name": "Jasmine Milk Tea"
     },
     {
         "id": "3",
-        "name": "Oolong Milk"
+        "name": "Oolong Milk Tea"
     },
     {
         "id": "4",
@@ -37,6 +37,6 @@
     },
     {
         "id": "10",
-        "name": "Green Milk"
+        "name": "Green Milk Tea"
     }
 ]
