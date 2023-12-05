@@ -21,7 +21,7 @@ import { useRoute } from "@react-navigation/native"
 
 export default function CustomScreen({ route, navigation }) {
   const { drink, topping } = route.params;
-
+  
   // for fonts
   const [loaded] = useFonts({
     'Assistant': require('../../../assets/fonts/Assistant-Light.ttf'),
@@ -30,6 +30,15 @@ export default function CustomScreen({ route, navigation }) {
 
   if (!loaded) {
       return null;
+  }
+
+  //Checks if the base has been chosen yet, if not then ERROR
+  const isChosen = () => {
+    if (drink.length == 0) {
+      console.log("Error: User drink has not been chosen yet!");
+    } else {
+      navigation.navigate("Map", {drink: drink, topping: topping});
+    }
   }
 
   return (
@@ -146,7 +155,7 @@ export default function CustomScreen({ route, navigation }) {
         {/* button to submit the customized drink */}
         <TouchableOpacity
           style={styles.submitButton}
-          onPress={() => navigation.navigate("Map", {drink: drink, topping: topping})}
+          onPress={() => isChosen()}
         >
           <Text
             style={{ fontSize: 30, fontFamily: "ComingSoon" }}
