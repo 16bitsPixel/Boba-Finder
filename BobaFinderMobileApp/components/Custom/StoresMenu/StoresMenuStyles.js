@@ -61,10 +61,6 @@ export default styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 5,
   },
-  infoContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
   hours: {
     fontSize: 12,
     color: '#555',
