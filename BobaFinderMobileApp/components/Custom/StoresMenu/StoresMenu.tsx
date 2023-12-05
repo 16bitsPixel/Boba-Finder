@@ -49,6 +49,19 @@ export default function StoresMenu({ getAddress, passDetails }) {
     console.log(intersectData);
     console.log("Final Data Length: " + intersectData.length);
 
+    //Calculates distance between store and User Location
+    const calcDistance = (lat, long) => {
+        var R = 3958.8; // Radius of the Earth in miles
+        var rlat1 = lat * (Math.PI/180); // Convert degrees to radians
+        var rlat2 = passDetails.latitude * (Math.PI/180); // Convert degrees to radians
+        var difflat = rlat2-rlat1; // Radian difference (latitudes)
+        var difflon = (long-passDetails.longitude) * (Math.PI/180); // Radian difference (longitudes)
+  
+        var d = 2 * R * Math.asin(Math.sqrt(Math.sin(difflat/2)*Math.sin(difflat/2)+Math.cos(rlat1)*Math.cos(rlat2)*Math.sin(difflon/2)*Math.sin(difflon/2)));
+        console.log(d.toFixed(2));
+        return(d.toFixed(2));
+    };
+
     // hooks
     const sheetRef = useRef<BottomSheet>(null);
 
@@ -138,6 +151,7 @@ export default function StoresMenu({ getAddress, passDetails }) {
                             12:00AM-11:59PM
                         </Text>
                         {/* TODO: show euclidean distance from user to store */}
+                        {/* Use calcDistance here with lat as item.latitude and long as item.longitude */}
                         <Text style={styles.distance}>
                             x miles away
                         </Text>
