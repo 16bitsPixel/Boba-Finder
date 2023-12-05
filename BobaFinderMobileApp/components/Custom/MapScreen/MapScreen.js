@@ -137,8 +137,8 @@ export default function MapScreen({ route, navigation }) {
   };
 
   const passDetails = {
-    longitude: userLatitude,
-    latitude: userLongitude,
+    latitude: userLatitude,
+    longitude: userLongitude,
     base: drink.toLowerCase(),
     toppings: topping.toLowerCase(),
   }
