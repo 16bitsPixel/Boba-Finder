@@ -50,7 +50,7 @@ export default function CustomScreen({ route, navigation }) {
               resizeMode="contain"
             />
             <Image
-              source={topping ? toppings.topName[topping] : images.basecup}
+              source={topping ? toppings.topName[topping] : images.topcup}
               style={styles.searchImages}
               resizeMode="contain"
             />
