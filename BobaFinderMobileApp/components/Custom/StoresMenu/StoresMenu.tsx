@@ -40,28 +40,28 @@ export default function StoresMenu({ getAddress, passDetails }) {
     if (tFilter == "creama/foam") {
         tFilter = "foam";
         altFilter = "foam";
-      } else if (tFilter == "strawberry popping boba" || tFilter == "mango popping boba") {
+    } else if (tFilter == "strawberry popping boba" || tFilter == "mango popping boba") {
         altFilter = "popping boba";
-      } else if (tFilter == "boba") {
+    } else if (tFilter == "boba") {
         altFilter = "pearl";
-      }
+    }
 
     //Filter both base and toppings
-    const intersectData = data.filter((item) => {return ((item.teaBases.indexOf(bFilter) >= 0) && ((item.teaToppings.indexOf(tFilter) >= 0) || (item.teaToppings.indexOf(altFilter) >= 0) || (passDetails.toppings.length == 0)))});
+    const intersectData = data.filter((item) => { return ((item.teaBases.indexOf(bFilter) >= 0) && ((item.teaToppings.indexOf(tFilter) >= 0) || (item.teaToppings.indexOf(altFilter) >= 0) || (passDetails.toppings.length == 0))) });
     console.log(intersectData);
     console.log("Final Data Length: " + intersectData.length);
 
     //Calculates distance between store and User Location
     const calcDistance = (lat, long) => {
         var R = 3958.8; // Radius of the Earth in miles
-        var rLat1 = lat * (Math.PI/180); // Convert degrees to radians
-        var rLat2 = passDetails.latitude * (Math.PI/180); // Convert degrees to radians
-        var diffLat = rLat2-rLat1; // Radian difference (latitudes)
-        var diffLon = (long-passDetails.longitude) * (Math.PI/180); // Radian difference (longitudes)
-  
-        var d = 2 * R * Math.asin(Math.sqrt(Math.sin(diffLat/2)*Math.sin(diffLat/2)+Math.cos(rLat1)*Math.cos(rLat2)*Math.sin(diffLon/2)*Math.sin(diffLon/2)));
+        var rLat1 = lat * (Math.PI / 180); // Convert degrees to radians
+        var rLat2 = passDetails.latitude * (Math.PI / 180); // Convert degrees to radians
+        var diffLat = rLat2 - rLat1; // Radian difference (latitudes)
+        var diffLon = (long - passDetails.longitude) * (Math.PI / 180); // Radian difference (longitudes)
+
+        var d = 2 * R * Math.asin(Math.sqrt(Math.sin(diffLat / 2) * Math.sin(diffLat / 2) + Math.cos(rLat1) * Math.cos(rLat2) * Math.sin(diffLon / 2) * Math.sin(diffLon / 2)));
         console.log(d.toFixed(2));
-        return(d.toFixed(2));
+        return (d.toFixed(2));
     };
 
     // hooks
@@ -101,13 +101,13 @@ export default function StoresMenu({ getAddress, passDetails }) {
         return (
             <View>
                 {!imageLoaded && <ActivityIndicator size="large" color="black" />}
-                {imageLoaded && <Image source={{uri: imageUrl}} style={styles.image} resizeMode="contain"/>}
+                {imageLoaded && <Image source={{ uri: imageUrl }} style={styles.image} resizeMode="contain" />}
             </View>
         );
     };
 
     const imageUrl = "https://github.com/16bitsPixel/Boba-Finder/blob/main/BobaFinderMobileApp/assets/images/basecup.png?raw=true";
-    
+
     // render store card from data.json
     const renderItem = useCallback(
         (item) => (
@@ -118,7 +118,7 @@ export default function StoresMenu({ getAddress, passDetails }) {
                 onPress={() => sendAddress(item)}
             >
                 {/* Left side: Image */}
-                <ImagePreLoader imageUrl={imageUrl}/>
+                <ImagePreLoader imageUrl={imageUrl} />
 
                 {/* Right side: Details */}
                 <View style={styles.detailsContainer}>
@@ -148,17 +148,17 @@ export default function StoresMenu({ getAddress, passDetails }) {
                     </Text>
 
                     {/* Store Hours and Distance */}
-                    <View style={styles.infoContainer}>
-                        {/* TODO: show store operational hours */}
-                        <Text style={styles.hours}>
-                            12:00AM-11:59PM
-                        </Text>
-                        {/* TODO: show euclidean distance from user to store */}
-                        {/* Use calcDistance here with lat as item.latitude and long as item.longitude */}
-                        <Text style={styles.distance}>
-                            {calcDistance(item.lattitude, item.longitude)} miles away
-                        </Text>
-                    </View>
+
+                    {/* TODO: show store operational hours */}
+                    <Text style={styles.hours}>
+                        12:00AM-11:59PM
+                    </Text>
+                    {/* TODO: show euclidean distance from user to store */}
+                    {/* Use calcDistance here with lat as item.latitude and long as item.longitude */}
+                    <Text style={styles.distance}>
+                        {calcDistance(item.lattitude, item.longitude)} miles away
+                    </Text>
+
                 </View>
             </TouchableOpacity>
         ),
@@ -175,8 +175,8 @@ export default function StoresMenu({ getAddress, passDetails }) {
                 onChange={handleSheetChange}
             >
                 <BottomSheetScrollView
-                        contentContainerStyle={styles.loadingContainer}
-                        scrollEnabled={true}
+                    contentContainerStyle={styles.loadingContainer}
+                    scrollEnabled={true}
                 >
                     <View style={styles.loader}>
                         <ActivityIndicator size="large" color="black" />
@@ -186,26 +186,26 @@ export default function StoresMenu({ getAddress, passDetails }) {
                     </View>
                 </BottomSheetScrollView>
             </BottomSheet>
-                )
+        )
     }
     else {
 
     }
 
-                return (
-                <BottomSheet
-                    handleStyle={styles.handle}
-                    ref={sheetRef}
-                    index={1}
-                    snapPoints={snapPoints}
-                    onChange={handleSheetChange}
-                >
-                    <BottomSheetScrollView
-                        contentContainerStyle={styles.container}
-                        scrollEnabled={true}
-                    >
-                        {intersectData.map(renderItem)}
-                    </BottomSheetScrollView>
-                </BottomSheet>
-                );
+    return (
+        <BottomSheet
+            handleStyle={styles.handle}
+            ref={sheetRef}
+            index={1}
+            snapPoints={snapPoints}
+            onChange={handleSheetChange}
+        >
+            <BottomSheetScrollView
+                contentContainerStyle={styles.container}
+                scrollEnabled={true}
+            >
+                {intersectData.map(renderItem)}
+            </BottomSheetScrollView>
+        </BottomSheet>
+    );
 };
