@@ -10,6 +10,7 @@ export default function StoresMenu({ getAddress, passDetails }) {
     console.log(passDetails.longitude);
     console.log(passDetails.base);
     console.log(passDetails.toppings);
+
     // make an array for the shops
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
@@ -31,33 +32,34 @@ export default function StoresMenu({ getAddress, passDetails }) {
     }, []);
 
     //Filter bases
-    const bfilter = passDetails.base;
+    const bFilter = passDetails.base;
+
     //Filter toppings
-    var tfilter = passDetails.toppings;
-    var altfilter = "alternative";
-    if (tfilter == "creama/foam") {
-        tfilter = "foam";
-        altfilter = "foam";
-      } else if (tfilter == "strawberry popping boba" || tfilter == "mango popping boba") {
-        altfilter = "popping boba";
-      } else if (tfilter == "boba") {
-        altfilter = "pearl";
+    var tFilter = passDetails.toppings;
+    var altFilter = "alternative";
+    if (tFilter == "creama/foam") {
+        tFilter = "foam";
+        altFilter = "foam";
+      } else if (tFilter == "strawberry popping boba" || tFilter == "mango popping boba") {
+        altFilter = "popping boba";
+      } else if (tFilter == "boba") {
+        altFilter = "pearl";
       }
-    var tcfilter = tfilter;
+
     //Filter both base and toppings
-    const intersectData = data.filter((item) => {return ((item.teaBases.indexOf(bfilter) >= 0) && ((item.teaToppings.indexOf(tcfilter) >= 0) || (item.teaToppings.indexOf(altfilter) >= 0)))});
+    const intersectData = data.filter((item) => {return ((item.teaBases.indexOf(bFilter) >= 0) && ((item.teaToppings.indexOf(tFilter) >= 0) || (item.teaToppings.indexOf(altFilter) >= 0) || (passDetails.toppings.length == 0)))});
     console.log(intersectData);
     console.log("Final Data Length: " + intersectData.length);
 
     //Calculates distance between store and User Location
     const calcDistance = (lat, long) => {
         var R = 3958.8; // Radius of the Earth in miles
-        var rlat1 = lat * (Math.PI/180); // Convert degrees to radians
-        var rlat2 = passDetails.latitude * (Math.PI/180); // Convert degrees to radians
-        var difflat = rlat2-rlat1; // Radian difference (latitudes)
-        var difflon = (long-passDetails.longitude) * (Math.PI/180); // Radian difference (longitudes)
+        var rLat1 = lat * (Math.PI/180); // Convert degrees to radians
+        var rLat2 = passDetails.latitude * (Math.PI/180); // Convert degrees to radians
+        var diffLat = rLat2-rLat1; // Radian difference (latitudes)
+        var diffLon = (long-passDetails.longitude) * (Math.PI/180); // Radian difference (longitudes)
   
-        var d = 2 * R * Math.asin(Math.sqrt(Math.sin(difflat/2)*Math.sin(difflat/2)+Math.cos(rlat1)*Math.cos(rlat2)*Math.sin(difflon/2)*Math.sin(difflon/2)));
+        var d = 2 * R * Math.asin(Math.sqrt(Math.sin(diffLat/2)*Math.sin(diffLat/2)+Math.cos(rLat1)*Math.cos(rLat2)*Math.sin(diffLon/2)*Math.sin(diffLon/2)));
         console.log(d.toFixed(2));
         return(d.toFixed(2));
     };
@@ -105,6 +107,7 @@ export default function StoresMenu({ getAddress, passDetails }) {
     };
 
     const imageUrl = "https://github.com/16bitsPixel/Boba-Finder/blob/main/BobaFinderMobileApp/assets/images/basecup.png?raw=true";
+    
     // render store card from data.json
     const renderItem = useCallback(
         (item) => (

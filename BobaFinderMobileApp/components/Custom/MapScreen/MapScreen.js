@@ -59,13 +59,12 @@ export default function MapScreen({ route, navigation }) {
       title: "Ume Tea",
       description:"https://maps.app.goo.gl/4UoQiokiHd8WuPhb7?g_st=ic",
     },
-    // Add more markers as needed
+    // Dummy markers
   ];
   
 
-
+  // Gets permission from user to get user location
   useEffect(() => {
-    // Gets permission from user to get user location
     const getPermissions = async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
@@ -82,22 +81,6 @@ export default function MapScreen({ route, navigation }) {
       console.log(location);
     };
     getPermissions();
-
-    //Calculates distance between Marker at index and User Location
-    const calcDistance = (lat, long) => {
-      var R = 3958.8; // Radius of the Earth in miles
-      var rlat1 = lat * (Math.PI/180); // Convert degrees to radians
-      var rlat2 = userLatitude * (Math.PI/180); // Convert degrees to radians
-      var difflat = rlat2-rlat1; // Radian difference (latitudes)
-      var difflon = (long-userLongitude) * (Math.PI/180); // Radian difference (longitudes)
-
-      var d = 2 * R * Math.asin(Math.sqrt(Math.sin(difflat/2)*Math.sin(difflat/2)+Math.cos(rlat1)*Math.cos(rlat2)*Math.sin(difflon/2)*Math.sin(difflon/2)));
-      setDistance(d.toFixed(2));
-      console.log(d.toFixed(2));
-    };
-    var ind = 1; //index = 1, change to do a loop and do it for all markers
-    calcDistance(markers[ind].coordinate.latitude, markers[ind].coordinate.longitude);
-    calcDistance(markers[ind].coordinate.latitude, markers[ind].coordinate.longitude);
   },  []);
  
   // here we put the data in the format we want in dynamicMarkers
@@ -114,10 +97,11 @@ export default function MapScreen({ route, navigation }) {
       }
     }
     var matchTop = false;
+
     //Check if shop has topping
     var fixedtop = topping.toLowerCase();
     for (top in item.teaToppings) {
-      if (item.teaToppings[top] === fixedtop) {
+      if (item.teaToppings[top] === fixedtop || topping.length == 0) {
         matchTop = true;
       }
       if (fixedtop == "strawberry popping boba" || fixedtop == "mango popping boba") {
@@ -136,6 +120,7 @@ export default function MapScreen({ route, navigation }) {
         }
       }
     }
+    
     //Check if shop has both drink and topping
     if (matchBase == true && matchTop == true) {
       markers.push(
