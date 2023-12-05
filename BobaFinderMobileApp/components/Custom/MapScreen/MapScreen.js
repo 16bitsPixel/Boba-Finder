@@ -48,19 +48,7 @@ export default function MapScreen({ route, navigation }) {
         getShops();
     }, []);
 
-  let markers = [
-    {
-      coordinate: {latitude: 36.9650, longitude: -122.0413,},
-      title: "TZone",
-      description:"https://maps.app.goo.gl/wSRoj39U3h1YfFS38?g_st=ic",
-    },
-    {
-      coordinate: {latitude: 36.9640, longitude: -122.0244,},
-      title: "Ume Tea",
-      description:"https://maps.app.goo.gl/4UoQiokiHd8WuPhb7?g_st=ic",
-    },
-    // Dummy markers
-  ];
+  let markers = [];
   
 
   // Gets permission from user to get user location
@@ -171,9 +159,6 @@ export default function MapScreen({ route, navigation }) {
             >
               {renderMarkers()}
             </MapView>
-          <Text>Distance to marker: {distance} mi</Text>
-          <Text>Latitude: {userLatitude}</Text>
-          <Text>Longitude: {userLongitude}</Text>
 
           <StoresMenu getAddress={getAddress} passDetails={passDetails} />
         </SafeAreaView>

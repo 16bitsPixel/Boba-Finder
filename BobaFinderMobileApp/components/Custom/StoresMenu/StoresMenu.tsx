@@ -156,7 +156,7 @@ export default function StoresMenu({ getAddress, passDetails }) {
                         {/* TODO: show euclidean distance from user to store */}
                         {/* Use calcDistance here with lat as item.latitude and long as item.longitude */}
                         <Text style={styles.distance}>
-                            x miles away
+                            {calcDistance(item.lattitude, item.longitude)} miles away
                         </Text>
                     </View>
                 </View>
