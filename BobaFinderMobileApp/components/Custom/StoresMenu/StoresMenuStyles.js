@@ -4,6 +4,14 @@ export default styles = StyleSheet.create({
   handle: {
     backgroundColor: '#C5E7E2',
   },
+  loadingContainer: {
+    flex: 1,
+    backgroundColor: '#C5E7E2',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: "100%",
+    paddingVertical: "5%",
+  },
   container: {
     backgroundColor: '#C5E7E2',
     alignItems: 'center',
