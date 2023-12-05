@@ -5,7 +5,8 @@ import {
   TouchableOpacity,
   Image,
   ImageBackground,
-  SafeAreaView
+  SafeAreaView,
+  Alert,
 } from 'react-native'
 import { images } from '../../../constants'
 import { baseTeas } from '../../../constants/images'
@@ -35,6 +36,7 @@ export default function CustomScreen({ route, navigation }) {
   //Checks if the base has been chosen yet, if not then ERROR
   const isChosen = () => {
     if (drink.length == 0) {
+      Alert.alert("Please select a base!")
       console.log("Error: User drink has not been chosen yet!");
     } else {
       navigation.navigate("Map", {drink: drink, topping: topping});
