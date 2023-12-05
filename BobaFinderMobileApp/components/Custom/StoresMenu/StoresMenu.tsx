@@ -6,10 +6,9 @@ import StarRating from "./Rating";
 import { images } from "../../../constants";
 
 export default function StoresMenu({ getAddress, passDetails }) {
-    console.log(passDetails.latitude);
-    console.log(passDetails.longitude);
-    console.log(passDetails.base);
-    console.log(passDetails.toppings);
+    console.log("User latitude, longitude:", passDetails.latitude, passDetails.longitude);
+    console.log("Base:", passDetails.base);
+    console.log("Toppings:", passDetails.toppings);
 
     // make an array for the shops
     const [isLoading, setLoading] = useState(true);
@@ -54,13 +53,14 @@ export default function StoresMenu({ getAddress, passDetails }) {
     //Calculates distance between store and User Location
     const calcDistance = (lat, long) => {
         var R = 3958.8; // Radius of the Earth in miles
-        var rLat1 = lat * (Math.PI / 180); // Convert degrees to radians
+        var rLat1 = long * (Math.PI / 180); // Convert degrees to radians
         var rLat2 = passDetails.latitude * (Math.PI / 180); // Convert degrees to radians
         var diffLat = rLat2 - rLat1; // Radian difference (latitudes)
-        var diffLon = (long - passDetails.longitude) * (Math.PI / 180); // Radian difference (longitudes)
+        var diffLon = (lat - passDetails.longitude) * (Math.PI / 180); // Radian difference (longitudes)
 
         var d = 2 * R * Math.asin(Math.sqrt(Math.sin(diffLat / 2) * Math.sin(diffLat / 2) + Math.cos(rLat1) * Math.cos(rLat2) * Math.sin(diffLon / 2) * Math.sin(diffLon / 2)));
-        console.log(d.toFixed(2));
+        console.log("store latitude, longitude:", lat, long)
+        console.log("distance: " + d.toFixed(2));
         return (d.toFixed(2));
     };
 
@@ -72,7 +72,7 @@ export default function StoresMenu({ getAddress, passDetails }) {
 
     // callbacks
     const handleSheetChange = useCallback((index) => {
-        console.log("handleSheetChange", index);
+        console.log("handleSheetChange: " + index);
     }, []);
 
     const sendAddress = (store) => {

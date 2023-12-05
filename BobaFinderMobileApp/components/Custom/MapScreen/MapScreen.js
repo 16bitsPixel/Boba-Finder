@@ -65,8 +65,7 @@ export default function MapScreen({ route, navigation }) {
       setLocation(location);
       setUserLatitude(location.coords.latitude)
       setUserLongitude(location.coords.longitude)
-      console.log("Location:");
-      console.log(location);
+      console.log("User latitude, longitude:", location.coords.latitude, location.coords.longitude);
     };
     getPermissions();
   },  []);
