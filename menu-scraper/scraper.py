@@ -204,8 +204,19 @@ class Scraper:
             if n in teaToppingsKW:
                 if n not in teaToppings:
                     teaToppings.append(n)
+            # capture 2 word kw
             if i < len(text) - 1:
                 currPlusNext = f'{n} {text[i + 1]}'
+                if currPlusNext in teaFlavorsKW:
+                    if currPlusNext not in teaFlavors:
+                        found += 1
+                        teaFlavors.append(currPlusNext)
+                if currPlusNext in teaToppingsKW:
+                    if currPlusNext not in teaToppings:
+                        teaToppings.append(currPlusNext)
+            # capture 3 word kw
+            if i < len(text) - 2:
+                currPlusNext = f'{n} {text[i + 1]} {text[i + 2]}'
                 if currPlusNext in teaFlavorsKW:
                     if currPlusNext not in teaFlavors:
                         found += 1
@@ -247,7 +258,7 @@ class Scraper:
         # mongodb+srv://brandonllanes16:XIPZsFqtcLYtkQ4l@bobacluster.atdxi6u.mongodb.net/?retryWrites=true&w=majority
         client = pymongo.MongoClient(
             "mongodb+srv://vcasanov:i3DFbeGAHi05CWA0@test.i44ykno.mongodb.net/?retryWrites=true&w=majority")
-        db = client.db.bobaShopTestNewSet
+        db = client.db.BobaShops
         try:
             db.insert_many(entry)
             print(f'Inserted {len(entry)} entries')
