@@ -1,3 +1,15 @@
+# Requirements
+1. Mobile device with the Expo Go app installed
+2. Location services allowed on the Expo Go app
+3. Node.js installed on the user's system
+
+# Installation Guide
+1. Download the Boba-Finder release and direct to the project folder in a terminal
+2. Direct to the app folder with ```cd BobaFinderMobileApp```
+3. Install project dependencies ```npm install```
+4. Run the project with ```npx expo start --tunnel```
+5. On your mobile device's camera app, scan the QR code produced and the mobile app should run
+
 # The Idea
 The aim of this project is to create a web and/or mobile app that locates nearby restaurant locations that serve the user's created drink. Think of the Starbucks app or Yelp app: you select a store location first, look at the menu, and then order your drink. In this proposed project, we are reversing the process. Instead, the user will create their desired drink first and given drink information will be collected to be used to find nearby stores that sell that boba drink.
 
