@@ -50,7 +50,7 @@ export default function StoresMenu({ getAddress, passDetails }) {
     console.log("Final Data Length: " + intersectData.length);
 
     //Calculates distance between store and User Location
-    const calcDistance = (lat, long) => {
+    const calcDistance = (store, lat, long) => {
         var R = 3958.8; // Radius of the Earth in miles
         var rLat1 = lat * (Math.PI / 180); // Convert degrees to radians
         var rLat2 = passDetails.latitude * (Math.PI / 180); // Convert degrees to radians
@@ -58,7 +58,8 @@ export default function StoresMenu({ getAddress, passDetails }) {
         var diffLon = (long - passDetails.longitude) * (Math.PI / 180); // Radian difference (longitudes)
 
         var d = 2 * R * Math.asin(Math.sqrt(Math.sin(diffLat / 2) * Math.sin(diffLat / 2) + Math.cos(rLat1) * Math.cos(rLat2) * Math.sin(diffLon / 2) * Math.sin(diffLon / 2)));
-        console.log("store latitude, longitude:", lat, long)
+        console.log("ulatitude, ulongitude:", passDetails.latitude, passDetails.longitude)
+        console.log("store, latitude, longitude:", store, lat, long)
         console.log("distance: " + d.toFixed(2));
         return (d.toFixed(2));
     };
@@ -129,9 +130,6 @@ export default function StoresMenu({ getAddress, passDetails }) {
                     {/* Rating */}
                     <View style={styles.ratingContainer}>
                         {/* Render stars based on store.rating */}
-                        {/* You can use an external library or create your own component */}
-                        {/* Example: */}
-                        {/* <StarRating rating={store.rating} /> */}
                         <Text>
                             <StarRating rating="4.5" />
                         </Text>
@@ -140,10 +138,10 @@ export default function StoresMenu({ getAddress, passDetails }) {
                     {/* Description */}
                     <Text style={styles.description}>
                         {/* Show matching bases */}
-                        Bases: {item.teaBases.slice(0, 2).join(', ')}
+                        Bases: {passDetails.base}
                         {"\n"}
                         {/* Show matching toppings */}
-                        Toppings: {item.teaToppings.slice(0, 2).join(', ')}
+                        Toppings: {passDetails.toppings}
                     </Text>
 
                     {/* Store Hours and Distance */}
@@ -155,7 +153,7 @@ export default function StoresMenu({ getAddress, passDetails }) {
                     {/* TODO: show euclidean distance from user to store */}
                     {/* Use calcDistance here with lat as item.latitude and long as item.longitude */}
                     <Text style={styles.distance}>
-                        {calcDistance(item.lattitude, item.longitude)} miles away
+                        {calcDistance(item.restaurantName, item.lattitude, item.longitude)} miles away
                     </Text>
 
                 </View>
@@ -186,9 +184,6 @@ export default function StoresMenu({ getAddress, passDetails }) {
                 </BottomSheetScrollView>
             </BottomSheet>
         )
-    }
-    else {
-
     }
 
     return (
