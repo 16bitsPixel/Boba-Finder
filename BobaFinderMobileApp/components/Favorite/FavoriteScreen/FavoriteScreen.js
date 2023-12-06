@@ -8,6 +8,7 @@ import FavButtonArray from '../FavoriteButton/FavButtonArray';
 import { images } from '../../../constants'
 
 export default function FavoriteScreen({ navigation }) {
+  // load fonts
   const [fontsLoaded, fontError] = useFonts({
     'Assistant': require('../../../assets/fonts/Assistant-Light.ttf'),
     'ComingSoon': require('../../../assets/fonts/ComingSoon-Regular.ttf'),
@@ -23,6 +24,7 @@ export default function FavoriteScreen({ navigation }) {
     return null;
   }
 
+  // dummy data
   const data = [
     { base: 'Fruit Tea', topping: 'Aloe Jelly' },
     { base: 'Thai Tea', topping: 'Whipped Cream' },

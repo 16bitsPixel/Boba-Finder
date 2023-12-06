@@ -12,15 +12,14 @@ import { images } from '../../../constants'
 import { baseTeas } from '../../../constants/images'
 import { toppings } from '../../../constants/images'
 import { useFonts } from 'expo-font';
-import styles from './CustomScreenStyles'
-
-import { useRoute } from "@react-navigation/native"
+import styles from './CustomScreenStyles';
 
 /*
   Custom Screen where users can create their drink of choice
 */
 
 export default function CustomScreen({ route, navigation }) {
+  //parameters: user's drink, user's topping
   const { drink, topping } = route.params;
   
   // for fonts

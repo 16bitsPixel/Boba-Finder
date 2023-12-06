@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Image, Pressable } from 'react-native';
 import FavButton from './FavButton';
 
+// Makes array of favorite buttons
 const FavButtonArray = ({ data }) => {
   return (
     <View>

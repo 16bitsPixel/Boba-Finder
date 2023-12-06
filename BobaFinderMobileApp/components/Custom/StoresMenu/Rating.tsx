@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+// Make Star Ratings
 const StarRating = ({ rating }) => {
   const filledStars = Math.floor(rating);
   const halfStar = rating - filledStars >= 0.5;

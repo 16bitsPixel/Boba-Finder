@@ -6,6 +6,7 @@ import Constants from "expo-constants";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
+// Loads Splash screen animation
 export default function AnimatedAppLoader({ children, image }) {
     const [isSplashReady, setSplashReady] = useState(false);
   
@@ -25,6 +26,7 @@ export default function AnimatedAppLoader({ children, image }) {
     return <AnimatedSplashScreen image={image}>{children}</AnimatedSplashScreen>;
   }
   
+  // splash screen function
   function AnimatedSplashScreen({ children, image }) {
     const animation = useMemo(() => new Animated.Value(1), []);
     const [isAppReady, setAppReady] = useState(false);
