@@ -31,30 +31,8 @@ class Scraper:
         if not self.checkMenuExists(soup, rName):
             return 0
 
-        # Click Pickup Option if available
-        try:
-            pickup_option = WebDriverWait(browser, 3).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR, 'label[for="PICKUP"]')))
-            pickup_option.click()
-        except:
-            pass
-        time.sleep(2)
-
-        # Check if Closed at this time:
-        try:
-            button = WebDriverWait(browser, 2).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[data-testid="close-cart-edit-modal"]'))
-            )
-            button.click()
-            button = WebDriverWait(browser, 2).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[data-testid="close-cart-edit-modal"]'))
-            )
-            button.click()
-            time.sleep(2)
-        except:
-            pass
-
-        previous_height = browser.execute_script('return window.pageYOffset;')
+        self.closePopUps(browser)
+        previousHeight = browser.execute_script('return window.pageYOffset;')
         body = browser.find_element(By.TAG_NAME, 'body')
         body.click()
 
@@ -68,13 +46,10 @@ class Scraper:
         self.getAddress(soup, entry)
 
         # Scan menu items for key TeaBase and TeaToppings words
-        # Load Tea Flavors & Toppings
         teaFlavorsKW = self.loadKeyWordsFromTextFile('../res/tea.txt')
         teaToppingsKW = self.loadKeyWordsFromTextFile('../res/toppings.txt')
-
         teaFlavors = []
         teaToppings = []
-
         foundToppings = False
         while True:
             for item in soup.select('.menuItem'):
@@ -95,10 +70,10 @@ class Scraper:
 
             body.send_keys(Keys.PAGE_DOWN)
             time.sleep(1)
-            new_height = browser.execute_script('return window.pageYOffset;')
-            if new_height == previous_height:
+            newHeight = browser.execute_script('return window.pageYOffset;')
+            if newHeight == previousHeight:
                 break
-            previous_height = new_height
+            previousHeight = newHeight
 
             # update html
             innerHTML = browser.page_source
@@ -116,25 +91,86 @@ class Scraper:
         print("[FINISHED SCRAPING]")
 
         # Generate Coordinates
-        coordinates = self.generateCoordinates(entry['address'])
+        coordinates = 0
+        try:
+            coordinates = self.generateCoordinates(entry['address'])
+        except:
+            try:
+                coordinates = self.generateCoordinates(entry['address'])
+            except:
+                pass
         if coordinates:
-            entry['lattitude'] = coordinates[0]
+            print(f"Coordinates: {coordinates[0]} {coordinates[1]}")
+            entry['latitude'] = coordinates[0]
             entry['longitude'] = coordinates[1]
         else:
-            print("Could not generate coordinates")
-
+            print('Failed to generate coordinates')
+            return 0
         return menuItems
+
+    def closePopUps(self, browser):
+        # Removes various types of pop up from grubhub page
+
+        # Close popup that asks for address
+        try:
+            button = WebDriverWait(browser, 2).until(
+                EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[data-testid="out-of-delivery-switch-pickup"]')))
+            button.click()
+        except:
+            pass
+
+        # Click Pickup Option if available
+        try:
+            pickupOption = WebDriverWait(browser, 2).until(
+                EC.element_to_be_clickable((By.CSS_SELECTOR, 'label[for="PICKUP"]')))
+            pickupOption.click()
+        except:
+            # close pop up if restaurant not open yet
+            try:
+                popUp = WebDriverWait(browser, 2).until(
+                    EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[data-testid="close-cart-edit-modal"]')))
+                popUp.click()
+
+                popUp = WebDriverWait(browser, 2).until(
+                    EC.element_to_be_clickable((By.CSS_SELECTOR, '//button[@data-testid="close-cart-edit-modal"]')))
+                popUp.click()
+            except:
+                # Close popup if out of range
+                try:
+                    popUp = WebDriverWait(browser, 2).until(
+                        EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[data-testid="close-modalBtn"]')))
+                    popUp.click()
+                except:
+                    pass
+
+        time.sleep(2)
+
+        # Check if Closed at this time:
+        try:
+            button = WebDriverWait(browser, 2).until(
+                EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[data-testid="close-cart-edit-modal"]')))
+            button.click()
+
+            button = WebDriverWait(browser, 2).until(
+                EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[data-testid="close-cart-edit-modal"]')))
+            button.click()
+            time.sleep(2)
+        except:
+            pass
+
+        return 1
 
     def initializeChromeOptions(self):
 
         # Initialize chrome options for selenium webdriver
-        chrome_options = Options()
-        chrome_options.add_argument("start-maximized")
-        chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
-        chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
-        chrome_options.add_experimental_option('useAutomationExtension', False)
-        chrome_options.add_argument('--disable-blink-features=AutomationControlled')
-        return chrome_options
+        chromeOptions = Options()
+        chromeOptions.add_argument("--disable-geolocation")
+        chromeOptions.add_argument("start-maximized")
+        chromeOptions.add_experimental_option("excludeSwitches", ["enable-automation"])
+        chromeOptions.add_experimental_option('excludeSwitches', ['enable-logging'])
+        chromeOptions.add_experimental_option('useAutomationExtension', False)
+        chromeOptions.add_argument('--disable-blink-features=AutomationControlled')
+        return chromeOptions
 
     def checkMenuExists(self, soup, rName):
 
@@ -262,6 +298,7 @@ class Scraper:
         try:
             db.insert_many(entry)
             print(f'Inserted {len(entry)} entries')
+            print(f'Entry:\n{entry}')
         except Exception as e:
             print(f"Error during insertion: \n{e}")
             print("\nNothing was stored to db")
@@ -402,11 +439,11 @@ class Scraper:
 
     def getAddress(self, soup, entry):
         for div in soup.find_all('a', {'class': 'sc-hBxehG flfcph'}):
-            link_text = div['href']
-            if "http" in link_text:
-                entry['gMapsLink'] = self.extractGmapLink(link_text)
-                link_parts = link_text.partition("daddr=")
-                entry['address'] = link_parts[2]
+            linkText = div['href']
+            if "http" in linkText:
+                entry['gMapsLink'] = self.extractGmapLink(linkText)
+                linkParts = linkText.partition("daddr=")
+                entry['address'] = linkParts[2]
                 break
 
     def extractGmapLink(self, link):
@@ -423,4 +460,4 @@ class Scraper:
             coordinates = [location.latitude, location.longitude]
             return coordinates
         else:
-            return []
+            return 0
