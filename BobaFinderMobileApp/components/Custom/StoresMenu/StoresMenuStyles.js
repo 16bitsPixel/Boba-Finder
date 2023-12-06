@@ -57,6 +57,10 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 5,
   },
+  hourDistanceContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },  
   description: {
     fontSize: 14,
     marginBottom: 5,
