@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useMemo, useEffect, useState } from "react";
-import { View, Text, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
 import BottomSheet, { BottomSheetScrollView, } from "@gorhom/bottom-sheet";
 import styles from './StoresMenuStyles';
 import StarRating from "./Rating";
@@ -115,7 +115,7 @@ export default function StoresMenu({ getAddress, passDetails }) {
                 style={styles.card}
                 key={item.id}
                 // Pressing a store card will route the user to the store's pin on the map
-                onPress={() => sendAddress(item)}
+                onPress={() => Alert.alert(item.address)}
             >
                 {/* Left side: Image */}
                 <ImagePreLoader imageUrl={imageUrl} />
@@ -124,7 +124,9 @@ export default function StoresMenu({ getAddress, passDetails }) {
                 <View style={styles.detailsContainer}>
                     {/* Store Name */}
                     <Text style={styles.storeName}>
-                        {item.restaurantName}
+                        {item.restaurantName.length > 17
+                            ? `${item.restaurantName.substring(0, 17)}...`
+                            : item.restaurantName}
                     </Text>
 
                     {/* Rating */}
@@ -143,19 +145,19 @@ export default function StoresMenu({ getAddress, passDetails }) {
                         {/* Show matching toppings */}
                         Toppings: {passDetails.toppings}
                     </Text>
-
+                    
                     {/* Store Hours and Distance */}
-
-                    {/* TODO: show store operational hours */}
-                    <Text style={styles.hours}>
-                        12:00AM-11:59PM
-                    </Text>
-                    {/* TODO: show euclidean distance from user to store */}
-                    {/* Use calcDistance here with lat as item.latitude and long as item.longitude */}
-                    <Text style={styles.distance}>
-                        {calcDistance(item.restaurantName, item.lattitude, item.longitude)} miles away
-                    </Text>
-
+                    <View style={styles.hourDistanceContainer}>
+                        {/* TODO: show store operational hours */}
+                        <Text style={styles.hours}>
+                            12:00AM-11:59PM
+                        </Text>
+                        {/* show euclidean distance from user to store */}
+                        {/* Use calcDistance here with lat as item.latitude and long as item.longitude */}
+                        <Text style={styles.distance}>
+                            {calcDistance(item.restaurantName, item.lattitude, item.longitude)} miles
+                        </Text>
+                    </View>
                 </View>
             </TouchableOpacity>
         ),
