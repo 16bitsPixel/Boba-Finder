@@ -9,6 +9,7 @@ import {
 import favStyles from '../FavoriteScreen/FavoriteScreenStyles';
 import { images } from '../../../constants';
 
+// Favorite Button function
 export default function FavButton({ base, topping }) {
   return (
     <View style={favStyles.pressableBG}>

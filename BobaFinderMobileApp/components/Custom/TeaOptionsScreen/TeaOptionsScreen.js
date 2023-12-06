@@ -3,12 +3,10 @@ import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image} from 're
 import Accordion from 'react-native-collapsible/Accordion';
 import styles from './TeaOptionsScreenStyles';
 import { useFonts } from 'expo-font';
-import { baseTeas } from '../../../constants/images'
-import milkTeaList from '../../../data/milkTeas.json'
-import fruitTeaList from '../../../data/fruitTeas.json'
-import classicTeaList from '../../../data/classicTeas.json'
-
-import { useRoute } from "@react-navigation/native"
+import { baseTeas } from '../../../constants/images';
+import milkTeaList from '../../../data/milkTeas.json';
+import fruitTeaList from '../../../data/fruitTeas.json';
+import classicTeaList from '../../../data/classicTeas.json';
 
 /*
     Screen where users can see all options of tea bases for their custom drink

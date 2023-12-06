@@ -1,10 +1,9 @@
 import React from "react";
 import {Text, ScrollView, View, SafeAreaView, Image, TouchableOpacity,} from 'react-native';
-import styles from '../ToppingOptionsScreen/ToppingOptionsScreenStyles'
-import toppingList from '../../../data/toppings.json'
+import styles from '../ToppingOptionsScreen/ToppingOptionsScreenStyles';
+import toppingList from '../../../data/toppings.json';
 import { toppings } from "../../../constants/images";
 import { useFonts } from 'expo-font';
-import { useRoute } from "@react-navigation/native"
 
 /*
     Screen where users can see all options of toppings for their custom drink

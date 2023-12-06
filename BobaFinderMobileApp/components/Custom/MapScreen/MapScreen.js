@@ -9,7 +9,6 @@ import {
 import * as Location from 'expo-location';
 import styles from './MapScreenStyles';
 import StoresMenu from "../StoresMenu/StoresMenu";
-import { useRoute } from "@react-navigation/native"
 
 export default function MapScreen({ route, navigation }) {
   //parameters: user drink, user topping
@@ -20,7 +19,6 @@ export default function MapScreen({ route, navigation }) {
   const [location, setLocation] = useState(null);
   const [userLatitude, setUserLatitude] = useState(null);
   const [userLongitude, setUserLongitude] = useState(null);
-  const [dynamicMarkers, setMarkers] = useState([]);
 
   // load in the data
   const [isLoading, setLoading] = useState(true);
