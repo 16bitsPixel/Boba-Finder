@@ -5,6 +5,7 @@ import styles from './StoresMenuStyles';
 import StarRating from "./Rating";
 
 export default function StoresMenu({ getAddress, passDetails }) {
+    // pass in details about user's latitude, longitude, base drink, and topping
     console.log("User latitude, longitude:", passDetails.latitude, passDetails.longitude);
     console.log("Base:", passDetails.base);
     console.log("Toppings:", passDetails.toppings);

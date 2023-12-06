@@ -6,24 +6,20 @@ import {
   SafeAreaView,
   ActivityIndicator
 } from 'react-native';
-
-/*import Geolocation from 'react-native-geolocation-service';*/
 import * as Location from 'expo-location';
-
 import styles from './MapScreenStyles';
 import StoresMenu from "../StoresMenu/StoresMenu";
-
 import { useRoute } from "@react-navigation/native"
 
 export default function MapScreen({ route, navigation }) {
+  //parameters: user drink, user topping
   const { drink, topping } = route.params;
 
-  const [mapLat, setMapLat] = useState(37.3387); /* Map initial location: San Jose */
-  const [mapLong, setMapLong] = useState(-121.8853);
+  const [mapLat, setMapLat] = useState(37.3387); /* Map initial location latitude : San Jose */
+  const [mapLong, setMapLong] = useState(-121.8853); /* Map initial location longitude : San Jose */
   const [location, setLocation] = useState(null);
   const [userLatitude, setUserLatitude] = useState(null);
   const [userLongitude, setUserLongitude] = useState(null);
-  const [distance, setDistance] = useState(null)
   const [dynamicMarkers, setMarkers] = useState([]);
 
   // load in the data
@@ -47,6 +43,7 @@ export default function MapScreen({ route, navigation }) {
     getShops();
   }, []);
 
+  //empty markers
   let markers = [];
 
 
@@ -69,8 +66,8 @@ export default function MapScreen({ route, navigation }) {
     getPermissions();
   }, []);
 
-  // here we put the data in the format we want in dynamicMarkers
-  // we would also only want to put the boba shops in that match the user's boba request
+  // Put the data in the format we want in dynamicMarkers
+  // Also put the boba shops in that match the user's boba request
   data.map((item) => {
     let lat = item.lattitude;
     let long = item.longitude;
@@ -119,6 +116,7 @@ export default function MapScreen({ route, navigation }) {
     }
   });
 
+  //render markers on map
   const renderMarkers = () => {
     return markers.map((marker, index) => (
       <Marker
@@ -135,6 +133,7 @@ export default function MapScreen({ route, navigation }) {
     console.log('Address: ', address)
   };
 
+  //pass user latitude, longitude, drink base, and topping to map screen
   const passDetails = {
     latitude: userLatitude,
     longitude: userLongitude,

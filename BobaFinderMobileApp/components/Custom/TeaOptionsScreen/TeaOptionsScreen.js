@@ -18,9 +18,11 @@ import { useRoute } from "@react-navigation/native"
 */
 
 export default function TeaOptionsScreen({ route, navigation }) {
+    // parameters: user's drink, user's topping
     const { drink, topping } = route.params;
     const [ activeSections, setActiveSections ] = useState([0, 1, 2]);
 
+    // load in fonts
     const [loaded] = useFonts({
         'Assistant': require('../../../assets/fonts/Assistant-Light.ttf'),
         'ComingSoon': require('../../../assets/fonts/ComingSoon-Regular.ttf'),
@@ -30,6 +32,7 @@ export default function TeaOptionsScreen({ route, navigation }) {
         return null;
     }
 
+    // section for Classic Teas
     const sections = [
         {
             title: "Classics",
@@ -54,8 +57,8 @@ export default function TeaOptionsScreen({ route, navigation }) {
                         )})
                 }
             </View>
-        },
-        {
+        }, 
+        {   // section for Milk Teas
             title: "Milk Teas",
             content:
                 <View style = {styles.customizationContainer}>
@@ -80,7 +83,7 @@ export default function TeaOptionsScreen({ route, navigation }) {
                      }
                 </View>
         },
-        {
+        {   // section for Fruit Teas
             title: "Fruit Teas",
             content:
             <View style = {styles.customizationContainer}>
@@ -106,6 +109,7 @@ export default function TeaOptionsScreen({ route, navigation }) {
         }
     ];
 
+    // Render Headers
     function renderHeader(section, _, isActive) {
         return (
           <View style={styles.accordHeader}>
@@ -114,12 +118,14 @@ export default function TeaOptionsScreen({ route, navigation }) {
         );
     }
 
+    //Render Content
     function renderContent(section, _, isActive) {
         return (
           section.content
         );
     }
 
+    // Load in Header, Content, and Sections
     return (
         <SafeAreaView style={styles.container}>
           <ScrollView
