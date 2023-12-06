@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import MapView, { Marker, Heatmap, PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import {
-    View,
-    Text,
-    SafeAreaView,
-    StyleSheet,
-    TouchableOpacity,
+  View,
+  Text,
+  SafeAreaView,
+  ActivityIndicator
 } from 'react-native';
 
 /*import Geolocation from 'react-native-geolocation-service';*/
@@ -28,28 +27,28 @@ export default function MapScreen({ route, navigation }) {
   const [dynamicMarkers, setMarkers] = useState([]);
 
   // load in the data
-    const [isLoading, setLoading] = useState(true);
-    const [data, setData] = useState([]);
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
 
-    const getShops = async () => {
-        try {
-            // use iPv4 address
-            const response = await fetch('https://us-west-2.aws.data.mongodb-api.com/app/application-1-agiaq/endpoint/shops');
-            const json = await response.json();
-            setData(json);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading(false);
-        }
-    };
+  const getShops = async () => {
+    try {
+      // use iPv4 address
+      const response = await fetch('https://us-west-2.aws.data.mongodb-api.com/app/application-1-agiaq/endpoint/shops');
+      const json = await response.json();
+      setData(json);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    useEffect(() => {
-        getShops();
-    }, []);
+  useEffect(() => {
+    getShops();
+  }, []);
 
   let markers = [];
-  
+
 
   // Gets permission from user to get user location
   useEffect(() => {
@@ -68,8 +67,8 @@ export default function MapScreen({ route, navigation }) {
       console.log("User latitude, longitude:", location.coords.latitude, location.coords.longitude);
     };
     getPermissions();
-  },  []);
- 
+  }, []);
+
   // here we put the data in the format we want in dynamicMarkers
   // we would also only want to put the boba shops in that match the user's boba request
   data.map((item) => {
@@ -92,9 +91,9 @@ export default function MapScreen({ route, navigation }) {
         matchTop = true;
       }
       if (fixedtop == "strawberry popping boba" || fixedtop == "mango popping boba") {
-          if (item.teaToppings[top] === fixedtop || item.teaToppings[top] === "popping boba") {
-            matchTop = true;
-          }
+        if (item.teaToppings[top] === fixedtop || item.teaToppings[top] === "popping boba") {
+          matchTop = true;
+        }
       }
       if (fixedtop == "creama/foam") {
         if (item.teaToppings[top] === "foam" || item.teaToppings[top] === "creama") {
@@ -107,12 +106,12 @@ export default function MapScreen({ route, navigation }) {
         }
       }
     }
-    
+
     //Check if shop has both drink and topping
     if (matchBase == true && matchTop == true) {
       markers.push(
         {
-          coordinate: {latitude: lat, longitude: long},
+          coordinate: { latitude: lat, longitude: long },
           title: item.restaurantName,
           description: item.address
         }
@@ -143,23 +142,36 @@ export default function MapScreen({ route, navigation }) {
     toppings: topping.toLowerCase(),
   }
 
-    return (
-        <SafeAreaView style={styles.container}>
-          <MapView                        /* Map currently just shows user location */
-            style={styles.map}            /* Need to grab user location to show direction */
-            provider={ PROVIDER_GOOGLE }
-            showsUserLocation={true}
-            initialRegion={{
-              latitude: mapLat,
-              longitude: mapLong,
-              latitudeDelta: 0.0922, /* This configures the user's view of the map */
-              longitudeDelta: 0.0421, /* This configures the user's view of the map */
-            }}
-            >
-              {renderMarkers()}
-            </MapView>
+  console.log(passDetails)
 
-          <StoresMenu getAddress={getAddress} passDetails={passDetails} />
-        </SafeAreaView>
-    );
+  if (passDetails.latitude == null || passDetails.longitude == null) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="black" />
+        <Text>
+          Finding Stores...
+        </Text>
+      </View>
+    )
+  }
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <MapView                        /* Map currently just shows user location */
+        style={styles.map}            /* Need to grab user location to show direction */
+        provider={PROVIDER_GOOGLE}
+        showsUserLocation={true}
+        initialRegion={{
+          latitude: mapLat,
+          longitude: mapLong,
+          latitudeDelta: 0.0922, /* This configures the user's view of the map */
+          longitudeDelta: 0.0421, /* This configures the user's view of the map */
+        }}
+      >
+        {renderMarkers()}
+      </MapView>
+
+      <StoresMenu getAddress={getAddress} passDetails={passDetails} />
+    </SafeAreaView>
+  );
 }
