@@ -10,6 +10,9 @@
 4. Run the project with ```npx expo start --tunnel```
 5. On your mobile device's camera app, scan the QR code produced and the mobile app should run
 
+# Video Demo
+https://drive.google.com/file/d/1tGzO9vDi9Ng22VObTJbHUQ8kfAPQPpAw/view?resourcekey
+
 # The Idea
 The aim of this project is to create a web and/or mobile app that locates nearby restaurant locations that serve the user's created drink. Think of the Starbucks app or Yelp app: you select a store location first, look at the menu, and then order your drink. In this proposed project, we are reversing the process. Instead, the user will create their desired drink first and given drink information will be collected to be used to find nearby stores that sell that boba drink.
 
