@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 export default function DrinkMakerStack() {
 	return (
         <Stack.Navigator>
-            <Stack.Screen name = "Drink Maker" component = {DrinkMakerScreen} options = {{ headerShown: false }}/>
+            <Stack.Screen name = "Drink Maker" component = {DrinkMakerScreen} options = {{ headerShown: false }} />
         </Stack.Navigator>
 	);
 }
