@@ -14,7 +14,7 @@ const Tab = createBottomTabNavigator();
 export default function App() {
 	return (
 		<NavigationContainer>
-			<Tab.Navigator screenOptions = {{tabBarStyle: {backgroundColor: "#A4D9D1"}, tabBarInactiveTintColor: "black", tabBarActiveTintColor: "blue"}}>
+			<Tab.Navigator screenOptions = {{tabBarStyle: {backgroundColor: "#A4D9D1", position: "absolute"}, tabBarInactiveTintColor: "black", tabBarActiveTintColor: "blue"}}>
 				<Tab.Screen name = "Drink Maker Tab" component = {DrinkMakerStack} options = {{ headerShown: false }} />
 				<Tab.Screen name = "Favorites" component = {FavoritesScreen} />
 				<Tab.Screen name = "Account" component = {AccountScreen} />

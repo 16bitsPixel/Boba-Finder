@@ -7,7 +7,7 @@ const teaBase = require("../../assets/basecup.png");
 const toppingBase = require("../../assets/bobaTopping.png");
 
 
-export default function DrinkMakerScreen() {
+export default function DrinkMakerScreen({ navigation }) {
 	return (
 		<SafeAreaView style = {styles.safeContainer}>
 
@@ -47,7 +47,7 @@ export default function DrinkMakerScreen() {
 					</View>
 					
 					{/* view for the main bag container, contains tea base, toppings, and submit buttons */}
-					<View style = {{flex: 4, backgroundColor: "#C5E7E2", borderTopWidth: 2, borderColor: "rgba(158, 150, 150, .5)", alignItems: "center"}}>
+					<View style = {{flex: 4, backgroundColor: "#C5E7E2", borderTopWidth: 2, borderColor: "rgba(158, 150, 150, .5)", alignItems: "center", marginBottom: 45}}>
 
 						{/* view for the two main custom buttons */}
 						<View style = {{flex: 4, flexDirection: "row", marginTop: "5%", justifyContent: "center", gap: "30%"}}>
@@ -56,7 +56,7 @@ export default function DrinkMakerScreen() {
 									updates image/text on user selected input
 								should navigate to the tea bases screen
 							*/}
-							<TouchableOpacity style = {styles.customButton}>
+							<TouchableOpacity style = {styles.customButton} onPress = {() => navigation.navigate("Tea Bases")}>
 								<Image source = {teaBase} resizeMode = "contain" style = {{height: "80%"}}/>
 								<Text style = {{fontSize: 32, paddingBottom: "10%"}}>Tea Base</Text>
 							</TouchableOpacity>
@@ -131,7 +131,10 @@ const styles = StyleSheet.create({
 		width: "40%",
 		borderRadius: 20,
 		justifyContent: "center",
-		alignItems: "center"
+		alignItems: "center",
+		shadowRadius: 2,
+		shadowOpacity: 0.4,
+		shadowOffset: {height: 1, width: 1}
 	},
 
 	submitButton: {
@@ -141,6 +144,9 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		borderRadius: 15,
-		marginBottom: "5%"
+		marginBottom: "5%",
+		shadowRadius: 2,
+		shadowOpacity: 0.4,
+		shadowOffset: {height: 1, width: 1}
 	}
 });
