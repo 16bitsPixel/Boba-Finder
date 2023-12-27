@@ -2,8 +2,9 @@ import React, {useState} from "react";
 import { StyleSheet, View, Text, SafeAreaView, TextInput, StatusBar, Image, TouchableOpacity, ScrollView } from "react-native";
 import Accordion from "react-native-collapsible/Accordion";
 
-// import teas list
+// import toppings list and topping images
 import toppingsList from "../../assets/data/toppings.json"
+import { toppings } from "../../assets/data/customTeaImages.js"
 
 export default function ToppingsScreen({ navigation }) {
     // parameters: user's drink, user's topping
@@ -25,14 +26,18 @@ export default function ToppingsScreen({ navigation }) {
             content:
                 <View style = {styles.customizationContainer}>
                     {
-                        toppingsList.boba.map(tea => {
+                        toppingsList.boba.map(topping => {
                             return (
                                 <TouchableOpacity 
                                 style={styles.customizationButton} 
-                                key={tea.id} 
+                                key={topping.id} 
                                 >
-                                    <Text style = {{fontSize: 20, marginLeft: "5%", flex: 1}}>
-                                        {tea.name}
+                                    <Image source={toppings.topName[topping.name]}
+                                        style={styles.customizationIcon}
+                                        resizeMode="contain"
+                                    />
+                                    <Text style = {{fontSize: 16, textAlign: "center"}}>
+                                        {topping.name}
                                     </Text>
                                 </TouchableOpacity>
                             )})
@@ -45,14 +50,18 @@ export default function ToppingsScreen({ navigation }) {
             content:
                 <View style = {styles.customizationContainer}>
                     {
-                        toppingsList.jelly.map(tea => {
+                        toppingsList.jelly.map(topping => {
                             return (
                                 <TouchableOpacity 
                                 style={styles.customizationButton} 
-                                key={tea.id} 
+                                key={topping.id} 
                                 >
-                                    <Text style = {{fontSize: 20, marginLeft: "5%", flex: 1}}>
-                                        {tea.name}
+                                    <Image source={toppings.topName[topping.name]}
+                                        style={styles.customizationIcon}
+                                        resizeMode="contain"
+                                    />
+                                    <Text style = {{fontSize: 16, textAlign: "center"}}>
+                                        {topping.name}
                                     </Text>
                                 </TouchableOpacity>
                             )})
@@ -65,14 +74,18 @@ export default function ToppingsScreen({ navigation }) {
             content:
                 <View style = {styles.customizationContainer}>
                     {
-                        toppingsList.pudding.map(tea => {
+                        toppingsList.pudding.map(topping => {
                             return (
                                 <TouchableOpacity 
                                 style={styles.customizationButton} 
-                                key={tea.id} 
+                                key={topping.id} 
                                 >
-                                    <Text style = {{fontSize: 20, marginLeft: "5%", flex: 1}}>
-                                        {tea.name}
+                                    <Image source={toppings.topName[topping.name]}
+                                        style={styles.customizationIcon}
+                                        resizeMode="contain"
+                                    />
+                                    <Text style = {{fontSize: 16, textAlign: "center"}}>
+                                        {topping.name}
                                     </Text>
                                 </TouchableOpacity>
                             )})
@@ -85,14 +98,18 @@ export default function ToppingsScreen({ navigation }) {
             content:
                 <View style = {styles.customizationContainer}>
                     {
-                        toppingsList.fruit.map(tea => {
+                        toppingsList.fruit.map(topping => {
                             return (
                                 <TouchableOpacity 
                                 style={styles.customizationButton} 
-                                key={tea.id} 
+                                key={topping.id} 
                                 >
-                                    <Text style = {{fontSize: 20, marginLeft: "5%", flex: 1}}>
-                                        {tea.name}
+                                    <Image source={toppings.topName[topping.name]}
+                                        style={styles.customizationIcon}
+                                        resizeMode="contain"
+                                    />
+                                    <Text style = {{fontSize: 16, textAlign: "center"}}>
+                                        {topping.name}
                                     </Text>
                                 </TouchableOpacity>
                             )})
@@ -106,14 +123,18 @@ export default function ToppingsScreen({ navigation }) {
             content:
                 <View style = {styles.customizationContainer}>
                     {
-                        toppingsList.foam.map(tea => {
+                        toppingsList.foam.map(topping => {
                             return (
                                 <TouchableOpacity 
                                 style={styles.customizationButton} 
-                                key={tea.id} 
+                                key={topping.id} 
                                 >
-                                    <Text style = {{fontSize: 20, marginLeft: "5%", flex: 1}}>
-                                        {tea.name}
+                                    <Image source={toppings.topName[topping.name]}
+                                        style={styles.customizationIcon}
+                                        resizeMode="contain"
+                                    />
+                                    <Text style = {{fontSize: 16, textAlign: "center"}}>
+                                        {topping.name}
                                     </Text>
                                 </TouchableOpacity>
                             )})
@@ -141,13 +162,13 @@ export default function ToppingsScreen({ navigation }) {
 	return (
 		<SafeAreaView style = {styles.safeContainer}>
             {/* section for search input
-                    according to what user enters, should open the appropriate section(s) and only show teas that have the input as part of their name
+                    according to what user enters, should open the appropriate section(s) and only show toppings that have the input as part of their name
             */}
 			<View style = {styles.searchContainer}>
 				<TextInput placeholder = "Search" style = {styles.searchInput} />
 			</View>
 
-            {/* accordion that uses renderHeader and renderContent to dynamically create the tea options */}
+            {/* accordion that uses renderHeader and renderContent to dynamically create the topping options */}
             <ScrollView contentInsetAdjustmentBehavior="automatic" style = {{width: "100%"}} >
               <Accordion
                 align="bottom"
@@ -219,20 +240,20 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "row",
         flexWrap: "wrap",
-        marginLeft: "6%",
         rowGap: "3%",
         columnGap: "15%",
-        paddingBottom: "5%"
+        paddingBottom: "5%",
+        marginLeft: "2%"
     },
 
     customizationButton: {
         backgroundColor: "white",
-        width: 100,
-        height: 100,
+        width: 110,
+        height: 110,
         marginTop: "5%",
         borderRadius: "12px",
-        flexDirection: "row",
-        justifyContent: "space-between",
+        flexDirection: "column",
+        justifyContent: "center",
         alignItems: "center",
     },
 

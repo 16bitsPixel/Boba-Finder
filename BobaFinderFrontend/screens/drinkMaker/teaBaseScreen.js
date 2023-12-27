@@ -2,8 +2,9 @@ import React, {useState} from "react";
 import { StyleSheet, View, Text, SafeAreaView, TextInput, StatusBar, Image, TouchableOpacity, ScrollView } from "react-native";
 import Accordion from "react-native-collapsible/Accordion";
 
-// import teas list
+// import teas list and images
 import teaList from "../../assets/data/baseTeas.json"
+import { baseTeas } from "../../assets/data/customTeaImages.js"
 
 export default function TeaBaseScreen({ navigation }) {
     // parameters: user's drink, user's topping
@@ -31,7 +32,11 @@ export default function TeaBaseScreen({ navigation }) {
                                 style={styles.customizationButton} 
                                 key={tea.id} 
                                 >
-                                    <Text style = {{fontSize: 20, marginLeft: "5%", flex: 1}}>
+                                    <Image source={baseTeas.teaName[tea.name]}
+                                        style={styles.customizationIcon}
+                                        resizeMode="contain"
+                                    />
+                                    <Text style = {{fontSize: 16, textAlign: "center"}}>
                                         {tea.name}
                                     </Text>
                                 </TouchableOpacity>
@@ -51,7 +56,11 @@ export default function TeaBaseScreen({ navigation }) {
                                 style={styles.customizationButton} 
                                 key={tea.id} 
                                 >
-                                    <Text style = {{fontSize: 20, marginLeft: "5%", flex: 1}}>
+                                    <Image source={baseTeas.teaName[tea.name]}
+                                        style={styles.customizationIcon}
+                                        resizeMode="contain"
+                                    />
+                                    <Text style = {{fontSize: 16, textAlign: "center"}}>
                                         {tea.name}
                                     </Text>
                                 </TouchableOpacity>
@@ -71,7 +80,11 @@ export default function TeaBaseScreen({ navigation }) {
                                 style={styles.customizationButton} 
                                 key={tea.id} 
                                 >
-                                    <Text style = {{fontSize: 20, marginLeft: "5%", flex: 1}}>
+                                    <Image source={baseTeas.teaName[tea.name]}
+                                        style={styles.customizationIcon}
+                                        resizeMode="contain"
+                                    />
+                                    <Text style = {{fontSize: 16, textAlign: "center"}}>
                                         {tea.name}
                                     </Text>
                                 </TouchableOpacity>
@@ -181,17 +194,18 @@ const styles = StyleSheet.create({
         marginLeft: "6%",
         rowGap: "3%",
         columnGap: "15%",
-        paddingBottom: "5%"
+        paddingBottom: "5%",
+        marginLeft: "2%"
     },
 
     customizationButton: {
         backgroundColor: "white",
-        width: 100,
-        height: 100,
+        width: 110,
+        height: 110,
         marginTop: "5%",
         borderRadius: "12px",
-        flexDirection: "row",
-        justifyContent: "space-between",
+        flexDirection: "column",
+        justifyContent: "center",
         alignItems: "center",
     },
 

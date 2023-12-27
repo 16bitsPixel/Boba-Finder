@@ -6,11 +6,19 @@
         },
         {
             "id": "2",
-            "name": "Brown Sugar Boba"
+            "name": "Brown Sugar"
         },
         {
             "id": "3",
             "name": "Crystal Boba"
+        },
+        {
+            "id": "4",
+            "name": "Strawberry"
+        },
+        {
+            "id": "5",
+            "name": "Mango"
         }
     ],
 
@@ -32,10 +40,14 @@
         },
         {
             "id": "2",
-            "name": "Soy Pudding"
+            "name": "Caramel"
         },
         {
             "id": "3",
+            "name": "Soy Pudding"
+        },
+        {
+            "id": "4",
             "name": "Milk Pudding"
         }
     ],
@@ -43,18 +55,18 @@
     "fruit": [
         {
             "id": "1",
-            "name": "Strawberry Popping"
+            "name": "Strawberry"
         },
         {
             "id": "2",
-            "name": "Mango Popping"
+            "name": "Mango"
         }
     ],
     
     "foam": [
         {
             "id": "1",
-            "name": "Sea Salt Crema"
+            "name": "Sea Salt"
         },
         {
             "id": "2",
@@ -62,7 +74,7 @@
         },
         {
             "id": "3",
-            "name": "Salted Cheese Foam"
+            "name": "Salted Cheese"
         }
     ]
 }

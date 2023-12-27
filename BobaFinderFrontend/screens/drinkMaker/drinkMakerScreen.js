@@ -4,7 +4,7 @@ import { StyleSheet, View, Text, SafeAreaView, TextInput, StatusBar, Image, Imag
 const searchBGImage = require("../../assets/searchbg.png");
 const matchaMilkTea = require("../../assets/matchaMilkTeaBase.png");
 const teaBase = require("../../assets/basecup.png");
-const toppingBase = require("../../assets/bobaTopping.png");
+const toppingBase = require("../../assets/images/toppings/bobaTopping.png");
 
 export default function DrinkMakerScreen({ navigation }) {
 	return (
@@ -75,7 +75,7 @@ export default function DrinkMakerScreen({ navigation }) {
 						{/* button to submit all created drinks
 								should send an array to the stores list screen
 						*/}
-						<TouchableOpacity style = {styles.submitButton}>
+						<TouchableOpacity style = {styles.submitButton} onPress = {() => navigation.navigate("Stores List")}>
 							<Text style = {{fontSize: 20}}>Search</Text>
 						</TouchableOpacity>
 
