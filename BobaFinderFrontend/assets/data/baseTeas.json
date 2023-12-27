@@ -1,0 +1,90 @@
+{
+    "classics": [
+        {
+            "id": "1",
+            "name": "Black Tea"
+        },
+        {
+            "id": "2",
+            "name": "Jasmine Tea"
+        },
+        {
+            "id": "3",
+            "name": "Green Tea"
+        },
+        {
+            "id": "4",
+            "name": "Oolong Tea"
+        }
+    ],
+
+    "milkTeas": [
+        {
+            "id": "1",
+            "name": "Black Milk Tea"
+        },
+        {
+            "id": "2",
+            "name": "Jasmine Milk Tea"
+        },
+        {
+            "id": "3",
+            "name": "Oolong Milk Tea"
+        },
+        {
+            "id": "4",
+            "name": "Taro"
+        },
+        {
+            "id": "5",
+            "name": "Thai"
+        },
+        {
+            "id": "6",
+            "name": "Hokkaido"
+        },
+        {
+            "id": "7",
+            "name": "Okinawa"
+        },
+        {
+            "id": "8",
+            "name": "Matcha"
+        },
+        {
+            "id": "9",
+            "name": "Brown Sugar"
+        },
+        {
+            "id": "10",
+            "name": "Green Milk Tea"
+        }
+    ],
+
+    "fruitTeas": [
+        {
+            "id": "1",
+            "name": "Grapefruit"
+        },
+        {
+            "id": "2",
+            "name": "Honey Lemon"
+        },
+        {
+            "id": "3",
+            "name": "Kiwi"
+        },
+        {
+            "id": "4",
+            "name": "Mango"
+        },
+        {
+            "id": "5",
+            "name": "Passion Fruit"
+        },
+        {
+            "id": "6",
+            "name": "Strawberry"
+        }
+    ]
+}

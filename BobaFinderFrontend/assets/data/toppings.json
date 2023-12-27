@@ -1,0 +1,68 @@
+{
+    "boba": [
+        {
+            "id": "1",
+            "name": "Honey Boba"
+        },
+        {
+            "id": "2",
+            "name": "Brown Sugar Boba"
+        },
+        {
+            "id": "3",
+            "name": "Crystal Boba"
+        }
+    ],
+
+    "jelly": [
+        {
+            "id": "1",
+            "name": "Lychee Jelly"
+        },
+        {
+            "id": "2",
+            "name": "Coffee Jelly"
+        }
+    ],
+
+    "pudding": [
+        {
+            "id": "1",
+            "name": "Egg Pudding"
+        },
+        {
+            "id": "2",
+            "name": "Soy Pudding"
+        },
+        {
+            "id": "3",
+            "name": "Milk Pudding"
+        }
+    ],
+
+    "fruit": [
+        {
+            "id": "1",
+            "name": "Strawberry Popping"
+        },
+        {
+            "id": "2",
+            "name": "Mango Popping"
+        }
+    ],
+    
+    "foam": [
+        {
+            "id": "1",
+            "name": "Sea Salt Crema"
+        },
+        {
+            "id": "2",
+            "name": "Milk Foam"
+        },
+        {
+            "id": "3",
+            "name": "Salted Cheese Foam"
+        }
+    ]
+}

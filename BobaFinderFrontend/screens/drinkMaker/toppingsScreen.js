@@ -3,29 +3,29 @@ import { StyleSheet, View, Text, SafeAreaView, TextInput, StatusBar, Image, Touc
 import Accordion from "react-native-collapsible/Accordion";
 
 // import teas list
-import teaList from "../../assets/data/baseTeas.json"
+import toppingsList from "../../assets/data/toppings.json"
 
-export default function TeaBaseScreen({ navigation }) {
+export default function ToppingsScreen({ navigation }) {
     // parameters: user's drink, user's topping
-    const [ activeSections, setActiveSections ] = useState([0, 1, 2]);
+    const [ activeSections, setActiveSections ] = useState([0, 1, 2, 3, 4]);
 
     /*
-        creates sections for each type of tea
-            each section will contain teas in baseTeas.json
-            each tea is represented as a button
-            when a tea is selected, the background color should change accordingly
-                if not selected already turn green and turn past selected option to white
+        creates sections for each type of topping
+            each section will contain toppings in toppings.json
+            each topping is represented as a button
+            when a topping is selected, the background color should change accordingly
+                if not selected already turn green
                 if selected already, turn to white
-            the tea that is selected should be "remembered" when travelling back to main screen
+            the topping(s) that is/are selected should be "remembered" when travelling back to main screen
     */
     const sections = [
         {
-            // section for classic teas
-            title: "Classic Teas",
+            // section for boba/pearls
+            title: "Boba/Pearls",
             content:
                 <View style = {styles.customizationContainer}>
                     {
-                        teaList.classics.map(tea => {
+                        toppingsList.boba.map(tea => {
                             return (
                                 <TouchableOpacity 
                                 style={styles.customizationButton} 
@@ -40,12 +40,12 @@ export default function TeaBaseScreen({ navigation }) {
                 </View>
         },
         {
-            // section for milk teas
-            title: "Milk Teas",
+            // section for jellies
+            title: "Jellies",
             content:
                 <View style = {styles.customizationContainer}>
                     {
-                        teaList.milkTeas.map(tea => {
+                        toppingsList.jelly.map(tea => {
                             return (
                                 <TouchableOpacity 
                                 style={styles.customizationButton} 
@@ -60,12 +60,53 @@ export default function TeaBaseScreen({ navigation }) {
                 </View>
         },
         {
-            // section for fruit teas
-            title: "Fruit Teas",
+            // section for puddings
+            title: "Puddings",
             content:
                 <View style = {styles.customizationContainer}>
                     {
-                        teaList.fruitTeas.map(tea => {
+                        toppingsList.pudding.map(tea => {
+                            return (
+                                <TouchableOpacity 
+                                style={styles.customizationButton} 
+                                key={tea.id} 
+                                >
+                                    <Text style = {{fontSize: 20, marginLeft: "5%", flex: 1}}>
+                                        {tea.name}
+                                    </Text>
+                                </TouchableOpacity>
+                            )})
+                    }
+                </View>
+        },
+        {
+            // section for fruit
+            title: "Fruit",
+            content:
+                <View style = {styles.customizationContainer}>
+                    {
+                        toppingsList.fruit.map(tea => {
+                            return (
+                                <TouchableOpacity 
+                                style={styles.customizationButton} 
+                                key={tea.id} 
+                                >
+                                    <Text style = {{fontSize: 20, marginLeft: "5%", flex: 1}}>
+                                        {tea.name}
+                                    </Text>
+                                </TouchableOpacity>
+                            )})
+                    }
+                </View>
+        },
+
+        {
+            // section for foam
+            title: "Foam",
+            content:
+                <View style = {styles.customizationContainer}>
+                    {
+                        toppingsList.foam.map(tea => {
                             return (
                                 <TouchableOpacity 
                                 style={styles.customizationButton} 

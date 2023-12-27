@@ -6,7 +6,6 @@ const matchaMilkTea = require("../../assets/matchaMilkTeaBase.png");
 const teaBase = require("../../assets/basecup.png");
 const toppingBase = require("../../assets/bobaTopping.png");
 
-
 export default function DrinkMakerScreen({ navigation }) {
 	return (
 		<SafeAreaView style = {styles.safeContainer}>
@@ -66,7 +65,7 @@ export default function DrinkMakerScreen({ navigation }) {
 									updates image/text on user selected input
 								should navigate to the toppings screen
 							*/}
-							<TouchableOpacity style = {styles.customButton}>
+							<TouchableOpacity style = {styles.customButton} onPress = {() => navigation.navigate("Toppings")}>
 							<Image source = {toppingBase} resizeMode = "contain" style = {{height: "80%"}}/>
 								<Text style = {{fontSize: 32, paddingBottom: "10%"}}>Toppings</Text>
 							</TouchableOpacity>
@@ -88,6 +87,7 @@ export default function DrinkMakerScreen({ navigation }) {
 	);
 }
 
+// styling
 const styles = StyleSheet.create({
 	safeContainer: {
 		flex: 1,
