@@ -14,7 +14,7 @@ export default function StoresListScreen({ navigation }) {
 
                 {/* replace with image of back button later */}
                 <TouchableOpacity onPress = {() => {navigation.navigate("Drink Maker")}} style = {{justifyContent: "center"}}>
-                    <Image source = {backArrow} resizeMode = "contain" style = {{height: "30%", position: "absolute"}} />
+                    <Image source = {backArrow} resizeMode = "contain" style = {{position: "absolute", height: "30%"}} />
                 </TouchableOpacity>
 
 				<TextInput placeholder = "Location" style = {styles.locationInput} />
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
 		flex: 1, 
 		alignItems: "center",
         flexDirection: "row",
+		paddingBottom: 10
 	},
 
 	locationInput: {

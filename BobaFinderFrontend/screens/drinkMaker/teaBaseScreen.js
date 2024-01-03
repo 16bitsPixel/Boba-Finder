@@ -5,6 +5,7 @@ import Accordion from "react-native-collapsible/Accordion";
 // import teas list and images
 import teaList from "../../assets/data/baseTeas.json"
 import { baseTeas } from "../../assets/data/customTeaImages.js"
+const backArrow = require("../../assets/images/arrowLeft.png")
 
 export default function TeaBaseScreen({ navigation }) {
     // parameters: user's drink, user's topping
@@ -112,6 +113,17 @@ export default function TeaBaseScreen({ navigation }) {
 
 	return (
 		<SafeAreaView style = {styles.safeContainer}>
+
+            {/* section for header */}
+			<View style = {styles.headerContainer}>
+                {/* back button */}
+                <TouchableOpacity onPress = {() => {navigation.navigate("Drink Maker")}} style = {{justifyContent: "center"}}>
+                        <Image source = {backArrow} resizeMode = "contain" style = {{width: "5%", position: "absolute", right: 150}} />
+                </TouchableOpacity>
+
+				<Text style = {{fontSize: 20}}>Tea Bases</Text>
+			</View>
+
             {/* section for search input
                     according to what user enters, should open the appropriate section(s) and only show teas that have the input as part of their name
             */}
@@ -145,6 +157,16 @@ const styles = StyleSheet.create({
 		shadowRadius: 2,
 		shadowOpacity: 0.1,
         marginBottom: 78
+	},
+
+    // styles for header container
+    headerContainer: {
+		alignItems: "center",
+        justifyContent: "center",
+        paddingTop: "5%",
+        height: "8%",
+        borderBottomWidth: 2,
+        borderBottomColor: "rgba(112, 163, 156, .5)"
 	},
 
     // styles for the search input at top of screen
