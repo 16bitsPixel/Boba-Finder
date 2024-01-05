@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { StyleSheet, View, Text, SafeAreaView, TextInput, StatusBar, Image, TouchableOpacity, ScrollView } from "react-native";
 import Accordion from "react-native-collapsible/Accordion";
 
@@ -7,9 +7,16 @@ import toppingsList from "../../assets/data/toppings.json"
 import { toppings } from "../../assets/data/customTeaImages.js"
 const backArrow = require("../../assets/images/arrowLeft.png")
 
-export default function ToppingsScreen({ navigation }) {
+export default function ToppingsScreen({ route, navigation }) {
     // parameters: user's drink, user's topping
     const [ activeSections, setActiveSections ] = useState([0, 1, 2, 3, 4]);
+    const [ selected, setSelected ] = useState([]);
+    const [ baseTea, setTea ] = useState("");
+
+    // get user's selected tea
+    useEffect(() => {
+		setTea(route.params?.baseTea);
+	});
 
     /*
         creates sections for each type of topping
@@ -28,10 +35,25 @@ export default function ToppingsScreen({ navigation }) {
                 <View style = {styles.customizationContainer}>
                     {
                         toppingsList.boba.map(topping => {
+                            // state changes background color of buttons
+                            const [ toppingSelect, setToppingSelect ] = useState(false);
+
                             return (
                                 <TouchableOpacity 
-                                style={styles.customizationButton} 
-                                key={topping.id} 
+                                style = {[styles.customizationButton, {backgroundColor: toppingSelect ? "#bdffee" : "white"}]}
+                                key = {topping.id} 
+                                delayPressIn = {1000}
+                                onPressIn = {() => {
+                                    if (selected.includes(topping.name)) {
+                                        let newSelect = selected.filter((top) => top !== topping.name);
+                                        setSelected(newSelect);
+                                    }
+                                    else {
+                                        setSelected([...selected, topping.name]);
+                                    }
+                                    setToppingSelect(!toppingSelect);
+                                }}
+                                delayPressOut={300}
                                 >
                                     <Image source={toppings.topName[topping.name]}
                                         style={styles.customizationIcon}
@@ -52,10 +74,25 @@ export default function ToppingsScreen({ navigation }) {
                 <View style = {styles.customizationContainer}>
                     {
                         toppingsList.jelly.map(topping => {
+                            // state to change background of buttons when selected
+                            const [ toppingSelect, setToppingSelect ] = useState(false);
+
                             return (
                                 <TouchableOpacity 
-                                style={styles.customizationButton} 
-                                key={topping.id} 
+                                style = {[styles.customizationButton, {backgroundColor: toppingSelect ? "#bdffee" : "white"}]}
+                                key = {topping.id} 
+                                delayPressIn = {1000}
+                                onPressIn = {() => {
+                                    if (selected.includes(topping.name)) {
+                                        let newSelect = selected.filter((top) => top !== topping.name);
+                                        setSelected(newSelect);
+                                    }
+                                    else {
+                                        setSelected([...selected, topping.name]);
+                                    }
+                                    setToppingSelect(!toppingSelect);
+                                }}
+                                delayPressOut = {300}
                                 >
                                     <Image source={toppings.topName[topping.name]}
                                         style={styles.customizationIcon}
@@ -76,10 +113,25 @@ export default function ToppingsScreen({ navigation }) {
                 <View style = {styles.customizationContainer}>
                     {
                         toppingsList.pudding.map(topping => {
+                            // state to change background of buttons when selected
+                            const [ toppingSelect, setToppingSelect ] = useState(false);
+
                             return (
                                 <TouchableOpacity 
-                                style={styles.customizationButton} 
-                                key={topping.id} 
+                                style = {[styles.customizationButton, {backgroundColor: toppingSelect ? "#bdffee" : "white"}]}
+                                key = {topping.id} 
+                                delayPressIn = {1000}
+                                onPressIn = {() => {
+                                    if (selected.includes(topping.name)) {
+                                        let newSelect = selected.filter((top) => top !== topping.name);
+                                        setSelected(newSelect);
+                                    }
+                                    else {
+                                        setSelected([...selected, topping.name]);
+                                    }
+                                    setToppingSelect(!toppingSelect);
+                                }}
+                                delayPressOut = {300}
                                 >
                                     <Image source={toppings.topName[topping.name]}
                                         style={styles.customizationIcon}
@@ -100,10 +152,25 @@ export default function ToppingsScreen({ navigation }) {
                 <View style = {styles.customizationContainer}>
                     {
                         toppingsList.fruit.map(topping => {
+                            // state to change background of buttons when selected
+                            const [ toppingSelect, setToppingSelect ] = useState(false);
+
                             return (
                                 <TouchableOpacity 
-                                style={styles.customizationButton} 
-                                key={topping.id} 
+                                style = {[styles.customizationButton, {backgroundColor: toppingSelect ? "#bdffee" : "white"}]}
+                                key = {topping.id} 
+                                delayPressIn = {1000}
+                                onPressIn = {() => {
+                                    if (selected.includes(topping.name)) {
+                                        let newSelect = selected.filter((top) => top !== topping.name);
+                                        setSelected(newSelect);
+                                    }
+                                    else {
+                                        setSelected([...selected, topping.name]);
+                                    }
+                                    setToppingSelect(!toppingSelect);
+                                }}
+                                delayPressOut = {300}
                                 >
                                     <Image source={toppings.topName[topping.name]}
                                         style={styles.customizationIcon}
@@ -125,10 +192,25 @@ export default function ToppingsScreen({ navigation }) {
                 <View style = {styles.customizationContainer}>
                     {
                         toppingsList.foam.map(topping => {
+                            // state to change background of buttons when selected
+                            const [ toppingSelect, setToppingSelect ] = useState(false);
+
                             return (
                                 <TouchableOpacity 
-                                style={styles.customizationButton} 
-                                key={topping.id} 
+                                style = {[styles.customizationButton, {backgroundColor: toppingSelect ? "#bdffee" : "white"}]}
+                                key = {topping.id} 
+                                delayPressIn = {1000}
+                                onPressIn = {() => {
+                                    if (selected.includes(topping.name)) {
+                                        let newSelect = selected.filter((top) => top !== topping.name);
+                                        setSelected(newSelect);
+                                    }
+                                    else {
+                                        setSelected([...selected, topping.name]);
+                                    }
+                                    setToppingSelect(!toppingSelect);
+                                }}
+                                delayPressOut = {300}
                                 >
                                     <Image source={toppings.topName[topping.name]}
                                         style={styles.customizationIcon}
@@ -167,7 +249,7 @@ export default function ToppingsScreen({ navigation }) {
 			<View style = {styles.headerContainer}>
 
                 {/* back button */}
-                <TouchableOpacity onPress = {() => {navigation.navigate("Drink Maker")}} style = {{justifyContent: "center"}}>
+                <TouchableOpacity onPress = {() => {navigation.navigate("Drink Maker", { baseTea: baseTea, toppings: selected })}} style = {{justifyContent: "center"}}>
                         <Image source = {backArrow} resizeMode = "contain" style = {{width: "5%", position: "absolute", right: 150}} />
                 </TouchableOpacity>
 

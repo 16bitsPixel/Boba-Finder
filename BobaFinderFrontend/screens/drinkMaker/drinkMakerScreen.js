@@ -1,12 +1,22 @@
 import { StyleSheet, View, Text, SafeAreaView, TextInput, StatusBar, Image, ImageBackground, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
 
 // import images
 const searchBGImage = require("../../assets/searchbg.png");
-const matchaMilkTea = require("../../assets/matchaMilkTeaBase.png");
+import { baseTeas } from "../../assets/data/customTeaImages.js"
 const teaBase = require("../../assets/basecup.png");
 const toppingBase = require("../../assets/images/toppings/bobaTopping.png");
 
-export default function DrinkMakerScreen({ navigation }) {
+export default function DrinkMakerScreen({ route, navigation }) {
+	const [ baseTea, setTea ] = useState("");
+	const [ toppings, setToppings ] = useState([]);
+
+	// get the user's selected tea/toppings
+	useEffect(() => {
+		setTea(route.params?.baseTea);
+		setToppings(route.params?.toppings);
+	});
+
 	return (
 		<SafeAreaView style = {styles.safeContainer}>
 
@@ -25,7 +35,11 @@ export default function DrinkMakerScreen({ navigation }) {
 				{/* section for the boba image that will change based on user's input
 						functionality to be added later
 				*/}
-				<Image source = {matchaMilkTea} resizeMode = "contain" style = {{flex: 1, alignSelf: "center", height: "60%", width: "60%"}} />
+				<View style = {{flex: 1, flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+					<Text>{baseTea}</Text>
+					<Image source = {baseTeas.teaName[baseTea]} resizeMode = "contain" style = {{flex: 1, alignSelf: "center", height: "60%", width: "60%"}} />
+					<Text>{toppings}</Text>
+				</View>
 
 				{/* section for the bag + custom buttons*/}
 				<View style = {{flex: 1, flexDirection: "column"}}>
@@ -55,7 +69,7 @@ export default function DrinkMakerScreen({ navigation }) {
 									updates image/text on user selected input
 								should navigate to the tea bases screen
 							*/}
-							<TouchableOpacity style = {styles.customButton} onPress = {() => navigation.navigate("Tea Bases")}>
+							<TouchableOpacity style = {styles.customButton} onPress = {() => navigation.navigate("Tea Bases", {baseTea: baseTea, toppings: toppings})}>
 								<Image source = {teaBase} resizeMode = "contain" style = {{height: "80%"}}/>
 								<Text style = {{fontSize: 32, paddingBottom: "10%"}}>Tea Base</Text>
 							</TouchableOpacity>
@@ -65,7 +79,7 @@ export default function DrinkMakerScreen({ navigation }) {
 									updates image/text on user selected input
 								should navigate to the toppings screen
 							*/}
-							<TouchableOpacity style = {styles.customButton} onPress = {() => navigation.navigate("Toppings")}>
+							<TouchableOpacity style = {styles.customButton} onPress = {() => navigation.navigate("Toppings", {baseTea: baseTea, toppings: toppings})}>
 							<Image source = {toppingBase} resizeMode = "contain" style = {{height: "80%"}}/>
 								<Text style = {{fontSize: 32, paddingBottom: "10%"}}>Toppings</Text>
 							</TouchableOpacity>
@@ -75,7 +89,7 @@ export default function DrinkMakerScreen({ navigation }) {
 						{/* button to submit all created drinks
 								should send an array to the stores list screen
 						*/}
-						<TouchableOpacity style = {styles.submitButton} onPress = {() => navigation.navigate("Stores List")}>
+						<TouchableOpacity style = {styles.submitButton} onPress = {() => navigation.navigate("Stores List", {baseTea: baseTea, toppings: toppings})}>
 							<Text style = {{fontSize: 20}}>Search</Text>
 						</TouchableOpacity>
 

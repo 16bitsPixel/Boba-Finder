@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import { StyleSheet, View, Text, SafeAreaView, TextInput, StatusBar, Image, TouchableOpacity, ScrollView } from "react-native";
+import React, {useState, useEffect} from "react";
+import { StyleSheet, View, Text, SafeAreaView, TextInput, StatusBar, Image, TouchableOpacity, ScrollView, Pressable } from "react-native";
 import Accordion from "react-native-collapsible/Accordion";
 
 // import teas list and images
@@ -7,9 +7,17 @@ import teaList from "../../assets/data/baseTeas.json"
 import { baseTeas } from "../../assets/data/customTeaImages.js"
 const backArrow = require("../../assets/images/arrowLeft.png")
 
-export default function TeaBaseScreen({ navigation }) {
+export default function TeaBaseScreen({ route, navigation }) {
     // parameters: user's drink, user's topping
     const [ activeSections, setActiveSections ] = useState([0, 1, 2]);
+    const [ selected, setSelected ] = useState("");
+    const [ toppings, setToppings ] = useState([]);
+    const teas = new Map();
+
+    // get the user's selected toppings
+	useEffect(() => {
+		setToppings(route.params?.toppings);
+	});
 
     /*
         creates sections for each type of tea
@@ -19,6 +27,10 @@ export default function TeaBaseScreen({ navigation }) {
                 if not selected already turn green and turn past selected option to white
                 if selected already, turn to white
             the tea that is selected should be "remembered" when travelling back to main screen
+
+        - have an array for all of the teas
+        - when a tea is selected, go through array and change all backgrounds back to white
+        - then change selected tea background to colored
     */
     const sections = [
         {
@@ -28,10 +40,22 @@ export default function TeaBaseScreen({ navigation }) {
                 <View style = {styles.customizationContainer}>
                     {
                         teaList.classics.map(tea => {
+                            const [ teaSelect, setTeaSelect ] = useState(false);
+                            teas.set(tea.name, setTeaSelect);
+
                             return (
                                 <TouchableOpacity 
-                                style={styles.customizationButton} 
-                                key={tea.id} 
+                                    style={[styles.customizationButton, {backgroundColor: teaSelect ? "#bdffee" : "white"}]}
+                                    key = {tea.id}
+                                    delayPressIn={1000}
+                                    onPressIn = {() => {
+                                        if (selected) {
+                                            teas.get(selected)(false);
+                                        }
+                                        setSelected(tea.name);
+                                        setTeaSelect(!teaSelect);
+                                    }}
+                                    delayPressOut={300}
                                 >
                                     <Image source={baseTeas.teaName[tea.name]}
                                         style={styles.customizationIcon}
@@ -52,10 +76,22 @@ export default function TeaBaseScreen({ navigation }) {
                 <View style = {styles.customizationContainer}>
                     {
                         teaList.milkTeas.map(tea => {
+                            const [ teaSelect, setTeaSelect ] = useState(false);
+                            teas.set(tea.name, setTeaSelect);
+
                             return (
                                 <TouchableOpacity 
-                                style={styles.customizationButton} 
+                                style={[styles.customizationButton, {backgroundColor: teaSelect ? "#bdffee" : "white"}]}
                                 key={tea.id} 
+                                delayPressIn={1000}
+                                onPressIn = {() => {
+                                    if (selected) {
+                                        teas.get(selected)(false);
+                                    }
+                                    setSelected(tea.name);
+                                    setTeaSelect(!teaSelect);
+                                }}
+                                delayPressOut={300}
                                 >
                                     <Image source={baseTeas.teaName[tea.name]}
                                         style={styles.customizationIcon}
@@ -76,10 +112,22 @@ export default function TeaBaseScreen({ navigation }) {
                 <View style = {styles.customizationContainer}>
                     {
                         teaList.fruitTeas.map(tea => {
+                            const [ teaSelect, setTeaSelect ] = useState(false);
+                            teas.set(tea.name, setTeaSelect);
+
                             return (
                                 <TouchableOpacity 
-                                style={styles.customizationButton} 
+                                style={[styles.customizationButton, {backgroundColor: teaSelect ? "#bdffee" : "white"}]}
                                 key={tea.id} 
+                                delayPressIn={1000}
+                                onPressIn = {() => {
+                                    if (selected) {
+                                        teas.get(selected)(false);
+                                    }
+                                    setSelected(tea.name);
+                                    setTeaSelect(!teaSelect);
+                                }}
+                                delayPressOut={300}
                                 >
                                     <Image source={baseTeas.teaName[tea.name]}
                                         style={styles.customizationIcon}
@@ -117,7 +165,7 @@ export default function TeaBaseScreen({ navigation }) {
             {/* section for header */}
 			<View style = {styles.headerContainer}>
                 {/* back button */}
-                <TouchableOpacity onPress = {() => {navigation.navigate("Drink Maker")}} style = {{justifyContent: "center"}}>
+                <TouchableOpacity onPress = {() => {navigation.navigate("Drink Maker", { baseTea: selected, toppings: toppings})}} style = {{justifyContent: "center"}}>
                         <Image source = {backArrow} resizeMode = "contain" style = {{width: "5%", position: "absolute", right: 150}} />
                 </TouchableOpacity>
 
@@ -235,4 +283,13 @@ const styles = StyleSheet.create({
         height: "100%",
         flex: 1
     },
+
+    // styles for button functionality
+    isSelected: {
+        backgroundColor: "blue"
+    },
+
+    notSelected: {
+        backgroundColor: "white"
+    }
 });
