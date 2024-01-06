@@ -1,6 +1,8 @@
 import { StyleSheet, View, Text, SafeAreaView, TextInput, StatusBar, Image, TouchableOpacity, ActivityIndicator } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import React, { useEffect, useState } from "react";
+import StoresList from "./storesList";
+import { GestureHandlerRootView, NativeViewGestureHandler } from 'react-native-gesture-handler';
 
 // currently works for one individual drink, will have to update to handle more than one drink
 
@@ -41,8 +43,9 @@ export default function StoresListScreen({ route, navigation }) {
 	  	getShops();
 	}, []);
   
-	//empty markers
+	//empty markers and restaurants list
 	let markers = [];
+	let restaurants = [];
 
 	/*
 		filter and sort data here
@@ -78,6 +81,7 @@ export default function StoresListScreen({ route, navigation }) {
 				  description: item.address
 				}
 			);
+			restaurants.push(item.restaurantName);
 		}
 	});
 
@@ -121,20 +125,23 @@ export default function StoresListScreen({ route, navigation }) {
 				<TextInput placeholder = "Location" style = {styles.locationInput} />
 			</View>
 
+			<GestureHandlerRootView style = {{flex: 1}}>
+				<MapView                        /* Map currently just shows user location */
+					style={styles.map}            /* Need to grab user location to show direction */
+					provider={PROVIDER_GOOGLE}
+					showsUserLocation={true}
+					initialRegion={{
+					latitude: mapLat,
+					longitude: mapLong,
+					latitudeDelta: 0.0922, /* This configures the user's view of the map */
+					longitudeDelta: 0.0421, /* This configures the user's view of the map */
+					}}
+				>
+					{renderMarkers()}
+				</MapView>
 
-			<MapView                        /* Map currently just shows user location */
-				style={styles.map}            /* Need to grab user location to show direction */
-				provider={PROVIDER_GOOGLE}
-				showsUserLocation={true}
-				initialRegion={{
-				latitude: mapLat,
-				longitude: mapLong,
-				latitudeDelta: 0.0922, /* This configures the user's view of the map */
-				longitudeDelta: 0.0421, /* This configures the user's view of the map */
-				}}
-			>
-				{renderMarkers()}
-			</MapView>
+				<StoresList passDetails = {restaurants}/>
+			</GestureHandlerRootView>
 		</SafeAreaView>
 	);
 }
@@ -172,9 +179,7 @@ const styles = StyleSheet.create({
 
 	// styles for the map
 	map: {
-        height: '90%',
+        height: '100%',
         width: '100%',
-		top: "17%",
-		position: "absolute",
     },
 });
