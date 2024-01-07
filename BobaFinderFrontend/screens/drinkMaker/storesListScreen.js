@@ -57,15 +57,19 @@ export default function StoresListScreen({ route, navigation }) {
 
 		// first check to see if the shop has the base tea
 		let matchBase = false;
-		for (tea in item.teaBases) {
-			if (item.teaBases[tea] == baseTea.toLowerCase()) {
-				matchBase = true;
-			}
+		if (!baseTea || item.teaBases.includes(baseTea.toLowerCase())) {
+			matchBase = true;
 		}
 
 		// second check to see if the shop has all the toppings we want
 		let matchTop = true;
 		for (let i = 0; i < toppings.length; i++) {
+			// edge case of no toppings
+			if (!toppings) {
+				break;
+			}
+
+			// go through each topping and check if store has it
 			if (!item.teaToppings.includes(toppings[i].toLowerCase())) {
 				matchTop = false;
 				break;
@@ -118,14 +122,14 @@ export default function StoresListScreen({ route, navigation }) {
 			<View style = {styles.locationContainer}>
 
                 {/* replace with image of back button later */}
-                <TouchableOpacity onPress = {() => {navigation.navigate("Drink Maker")}} style = {{justifyContent: "center"}}>
+                <TouchableOpacity onPress = {() => {navigation.navigate("Drink Maker", {baseTea: baseTea, toppings: toppings})}} style = {{justifyContent: "center"}}>
                     <Image source = {backArrow} resizeMode = "contain" style = {{position: "absolute", height: "30%"}} />
                 </TouchableOpacity>
 
 				<TextInput placeholder = "Location" style = {styles.locationInput} />
 			</View>
 
-			<GestureHandlerRootView style = {{flex: 1}}>
+			<GestureHandlerRootView style = {{flex: 1, marginBottom: 55}}>
 				<MapView                        /* Map currently just shows user location */
 					style={styles.map}            /* Need to grab user location to show direction */
 					provider={PROVIDER_GOOGLE}

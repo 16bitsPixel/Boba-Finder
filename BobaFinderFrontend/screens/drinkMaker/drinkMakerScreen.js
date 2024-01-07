@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, SafeAreaView, TextInput, StatusBar, Image, ImageBackground, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, SafeAreaView, TextInput, StatusBar, Image, ImageBackground, TouchableOpacity, Pressable } from "react-native";
 import React, { useState, useEffect } from "react";
 
 // import images
@@ -36,9 +36,9 @@ export default function DrinkMakerScreen({ route, navigation }) {
 						functionality to be added later
 				*/}
 				<View style = {{flex: 1, flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-					<Text>{baseTea}</Text>
+					<Text style = {{fontSize: 24}}>{baseTea}</Text>
 					<Image source = {baseTeas.teaName[baseTea]} resizeMode = "contain" style = {{flex: 1, alignSelf: "center", height: "60%", width: "60%"}} />
-					<Text>{toppings}</Text>
+					<Text style = {{fontSize: 24}}>{toppings}</Text>
 				</View>
 
 				{/* section for the bag + custom buttons*/}
@@ -48,14 +48,14 @@ export default function DrinkMakerScreen({ route, navigation }) {
 					<View style = {{flex: 1, flexDirection: "row", justifyContent: "space-between"}}>
 
 						{/* button for "add items to bag"*/}
-						<TouchableOpacity style = {{flex: 1}}>
+						<Pressable style = {{flex: 1}}>
 							<Image source = {{uri: "https://static.thenounproject.com/png/1374113-200.png"}} resizeMode = "contain" style = {[styles.handleButtons, {borderTopWidth: 2, borderRightWidth: 2, borderColor: "rgba(158, 150, 150, .5)"}]} />
-						</TouchableOpacity>
+						</Pressable>
 
 						{/* button for "favorites"*/}
-						<TouchableOpacity style = {{flex: 1}}>
+						<Pressable style = {{flex: 1}}>
 							<Image source = {{uri: "https://www.iconpacks.net/icons/2/free-favourite-icon-2765-thumb.png"}} resizeMode = "contain" style = {[styles.handleButtons, {alignSelf: "flex-end", borderTopWidth: 2, borderLeftWidth: 2, borderColor: "rgba(158, 150, 150, .5)"}]} />
-						</TouchableOpacity>
+						</Pressable>
 
 					</View>
 					
